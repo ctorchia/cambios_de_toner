@@ -15,8 +15,9 @@ let impresoras;
 
 // ********************************************** TEXTOS DE MENUS *******************************************************
 let opcionesMenuPrincipal = "Control de Toners:\n\n1- Cambiar toner\n2- Consultar Contador\n3- Listar Impresoras\n4- Nueva Impresora\n5- Filtrar Impresoras por Toner\n0- Salir\n";
-let menuCambiarToner = "Cambiar Toner:\n\n1- Impresora de Ventas\n2- Impresora de Calidad\n3- Impresora de Compras\n4- Atras\n";
-let menuConsultarContadores = "Consultar Contador:\n\n1- Impresora de Ventas\n2- Impresora de Calidad\n3- Impresora de Compras\n4- Atras\n";
+let encabezadoMenuCambiarToner = "Cambiar Toner:\n\n";
+let encabezadoMenuConsultarContadores = "Consultar Contador:\n\n";
+let opcionAtras = "\n9 - Atras";
 
 // ********************************************** CLASES *****************************************************************
 class Impresora {
@@ -66,16 +67,10 @@ function MenuPrincipal () {
         );
         switch (opcion) {
             case 1:
-                opcion = parseInt(
-                    prompt(menuCambiarToner) // Menú - Cambio de Toner
-                );
-                MenuCambioToner(opcion);
+                MenuCambioToner(encabezadoMenuCambiarToner);
                 break;
             case 2:
-                opcion = parseInt(
-                    prompt(menuConsultarContadores) // Menú - Consulta de contadores
-                );
-                MenuConsultaContador(opcion);
+                MenuConsultaContador(encabezadoMenuConsultarContadores);
                 break;
             case 3:
                 ListarImpresoras(impresoras);
@@ -96,54 +91,27 @@ function MenuPrincipal () {
     } while (opcion != 0);
 };
 
-function MenuCambioToner(opcion){
-    switch (opcion) {  
-        case 1:
-            contadorCambio = parseInt(
-                prompt("Ingrese el contador al momento del cambio") 
-            );
-            impresoraVentas.cambiarToner(contadorCambio);
-            break
-        case 2:
-            contadorCambio = parseInt(
-                prompt("Ingrese el contador al momento del cambio")
-            );
-            impresoraCalidad.cambiarToner(contadorCambio);
-            break
-        case 3:
-            contadorCambio = parseInt(
-                prompt("Ingrese el contador al momento del cambio")
-            );
-            impresoraCompras.cambiarToner(contadorCambio);
-            break    
-        case 4:
-            break;
-        default:
-            alert("Opcion incorrecta");
-            break;
-    }
-}
-
-function MenuConsultaContador(opcion){
-    switch (opcion) {
-        case 1:
-            alert("El contador del último cambio de Toner es: " + impresoraVentas.contador)
-            break
-        case 2:
-            alert("El contador del último cambio de Toner es: " + impresoraCalidad.contador)
-            break
-        case 3:
-            alert("El contador del último cambio de Toner es: " + impresoraCompras.contador)
-            break    
-        case 4:
-            break;
-        default:
-            alert("Opcion incorrecta");
-            break;
-    }
-}
-
 // ********************************************** FUNCIONES *****************************************************************
+function MenuCambioToner(encabezado){
+
+    opcion = parseInt(
+        prompt(mostrarMenuToners(encabezado)) // Menú - Cambio de Toner
+    );
+    // Armar Array con toda la variedad de IDs y verificar si existe la opcion indicada
+    contadorCambio = parseInt(prompt("Ingrese el contador al momento del cambio"));
+    const impresoraParaActualizar = impresoras.find((el) => el.id === opcion);
+    impresoraParaActualizar.cambiarToner(contadorCambio);
+}
+
+function MenuConsultaContador(encabezado){
+    
+    opcion = parseInt(
+        prompt(mostrarMenuToners(encabezado)) // Menú - Cambio de Toner
+    );
+    const impresoraParaMostrarContador = impresoras.find((el) => el.id === opcion);
+    alert("El contador del último cambio de Toner es: " + impresoraParaMostrarContador.contador)
+}
+
 function ListarImpresoras (impresoras){
     let i = 0;
     let lista = "Lista de Impresoras:\n\nID:     Sector:      Contador:        Rend. Prom Toner:      Modelo Toner:\n";
@@ -171,7 +139,7 @@ function filtrarImpresorasPorToner(impresoras){
 }
 
 function nuevaImpresora(){
-    id = prompt("Ingrese el ID:");
+    id = parseInt(prompt("Ingrese el ID:"));
     sector = prompt("Ingrese el sector:");
     contador = parseInt(prompt("Ingrese el contador actual:"));  
     rendimientoPromToner = parseInt(prompt("Ingrese el rendimiento promedio del toner:"));  
@@ -180,6 +148,15 @@ function nuevaImpresora(){
     const impresoraNueva = new Impresora(id, sector, contador, rendimientoPromToner, modeloToner);
 
     impresoras.push(impresoraNueva);
+}
+
+function mostrarMenuToners(encabezadoMenuToner){
+    impresoras.forEach((el) => {
+        let elementos = el.id + "        " + el.sector + "\n";
+        encabezadoMenuToner = encabezadoMenuToner.concat(elementos);
+    })
+    encabezadoMenuToner = encabezadoMenuToner.concat(opcionAtras);
+    return encabezadoMenuToner;
 }
 
 // ********************************************** INICIO *****************************************************************
