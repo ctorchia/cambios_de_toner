@@ -156,9 +156,14 @@ function nuevaImpresora(){                      // Crear nueva Impresora
     rendimientoPromToner = parseInt(prompt("Ingrese el rendimiento promedio del toner:"));  
     modeloToner = prompt("Ingrese el modelo de toner que utiliza:");  
 
-    const impresoraNueva = new Impresora(id, sector, contador, rendimientoPromToner, modeloToner);
+    const impresorasActuales = impresoras.map((el) => el.id);
 
-    impresoras.push(impresoraNueva);
+    if (!impresorasActuales.includes(id)){
+        const impresoraNueva = new Impresora(id, sector, contador, rendimientoPromToner, modeloToner);
+        impresoras.push(impresoraNueva);
+    } else {
+        alert("Error: El ID esta repetido")        // No se puede generar Impresora con ID repetido
+    }
 }
 
 function mostrarMenuToners(encabezadoMenuToner){      // Preparado de Menus Dinámicos
