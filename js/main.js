@@ -5,6 +5,8 @@
 // El sistema realiza una diferencia entre en valor actual y el registrado en el último cambio de toner para determinar el rendimiento del mismo.
 // Analiza si es superior o inferior al promedio de copias sugerido y almacena el nuevo valor.
 
+const listaImpresoras = document.getElementById("listaImpresoras");
+
 let id; 
 let sector;
 let contador;
@@ -72,7 +74,7 @@ function MenuPrincipal () {
                 MenuConsultaContador(encabezadoMenuConsultarContadores);
                 break;
             case 3:
-                ListarImpresoras(impresoras);
+                listarImpresoras(impresoras);
                 break;
             case 4:
                 nuevaImpresora();
@@ -123,15 +125,37 @@ function MenuConsultaContador(encabezado){                  // Menu Consulta de 
     } while (opcionMostrarContador != 0);
 }    
 
-function ListarImpresoras (impresoras){             // Listar Informacion completa de Impresoras
-    let i = 0;
-    let lista = "Lista de Impresoras:\n\nID:     Sector:      Contador:        Rend. Prom Toner:      Modelo Toner:\n";
-    totalImpresoras= impresoras.length;
-    for(i; i<totalImpresoras; i++){
-        elemento = impresoras[i].id + "        " + impresoras[i].sector + "        " + impresoras[i].contador + "                     " + impresoras[i].rendimientoPromToner + "                         " + impresoras[i].modeloToner + "\n";
-        lista = lista.concat(elemento);
+// ****************************************************************************************************************
+// function listarImpresoras (impresoras){             // Listar Informacion completa de Impresoras
+//     let i = 0;
+//     let lista = "Lista de Impresoras:\n\nID:     Sector:      Contador:        Rend. Prom Toner:      Modelo Toner:\n";
+//     totalImpresoras= impresoras.length;
+//     for(i; i<totalImpresoras; i++){
+//         elemento = impresoras[i].id + "        " + impresoras[i].sector + "        " + impresoras[i].contador + "                     " + impresoras[i].rendimientoPromToner + "                         " + impresoras[i].modeloToner + "\n";
+//         lista = lista.concat(elemento);
+//     }
+//     alert(lista);
+// }
+// ***************************************************************************************************************** 
+
+
+function listarImpresoras (impresoras){     // Crear lineas
+    for(const impresora of impresoras){
+        
+        const linea = document.createElement("tr");        
+        listaImpresoras.append(completarLinea(impresora, linea));    // agregar a tbody
     }
-    alert(lista);
+}
+
+function completarLinea (impresora, linea){    // Completar linea 
+    
+    for (const propiedad in impresora){
+        
+        const item = document.createElement("th");
+        item.innerText = impresora[propiedad];
+        linea.append(item);
+    }
+    return linea;
 }
 
 function filtrarImpresorasPorToner(impresoras){         // Filtrado de Impresoras por modelo de Toner
