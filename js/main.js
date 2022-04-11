@@ -7,14 +7,21 @@
 
 const listaImpresoras = document.getElementById("listaImpresoras");
 const inputFiltrar = document.getElementById("inputFiltrar");
+const crearImpresora = document.getElementById("crearImpresora");
 
 inputFiltrar.addEventListener("keyup", opcionFiltrar);
+crearImpresora.addEventListener("submit", nuevaImpresora);
 
-let id; 
-let sector;
-let contador;
-let rendimientoPromToner;
-let modeloToner;
+let id = document.getElementById("id");
+let sector = document.getElementById("sector");
+let contador = document.getElementById("contador");  
+let rendimientoPromToner = document.getElementById("rendimientoPromToner");  
+let modeloToner = document.getElementById("modeloToner");
+// let id; 
+// let sector;
+// let contador;
+// let rendimientoPromToner;
+// let modeloToner;
 let opcion;
 let impresoras;
 let tituloTabla;
@@ -83,17 +90,13 @@ function MenuCambioToner(encabezado){                       // Menu para cambio 
 }
 
 // function MenuConsultaContador(encabezado){                  // Menu Consulta de Contadores en forma individual
-    
 //     const opcionesValidas = impresoras.map((el) => el.id);
-
 //     do {
-//         opcionMostrarContador = parseInt(prompt(mostrarMenuToners(encabezado)));
-        
+//         opcionMostrarContador = parseInt(prompt(mostrarMenuToners(encabezado)));    
 //         if (opcionesValidas.includes(opcionMostrarContador)){
 //             const impresoraParaMostrarContador = impresoras.find((el) => el.id === opcionMostrarContador);
 //             alert("El contador del último cambio de Toner es: " + impresoraParaMostrarContador.contador)
 //         }
-
 //     } while (opcionMostrarContador != 0);
 // }    
 
@@ -134,30 +137,41 @@ function limpiarTabla(){
 }
 
 function nuevaImpresora(){                      // Crear nueva Impresora
-    id = parseInt(prompt("Ingrese el ID:"));
-    sector = prompt("Ingrese el sector:");
-    contador = parseInt(prompt("Ingrese el contador actual:"));  
-    rendimientoPromToner = parseInt(prompt("Ingrese el rendimiento promedio del toner:"));  
-    modeloToner = prompt("Ingrese el modelo de toner que utiliza:");  
+
+    console.log("entro");
+
+    nuevoId = id.value;
+    nuevoSector = sector.value;
+    nuevoContador = contador.value;
+    nuevoRendimientoPromToner = rendimientoPromToner.value;
+    nuevoModeloToner = modeloToner.value; 
 
     const impresorasActuales = impresoras.map((el) => el.id);
 
     if (!impresorasActuales.includes(id)){
-        const impresoraNueva = new Impresora(id, sector, contador, rendimientoPromToner, modeloToner);
+        const impresoraNueva = new Impresora(nuevoId, nuevoSector, nuevoContador, nuevoRendimientoPromToner, nuevoModeloToner);
         impresoras.push(impresoraNueva);
     } else {
         alert("Error: El ID esta repetido")        // No se puede generar Impresora con ID repetido
     }
+    console.log(impresoras)
 }
 
-function mostrarMenuToners(encabezadoMenuToner){      // Preparado de Menus Dinámicos
-    impresoras.forEach((el) => {
-        let elementos = el.id + "        " + el.sector + "\n";
-        encabezadoMenuToner = encabezadoMenuToner.concat(elementos);
-    })
-    encabezadoMenuToner = encabezadoMenuToner.concat(opcionAtras);
-    return encabezadoMenuToner;
+function inicio (){
+    listarImpresoras(impresoras);
+    tituloTabla = document.getElementById("tituloTabla");
+    tituloTabla.innerText = "Listado General de Impresoras:";
 }
+
+
+// function mostrarMenuToners(encabezadoMenuToner){      // Preparado de Menus Dinámicos
+//     impresoras.forEach((el) => {
+//         let elementos = el.id + "        " + el.sector + "\n";
+//         encabezadoMenuToner = encabezadoMenuToner.concat(elementos);
+//     })
+//     encabezadoMenuToner = encabezadoMenuToner.concat(opcionAtras);
+//     return encabezadoMenuToner;
+// }
 
 // ********************************************** INICIO *****************************************************************
 
@@ -169,7 +183,5 @@ impresoras = [impresoraVentas, impresoraCalidad, impresoraCompras];
 
 // MenuPrincipal()
 
-listarImpresoras(impresoras);
-tituloTabla = document.getElementById("tituloTabla");
-tituloTabla.innerText = "Listado General de Impresoras:";
+inicio();
 
