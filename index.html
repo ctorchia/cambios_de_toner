@@ -13,9 +13,45 @@
 </head>
 
 <body>
-    
-    
-    
+
+    <div class="container m-3 row">
+        <div class="container m-1 col">
+            <form id='agregar'>
+                <div class="form-group">
+                    <label for="id">ID:</label>
+                    <input type="number" class="form-control" id="id" placeholder="ID del producto">
+                </div>
+                <div class="form-group">
+                    <label for="sector">Sector:</label>
+                    <input type="text" class="form-control" id="sector" placeholder="Ubicacion de la Impresora">
+                </div>
+                <div class="form-group">
+                    <label for="contador">Contador:</label>
+                    <input type="number" class="form-control" id="contador" placeholder="Contador Actual">
+                </div>
+                <div class="form-group">
+                    <label for="rendimientoPromToner">Rendimiento Promedio del Toner:</label>
+                    <input type="number" class="form-control" id="rendimientoPromToner" placeholder="Rendimiento promedio del toner">
+                </div>
+                <div class="form-group">
+                    <label for="modeloToner">Modelo de Toner:</label>
+                    <input type="text" class="form-control" id="modeloToner" placeholder="Modelo de Toner">
+                </div>
+                <button class="btn btn-primary">
+                    Crear Impresora
+                </button>
+            </form>
+        </div>
+
+        <div class="container m-1 col">
+            <div class="form-group">
+                <label for="inputFiltrar">Filtrar por Modelo de Toner:</label>
+                <input type="text" id="inputFiltrar" class="form-control" placeholder="Escriba el modelo de Toner">
+            </div>
+        </div>
+
+    </div>
+
     <div>
         <div class="container m-1">
 
