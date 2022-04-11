@@ -14,6 +14,7 @@ let rendimientoPromToner;
 let modeloToner;
 let opcion;
 let impresoras;
+let tituloTabla;
 
 // ********************************************** TEXTOS DE MENUS *******************************************************
 let opcionesMenuPrincipal = "Control de Toners:\n\n1- Cambiar toner\n2- Consultar Contador\n3- Listar Impresoras\n4- Nueva Impresora\n5- Filtrar Impresoras por Toner\n0- Salir\n";
@@ -75,12 +76,16 @@ function MenuPrincipal () {
                 break;
             case 3:
                 listarImpresoras(impresoras);
+                tituloTabla = document.getElementById("tituloTabla");
+                tituloTabla.innerText = "Listado General de Impresoras:";
                 break;
             case 4:
                 nuevaImpresora();
                 break;        
             case 5:
-                filtrarImpresorasPorToner(impresoras);
+                listarImpresoras(filtrarImpresorasPorToner(impresoras));
+                tituloTabla = document.getElementById("tituloTabla");
+                tituloTabla.innerText = "Listado de Impresoras filtradas por Toner Seleccionado:";
                 break; 
             case 0:
                 alert("Muchas gracias!");
@@ -138,7 +143,6 @@ function MenuConsultaContador(encabezado){                  // Menu Consulta de 
 // }
 // ***************************************************************************************************************** 
 
-
 function listarImpresoras (impresoras){     // Crear lineas
     for(const impresora of impresoras){
         
@@ -171,6 +175,7 @@ function filtrarImpresorasPorToner(impresoras){         // Filtrado de Impresora
     })
     
     alert(lista);
+    return impresorasPorToner;
 }
 
 function nuevaImpresora(){                      // Crear nueva Impresora
