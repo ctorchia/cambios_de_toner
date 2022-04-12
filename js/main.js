@@ -10,18 +10,12 @@ const inputFiltrar = document.getElementById("inputFiltrar");
 const crearImpresora = document.getElementById("crearImpresora");
 
 inputFiltrar.addEventListener("keyup", opcionFiltrar);
-crearImpresora.addEventListener("submit", nuevaImpresora);
 
 let id = document.getElementById("id");
 let sector = document.getElementById("sector");
 let contador = document.getElementById("contador");  
 let rendimientoPromToner = document.getElementById("rendimientoPromToner");  
 let modeloToner = document.getElementById("modeloToner");
-// let id; 
-// let sector;
-// let contador;
-// let rendimientoPromToner;
-// let modeloToner;
 let opcion;
 let impresoras;
 let tituloTabla;
@@ -136,28 +130,39 @@ function limpiarTabla(){
     listaImpresoras.innerHTML = "";
 }
 
-function nuevaImpresora(){                      // Crear nueva Impresora
+crearImpresora.addEventListener("submit", (e) =>{   // Crear nueva Impresora
 
-    console.log("entro");
+        e.preventDefault();
 
-    nuevoId = id.value;
-    nuevoSector = sector.value;
-    nuevoContador = contador.value;
-    nuevoRendimientoPromToner = rendimientoPromToner.value;
-    nuevoModeloToner = modeloToner.value; 
+        console.log("entro");
+    
+        let nuevoId = id.value;
+        let nuevoSector = sector.value;
+        let nuevoContador = contador.value;
+        let nuevoRendimientoPromToner = rendimientoPromToner.value;
+        let nuevoModeloToner = modeloToner.value; 
+    
+        console.log(impresoras);
+    
+        // const impresorasActuales = impresoras.map((el) => el.id);
+    
+        //if (!impresorasActuales.includes(nuevoId)){
+            const impresoraNueva = new Impresora(nuevoId, nuevoSector, nuevoContador, nuevoRendimientoPromToner, nuevoModeloToner);
+            impresoras.push(impresoraNueva);
+        //} else {
+        //    alert("Error: El ID esta repetido")        // No se puede generar Impresora con ID repetido
+        //}
+        console.log(impresoras)
 
-    const impresorasActuales = impresoras.map((el) => el.id);
+        limpiarTabla();
+        listarImpresoras(impresoras);
+});
 
-    if (!impresorasActuales.includes(id)){
-        const impresoraNueva = new Impresora(nuevoId, nuevoSector, nuevoContador, nuevoRendimientoPromToner, nuevoModeloToner);
-        impresoras.push(impresoraNueva);
-    } else {
-        alert("Error: El ID esta repetido")        // No se puede generar Impresora con ID repetido
-    }
-    console.log(impresoras)
-}
 
 function inicio (){
+
+    console.log(impresoras);
+
     listarImpresoras(impresoras);
     tituloTabla = document.getElementById("tituloTabla");
     tituloTabla.innerText = "Listado General de Impresoras:";
