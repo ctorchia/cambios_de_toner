@@ -7,7 +7,7 @@
 
 const listaImpresoras = document.getElementById("listaImpresoras");
 const inputFiltrar = document.getElementById("inputFiltrar");
-const crearImpresora = document.getElementById("crearImpresora");
+const formImpresora = document.getElementById("formImpresora");
 
 inputFiltrar.addEventListener("keyup", opcionFiltrar);
 
@@ -16,15 +16,9 @@ let sector = document.getElementById("sector");
 let contador = document.getElementById("contador");  
 let rendimientoPromToner = document.getElementById("rendimientoPromToner");  
 let modeloToner = document.getElementById("modeloToner");
-let opcion;
-let impresoras;
-let tituloTabla;
+let tituloTabla = document.getElementById("tituloTabla");
 
-// ********************************************** TEXTOS DE MENUS *******************************************************
-let opcionesMenuPrincipal = "Control de Toners:\n\n1- Cambiar toner\n2- Consultar Contador\n3- Listar Impresoras\n4- Nueva Impresora\n5- Filtrar Impresoras por Toner\n0- Salir\n";
-let encabezadoMenuCambiarToner = "Cambiar Toner:\n\n";
-let encabezadoMenuConsultarContadores = "Consultar Contador:\n\n";
-let opcionAtras = "\n0 - Atras";
+let impresoras;
 
 // ********************************************** CLASES *****************************************************************
 class Impresora {
@@ -67,36 +61,24 @@ class Impresora {
 
 // ********************************************** FUNCIONES *****************************************************************
 
-function MenuCambioToner(encabezado){                       // Menu para cambio de Toner
+// function MenuCambioToner(encabezado){                       // Menu para cambio de Toner
 
-    const opcionesValidas = impresoras.map((el) => el.id);
-
-    do {
-        opcionCambio = parseInt(prompt(mostrarMenuToners(encabezado)));
-
-        if (opcionesValidas.includes(opcionCambio)) {
-            contadorCambio = parseInt(prompt("Ingrese el contador al momento del cambio"));
-            const impresoraParaActualizar = impresoras.find((el) => el.id === opcionCambio);
-            impresoraParaActualizar.cambiarToner(contadorCambio);
-        }
-        
-    } while (opcionCambio != 0);
-}
-
-// function MenuConsultaContador(encabezado){                  // Menu Consulta de Contadores en forma individual
 //     const opcionesValidas = impresoras.map((el) => el.id);
-//     do {
-//         opcionMostrarContador = parseInt(prompt(mostrarMenuToners(encabezado)));    
-//         if (opcionesValidas.includes(opcionMostrarContador)){
-//             const impresoraParaMostrarContador = impresoras.find((el) => el.id === opcionMostrarContador);
-//             alert("El contador del último cambio de Toner es: " + impresoraParaMostrarContador.contador)
-//         }
-//     } while (opcionMostrarContador != 0);
-// }    
 
-function listarImpresoras (impresoras){     // Crear lineas
-    for(const impresora of impresoras){
+//     do {
+//         opcionCambio = parseInt(prompt(mostrarMenuToners(encabezado)));
+
+//         if (opcionesValidas.includes(opcionCambio)) {
+//             contadorCambio = parseInt(prompt("Ingrese el contador al momento del cambio"));
+//             const impresoraParaActualizar = impresoras.find((el) => el.id === opcionCambio);
+//             impresoraParaActualizar.cambiarToner(contadorCambio);
+//         }
         
+//     } while (opcionCambio != 0);
+// }
+
+function actualizarTabla (impresoras){     // Crear lineas
+    for(const impresora of impresoras){
         const linea = document.createElement("tr");        
         listaImpresoras.append(completarLinea(impresora, linea));    // agregar a tbody
     }
@@ -105,7 +87,6 @@ function listarImpresoras (impresoras){     // Crear lineas
 function completarLinea (impresora, linea){    // Completar linea 
     
     for (const propiedad in impresora){
-        
         const item = document.createElement("th");
         item.innerText = impresora[propiedad];
         linea.append(item);
@@ -115,13 +96,13 @@ function completarLinea (impresora, linea){    // Completar linea
 
 function opcionFiltrar(){
     limpiarTabla();
-    listarImpresoras(filtrarImpresorasPorToner(impresoras));
+    actualizarTabla(filtrarImpresorasPorToner(impresoras));
     tituloTabla = document.getElementById("tituloTabla");
     tituloTabla.innerText = "Listado de Impresoras filtradas por Toner Seleccionado:";
 }
 
 function filtrarImpresorasPorToner(impresoras){         // Filtrado de Impresoras por modelo de Toner
-    toner = inputFiltrar.value;
+    toner = inputFiltrar.value.toUpperCase();
     const impresorasPorToner = impresoras.filter((el) => el.modeloToner.includes(toner));
     return impresorasPorToner;
 }
@@ -130,53 +111,39 @@ function limpiarTabla(){
     listaImpresoras.innerHTML = "";
 }
 
-crearImpresora.addEventListener("submit", (e) =>{   // Crear nueva Impresora
+formImpresora.addEventListener("submit", (e) =>{   // Crear nueva Impresora
 
         e.preventDefault();
 
-        console.log("entro");
-    
-        let nuevoId = id.value;
+        let nuevoId = parseInt(id.value);
         let nuevoSector = sector.value;
-        let nuevoContador = contador.value;
-        let nuevoRendimientoPromToner = rendimientoPromToner.value;
-        let nuevoModeloToner = modeloToner.value; 
+        let nuevoContador = parseInt(contador.value);
+        let nuevoRendimientoPromToner = parseInt(rendimientoPromToner.value);
+        let nuevoModeloToner = modeloToner.value.toUpperCase(); 
     
+        const impresorasActuales = impresoras.map((el) => el.id);
         console.log(impresoras);
-    
-        // const impresorasActuales = impresoras.map((el) => el.id);
-    
-        //if (!impresorasActuales.includes(nuevoId)){
+        
+        if (!impresorasActuales.includes(nuevoId)){
             const impresoraNueva = new Impresora(nuevoId, nuevoSector, nuevoContador, nuevoRendimientoPromToner, nuevoModeloToner);
             impresoras.push(impresoraNueva);
-        //} else {
-        //    alert("Error: El ID esta repetido")        // No se puede generar Impresora con ID repetido
-        //}
+        } else {
+            alert("Error: El ID esta repetido")        // No se puede generar Impresora con ID repetido
+        }
         console.log(impresoras)
 
+        formImpresora.reset();
         limpiarTabla();
-        listarImpresoras(impresoras);
+        actualizarTabla(impresoras);
 });
-
 
 function inicio (){
 
     console.log(impresoras);
 
-    listarImpresoras(impresoras);
-    tituloTabla = document.getElementById("tituloTabla");
+    actualizarTabla(impresoras);
     tituloTabla.innerText = "Listado General de Impresoras:";
 }
-
-
-// function mostrarMenuToners(encabezadoMenuToner){      // Preparado de Menus Dinámicos
-//     impresoras.forEach((el) => {
-//         let elementos = el.id + "        " + el.sector + "\n";
-//         encabezadoMenuToner = encabezadoMenuToner.concat(elementos);
-//     })
-//     encabezadoMenuToner = encabezadoMenuToner.concat(opcionAtras);
-//     return encabezadoMenuToner;
-// }
 
 // ********************************************** INICIO *****************************************************************
 
