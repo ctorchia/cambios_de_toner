@@ -13,76 +13,110 @@
 </head>
 
 <body>
-    <div class="container m-3 row">
-        <div class="container m-1 col-6">
-            <form id="formImpresora">
-                <div class="form-group">
-                    <label for="id">ID:</label>
-                    <input type="number" class="form-control" id="id" placeholder="ID del producto" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="sector">Sector:</label>
-                    <input type="text" class="form-control" id="sector" placeholder="Ubicacion de la Impresora"
-                        required="required">
-                </div>
-                <div class="form-group">
-                    <label for="contador">Contador:</label>
-                    <input type="number" class="form-control" id="contador" placeholder="Contador Actual"
-                        required="required">
-                </div>
-                <div class="form-group">
-                    <label for="rendimientoPromToner">Rendimiento Promedio del Toner:</label>
-                    <input type="number" class="form-control" id="rendimientoPromToner"
-                        placeholder="Rendimiento promedio del toner" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="modeloToner">Modelo de Toner:</label>
-                    <input type="text" class="form-control" id="modeloToner" placeholder="Modelo de Toner"
-                        required="required">
-                </div>
-                <button class="btn btn-primary">
-                    Crear Impresora
+    <div class="d-flex flex-column">
+        
+        <div class="ml-4 p-3 d-flex flex-row justify-content-start">
+            <div class="">
+                <select class="p-2 m-2 form-select" id="inputGrupoImpresoras" aria-label="Example select with button addon">
+    
+                </select>
+            </div>
+            <div>
+                <button class="m-2 btn btn-primary">
+                    Nueva Impresora
                 </button>
-            </form>
+            </div>
         </div>
 
-        <div class="container m-1 col-5">
-            <div >
-                <div class="form-group">
-                    <label for="inputFiltrar">Filtrar por Modelo de Toner:</label>
-                    <input type="text" id="inputFiltrar" class="form-control" placeholder="Escriba el modelo de Toner">
+        <div class="d-flex flex-row m-3">
+            <div class="border border-1 d-flex flex-row p-3">
+                <div>
+                    <img src="./imagenes/ventas.png" alt="">
+                </div>
+                <div class="m-2 text-center">
+                    <label for="sector">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="Nombre de la Impresora" required="required">
+                    <label for="sector">Marca:</label>
+                    <input type="text" class="form-control" id="marca" placeholder="Marca" required="required">
+                    <label for="sector">Tipo:</label>
+                    <input type="text" class="form-control" id="tipo" placeholder="Tipo" required="required">
+                    <label for="sector">Modelo:</label>
+                    <input type="text" class="form-control" id="modelo" placeholder="Modelo" required="required">
+                </div>
+
+                <div class="m-2 text-center"> 
+                    <label for="sector">IP:</label>
+                    <input type="text" class="form-control" id="ip" placeholder="IP" required="required">
+                    <label for="sector">Toners Compatibles:</label>
+                    <input type="text" class="form-control" id="tonersCompatibles" placeholder="Toners Compatibles" required="required">
                 </div>
             </div>
             
-            <div class="input-group col-12">
-                <select class="form-select" id="inputGrupoImpresoras" aria-label="Example select with button addon">
-                  <!--<option selected>Seleccione la Impresora</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option> -->
-                </select>
+            <div class="border border-1">
+
             </div>
         </div>
-    </div>
-
-    <div>
-        <div class="container m-1">
-
-            <p id="tituloTabla"></p>
-
-            <table class="table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>ID:</th>
-                        <th>Sector:</th>
-                        <th>Contador:</th>
-                        <th>Rend. Prom. Toner:</th>
-                        <th>Modelo Toner:</th>
-                    </tr>
-                </thead>
-                <tbody id="listaImpresoras">
-                </tbody>
-            </table>
+        
+        <!-- <div class="container m-3 row">
+            <div class="container m-1 col-6">
+                <form id="formImpresora">
+                    <div class="form-group">
+                        <label for="id">ID:</label>
+                        <input type="number" class="form-control" id="id" placeholder="ID del producto" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="sector">Sector:</label>
+                        <input type="text" class="form-control" id="sector" placeholder="Ubicacion de la Impresora"
+                            required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="contador">Contador:</label>
+                        <input type="number" class="form-control" id="contador" placeholder="Contador Actual"
+                            required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="rendimientoPromToner">Rendimiento Promedio del Toner:</label>
+                        <input type="number" class="form-control" id="rendimientoPromToner"
+                            placeholder="Rendimiento promedio del toner" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="modeloToner">Modelo de Toner:</label>
+                        <input type="text" class="form-control" id="modeloToner" placeholder="Modelo de Toner"
+                            required="required">
+                    </div>
+                    <button class="btn btn-primary">
+                        Crear Impresora
+                    </button>
+                </form>
+            </div>
+            <div class="container m-1 col-5">
+                <div >
+                    <div class="form-group">
+                        <label for="inputFiltrar">Filtrar por Modelo de Toner:</label>
+                        <input type="text" id="inputFiltrar" class="form-control" placeholder="Escriba el modelo de Toner">
+                    </div>
+                </div>
+        
+                
+            </div>
+        </div> -->
+        <div>
+            <div class="container m-1">
+                <p id="tituloTabla"></p>
+                <table class="table">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>ID:</th>
+                            <th>Sector:</th>
+                            <th>Contador:</th>
+                            <th>Rend. Prom. Toner:</th>
+                            <th>Modelo Toner:</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaImpresoras">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
