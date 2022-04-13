@@ -8,6 +8,7 @@
 const listaImpresoras = document.getElementById("listaImpresoras");
 const inputFiltrar = document.getElementById("inputFiltrar");
 const formImpresora = document.getElementById("formImpresora");
+const inputGrupoImpresoras = document.getElementById("inputGrupoImpresoras");
 
 inputFiltrar.addEventListener("keyup", opcionFiltrar);
 
@@ -60,22 +61,6 @@ class Impresora {
 }
 
 // ********************************************** FUNCIONES *****************************************************************
-
-// function MenuCambioToner(encabezado){                       // Menu para cambio de Toner
-
-//     const opcionesValidas = impresoras.map((el) => el.id);
-
-//     do {
-//         opcionCambio = parseInt(prompt(mostrarMenuToners(encabezado)));
-
-//         if (opcionesValidas.includes(opcionCambio)) {
-//             contadorCambio = parseInt(prompt("Ingrese el contador al momento del cambio"));
-//             const impresoraParaActualizar = impresoras.find((el) => el.id === opcionCambio);
-//             impresoraParaActualizar.cambiarToner(contadorCambio);
-//         }
-        
-//     } while (opcionCambio != 0);
-// }
 
 function actualizarTabla (impresoras){     // Crear lineas
     for(const impresora of impresoras){
@@ -143,6 +128,19 @@ function inicio (){
 
     actualizarTabla(impresoras);
     tituloTabla.innerText = "Listado General de Impresoras:";
+
+    armarInputGrupoImpresoras(impresoras);
+}
+
+function armarInputGrupoImpresoras (impresoras){
+
+    for(const impresora of impresoras){
+        const opcion = document.createElement("option");
+        opcion.innerText = impresora.sector;
+        opcion.value = impresora.id;        
+        inputGrupoImpresoras.append(opcion);    // agregar a tbody
+    }
+
 }
 
 // ********************************************** INICIO *****************************************************************
