@@ -5,151 +5,190 @@
 // El sistema realiza una diferencia entre en valor actual y el registrado en el último cambio de toner para determinar el rendimiento del mismo.
 // Analiza si es superior o inferior al promedio de copias sugerido y almacena el nuevo valor.
 
-const listaImpresoras = document.getElementById("listaImpresoras");
-const inputFiltrar = document.getElementById("inputFiltrar");
-const formImpresora = document.getElementById("formImpresora");
 const inputGrupoImpresoras = document.getElementById("inputGrupoImpresoras");
+const inputGrupoToners = document.getElementById("inputGrupoToners");
 
-inputFiltrar.addEventListener("keyup", opcionFiltrar);
+// const listaImpresoras = document.getElementById("listaImpresoras");
+// const inputFiltrar = document.getElementById("inputFiltrar");
+// const formImpresora = document.getElementById("formImpresora");
 
-let id = document.getElementById("id");
-let sector = document.getElementById("sector");
-let contador = document.getElementById("contador");  
-let rendimientoPromToner = document.getElementById("rendimientoPromToner");  
-let modeloToner = document.getElementById("modeloToner");
-let tituloTabla = document.getElementById("tituloTabla");
+inputGrupoImpresoras.addEventListener("change", mostrarInfoImpresora);
+
+//inputFiltrar.addEventListener("keyup", opcionFiltrar);
 
 let impresoras;
+// let impresora;
+// let nombre;
+let campoNombre = document.getElementById("nombre");
+let campoMarca = document.getElementById("marca");
+let campoTipo = document.getElementById("tipo");
+let campoModelo = document.getElementById("modelo");
+let campoIp = document.getElementById("ip");
+let campoTonerCompatible1 = document.getElementById("tonerCompatible1");
+let campoTonerCompatible2 = document.getElementById("tonerCompatible2");
+let campoUltimoContador = document.getElementById("ultimoContador");
+
+
+// let id = document.getElementById("id");
+// let sector = document.getElementById("sector");
+// let contador = document.getElementById("contador");  
+// let rendimientoPromToner = document.getElementById("rendimientoPromToner");  
+// let modeloToner = document.getElementById("modeloToner");
+// let tituloTabla = document.getElementById("tituloTabla");
+
 
 // ********************************************** CLASES *****************************************************************
 class Impresora {
 
-    constructor(nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, tonerCompatible3) {
+    constructor(nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2) {
         // this.id = id;  // {Number} id - ID de la impresora.
-        this.sector = sector;  // {String} sector - Sector donde se ubica la impresora.
-        this.contador = contador; // {Number} contador - Cantidad total de páginas impresas desde la instalación de la impresora.
-        this.rendimientoPromToner = rendimientoPromToner; // {Number} rendimientoPromToner - Rendimiento Promedio de Impresiones del Toner
-        this.modeloToner = modeloToner; // {Number} modeloToner -Modelo de Toner
+        this.nombre = nombre;  // {String} Nombre de la impresora.
+        this.marca = marca; // {String} Marca de la impresora.
+        this.tipo = tipo; // {String} Tipo de Impresora.
+        this.modelo = modelo; // {String} Modelo de Impresora.
+        this.ip = ip; // {String} IP de Impresora.
+        this.tonerCompatible1 = tonerCompatible1; // {String} 1ra opcion de Toner Compatible.
+        this.tonerCompatible2 = tonerCompatible2; // {String} 2da opcion de Toner Compatible.
+        this.contador = 0; // Inicializa contador de Immpresora.
+        this.historialCambios = []; // Inicializa Historial de Cambios.
     }
 
-    consultarContador() {
-        return this.contador; // Consulta contador del último cambio de toner registrado
-    }
+    // consultarContador() {
+    //     return this.contador; // Consulta contador del último cambio de toner registrado
+    // }
 
-    actualizarContador(nuevoContador) {  // Actualiza el contador con el valor actual al momento del cambio
-        this.contador = nuevoContador;
-    }
+    // actualizarContador(nuevoContador) {  // Actualiza el contador con el valor actual al momento del cambio
+    //     this.contador = nuevoContador;
+    // }
 
-    verificarRendimiento(nuevoContador) {   // Verifica si el rendimiento del toner es superior o inferior al promedio
-        let rendimientoToner = nuevoContador - this.consultarContador();
-        if (rendimientoToner >= this.rendimientoPromToner) {
-            alert("El rendimiento del Toner fue correcto.\n" + rendimientoToner + " páginas impresas vs " + this.rendimientoPromToner + " de promedio");
-        } else {
-            alert("El rendimiento del Toner fue deficiente.\n" + rendimientoToner + " páginas impresas vs " + this.rendimientoPromToner + " de promedio");
-        }
-    }
-
-    cambiarToner(nuevoContador) { // Si el contador es un valor válido, aplica el cambio y actualiza los datos en el objeto
-        if (nuevoContador > this.consultarContador()) {
-            this.verificarRendimiento(contadorCambio);
-            this.actualizarContador(contadorCambio);
-            alert("Se realizó el cambio correctamente.");
-        } else {
-            alert("Error en el contador ingresado");
-        }
-    }
+    // cambiarToner(nuevoContador) { // Si el contador es un valor válido, aplica el cambio y actualiza los datos en el objeto
+    //     if (nuevoContador > this.consultarContador()) {
+    //         this.verificarRendimiento(contadorCambio);
+    //         this.actualizarContador(contadorCambio);
+    //         alert("Se realizó el cambio correctamente.");
+    //     } else {
+    //         alert("Error en el contador ingresado");
+    //     }
+    // }
 }
 
 // ********************************************** FUNCIONES *****************************************************************
 
-function actualizarTabla (impresoras){     // Crear lineas
-    for(const impresora of impresoras){
-        const linea = document.createElement("tr");        
-        listaImpresoras.append(completarLinea(impresora, linea));    // agregar a tbody
-    }
-}
+// function actualizarTabla (impresoras){     // Crear lineas
+//     for(const impresora of impresoras){
+//         const linea = document.createElement("tr");        
+//         listaImpresoras.append(completarLinea(impresora, linea));    // agregar a tbody
+//     }
+// }
 
-function completarLinea (impresora, linea){    // Completar linea 
+// function completarLinea (impresora, linea){    // Completar linea 
     
-    for (const propiedad in impresora){
-        const item = document.createElement("th");
-        item.innerText = impresora[propiedad];
-        linea.append(item);
-    }
-    return linea;
-}
+//     for (const propiedad in impresora){
+//         const item = document.createElement("th");
+//         item.innerText = impresora[propiedad];
+//         linea.append(item);
+//     }
+//     return linea;
+// }
 
-function opcionFiltrar(){
-    limpiarTabla();
-    actualizarTabla(filtrarImpresorasPorToner(impresoras));
-    tituloTabla = document.getElementById("tituloTabla");
-    tituloTabla.innerText = "Listado de Impresoras filtradas por Toner Seleccionado:";
-}
+// function opcionFiltrar(){
+//     limpiarTabla();
+//     actualizarTabla(filtrarImpresorasPorToner(impresoras));
+//     tituloTabla = document.getElementById("tituloTabla");
+//     tituloTabla.innerText = "Listado de Impresoras filtradas por Toner Seleccionado:";
+// }
 
-function filtrarImpresorasPorToner(impresoras){         // Filtrado de Impresoras por modelo de Toner
-    toner = inputFiltrar.value.toUpperCase();
-    const impresorasPorToner = impresoras.filter((el) => el.modeloToner.includes(toner));
-    return impresorasPorToner;
-}
+// function filtrarImpresorasPorToner(impresoras){         // Filtrado de Impresoras por modelo de Toner
+//     toner = inputFiltrar.value.toUpperCase();
+//     const impresorasPorToner = impresoras.filter((el) => el.modeloToner.includes(toner));
+//     return impresorasPorToner;
+// }
 
-function limpiarTabla(){
-    listaImpresoras.innerHTML = "";
-}
+// function limpiarTabla(){
+//     listaImpresoras.innerHTML = "";
+// }
 
-formImpresora.addEventListener("submit", (e) =>{   // Crear nueva Impresora
+// formImpresora.addEventListener("submit", (e) =>{   // Crear nueva Impresora
 
-        e.preventDefault();
+//         e.preventDefault();
 
-        let nuevoId = parseInt(id.value);
-        let nuevoSector = sector.value;
-        let nuevoContador = parseInt(contador.value);
-        let nuevoRendimientoPromToner = parseInt(rendimientoPromToner.value);
-        let nuevoModeloToner = modeloToner.value.toUpperCase(); 
+//         let nuevoId = parseInt(id.value);
+//         let nuevoSector = sector.value;
+//         let nuevoContador = parseInt(contador.value);
+//         let nuevoRendimientoPromToner = parseInt(rendimientoPromToner.value);
+//         let nuevoModeloToner = modeloToner.value.toUpperCase(); 
     
-        const impresorasActuales = impresoras.map((el) => el.id);
-        console.log(impresoras);
+//         const impresorasActuales = impresoras.map((el) => el.id);
+//         console.log(impresoras);
         
-        if (!impresorasActuales.includes(nuevoId)){
-            const impresoraNueva = new Impresora(nuevoId, nuevoSector, nuevoContador, nuevoRendimientoPromToner, nuevoModeloToner);
-            impresoras.push(impresoraNueva);
-        } else {
-            alert("Error: El ID esta repetido")        // No se puede generar Impresora con ID repetido
-        }
-        console.log(impresoras)
+//         if (!impresorasActuales.includes(nuevoId)){
+//             const impresoraNueva = new Impresora(nuevoId, nuevoSector, nuevoContador, nuevoRendimientoPromToner, nuevoModeloToner);
+//             impresoras.push(impresoraNueva);
+//         } else {
+//             alert("Error: El ID esta repetido")        // No se puede generar Impresora con ID repetido
+//         }
+//         console.log(impresoras)
 
-        formImpresora.reset();
-        limpiarTabla();
-        actualizarTabla(impresoras);
-});
+//         formImpresora.reset();
+//         limpiarTabla();
+//         actualizarTabla(impresoras);
+// });
 
-function inicio (){
+function armarInputGrupoToners(impresora){
 
-    console.log(impresoras);
+    let opciones = `<option>${impresora.tonerCompatible1}</option>
+                    <option>${impresora.tonerCompatible2}</option>`;
+    inputGrupoToners.innerHTML = opciones;
+}
 
-    actualizarTabla(impresoras);
-    tituloTabla.innerText = "Listado General de Impresoras:";
+function obtenerImpresoraDesdeArray(){
+    let nombreImpresora = inputGrupoImpresoras.value;
+    // const impresora = impresoras.filter((el) => el.nombre.includes(nombreImpresora))[0];
+    const impresora = impresoras.find((el) => el.nombre.includes(nombreImpresora));
+    return (impresora);
+}
 
-    armarInputGrupoImpresoras(impresoras);
+function mostrarInfoImpresora(){
+    const impresora = obtenerImpresoraDesdeArray();
+
+    console.log(impresora);
+    
+    campoNombre.placeholder = impresora.nombre;
+    campoMarca.placeholder = impresora.marca;
+    campoTipo.placeholder = impresora.tipo;
+    campoModelo.placeholder = impresora.modelo;
+    campoIp.placeholder = impresora.ip;
+    campoTonerCompatible1.placeholder = impresora.tonerCompatible1;
+    campoTonerCompatible2.placeholder = impresora.tonerCompatible2;
+    campoUltimoContador.placeholder = impresora.contador;
+
+    armarInputGrupoToners(impresora);
 }
 
 function armarInputGrupoImpresoras (impresoras){
-
+    
     for(const impresora of impresoras){
         const opcion = document.createElement("option");
-        opcion.innerText = impresora.sector;
-        opcion.value = impresora.id;        
+        opcion.innerText = impresora.nombre;
+        // opcion.value = impresora.id;        
         inputGrupoImpresoras.append(opcion);    // agregar a tbody
     }
+}
 
+function inicio (){
+    console.log(impresoras);
+    // actualizarTabla(impresoras);
+    // tituloTabla.innerText = "Listado General de Impresoras:";
+    armarInputGrupoImpresoras(impresoras);
 }
 
 // ********************************************** INICIO *****************************************************************
 
-const impresoraVentas = new Impresora(01, "Ventas", 23000, 1000, "237A");  // Objetos de ejemplo
-const impresoraCalidad = new Impresora(02, "Calidad", 34000, 2000, "203L");
-const impresoraCompras = new Impresora(03, "Compras", 10000, 1000, "203L");
+const ventas = new Impresora("Ventas", "HP", "LaserJet", "M608dn", "10.18.89.16", "237A","");  // Objetos de ejemplo
+const calidad = new Impresora("Calidad", "Samsung", "Multifuncion", "SL-M4072FD", "10.18.89.26", "D203U","");
+const despacho = new Impresora("Despacho", "HP", "LaserJet", "P4015n", "10.18.89.13", "CC364A","CC364X");
 
-impresoras = [impresoraVentas, impresoraCalidad, impresoraCompras];
+impresoras = [ventas, calidad, despacho];
 
 // MenuPrincipal()
 

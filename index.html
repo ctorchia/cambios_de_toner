@@ -20,8 +20,8 @@
             <div class="p-2 m-2">
                 <select id="inputGrupoImpresoras" class="form-control">
                     <option value="0">Seleccionar Impresora:</option>
-                    <option value="1">Ventas</option>
-                    <option value="2">Calidad</option>
+                    <!-- <option value="1">Ventas</option>
+                    <option value="2">Calidad</option> -->
                 </select>
             </div>
 
@@ -62,11 +62,11 @@
                         <input type="text" class="form-control" id="ip" placeholder="IP" required="required">
                     </div>
                     <div class="mt-2">
-                        <label for="tonersCompatibles1">Toners Compatibles:</label>
-                        <!-- <input type="text" class="form-control" id="tonersCompatibles" placeholder="Toners Compatibles" required="required"> -->
-                        <input type="text" class="form-control mb-2" id="tonersCompatibles1" placeholder="" required="required">
-                        <input type="text" class="form-control mt-2" id="tonersCompatibles2" placeholder="" >
-                        <!-- <input type="text" class="form-control" id="tonersCompatibles3" placeholder="" > -->
+                        <label for="tonerCompatible1">Toners Compatibles:</label>
+                        <!-- <input type="text" class="form-control" id="tonerCompatible" placeholder="Toners Compatibles" required="required"> -->
+                        <input type="text" class="form-control mb-2" id="tonerCompatible1" placeholder="" required="required">
+                        <input type="text" class="form-control mt-2" id="tonerCompatible2" placeholder="" >
+                        <!-- <input type="text" class="form-control" id="tonerCompatible3" placeholder="" > -->
                     </div>
                     <div class="mt-5 pt-2">
                         <button class="m-2 btn btn-primary" disabled>
@@ -86,20 +86,20 @@
                 <div class="d-flex">
                     <div class="m-2">
                         <label for="ultimoContador">Ultimo:</label>
-                        <input type="text" class="form-control" id="ultimoContador" placeholder="Ultimo" required="required">
+                        <input type="number" class="form-control" id="ultimoContador" placeholder="Ultimo" required="required">
                     </div>
                     <div class="m-2">
                         <label for="actualContador">Actual:</label>
-                        <input type="text" class="form-control" id="actualContador" placeholder="Actual" required="required">
+                        <input type="number" class="form-control" id="actualContador" placeholder="Actual" required="required">
                     </div>
                 </div>
                 <div class="mt-4">
                     <label>Modelo de Toner:</label>
                     <div>
-                        <select class="form-control">
-                          <option value="0">Seleccionar Toner:</option>
+                        <select class="form-control" id="inputGrupoToners">
+                          <!-- <option value="0">Seleccionar Toner:</option>
                           <option value="1">364A</option>
-                          <option value="2">364X</option>
+                          <option value="2">364X</option> -->
                         </select>
                     </div>
                 </div>
@@ -160,11 +160,10 @@
                 <table class="table">
                     <thead class="table-primary">
                         <tr>
-                            <th>ID:</th>
-                            <th>Sector:</th>
-                            <th>Contador:</th>
-                            <th>Rend. Prom. Toner:</th>
-                            <th>Modelo Toner:</th>
+                            <th>Fecha de Cambio</th>
+                            <th>Contador de páginas</th>
+                            <th>Modelo de Toner</th>
+                            <th>Rend. Toner</th>
                         </tr>
                     </thead>
                     <tbody id="listaImpresoras">
