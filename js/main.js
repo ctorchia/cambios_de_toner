@@ -7,12 +7,20 @@
 
 const inputGrupoImpresoras = document.getElementById("inputGrupoImpresoras");
 const inputGrupoToners = document.getElementById("inputGrupoToners");
+const btnNuevaImpresora = document.getElementById("btnNuevaImpresora");
+const formNuevaImpresora = document.getElementById("formNuevaImpresora");
+const btnCambioToner = document.getElementById("btnCambioToner");
+const btnAceptarNuevaImpresora = document.getElementById("btnAceptarImpresora");
 
 // const listaImpresoras = document.getElementById("listaImpresoras");
 // const inputFiltrar = document.getElementById("inputFiltrar");
 // const formImpresora = document.getElementById("formImpresora");
 
 inputGrupoImpresoras.addEventListener("change", mostrarInfoImpresora);
+btnNuevaImpresora.addEventListener("click", crearImpresora);
+formNuevaImpresora.addEventListener("submit", aceptarNuevaImpresora);
+// btnCambioToner.addEventListener("submit", aceptarCambioToner);
+
 
 //inputFiltrar.addEventListener("keyup", opcionFiltrar);
 
@@ -134,6 +142,42 @@ class Impresora {
 //         actualizarTabla(impresoras);
 // });
 
+function aceptarNuevaImpresora(e){
+    e.preventDefault();
+
+    let nuevoNombre = campoNombre.value;
+    let nuevoMarca = campoMarca.value;
+    let nuevoTipo = campoTipo.value;
+    let nuevoModelo = campoModelo.value;
+    let nuevoIp = campoIp.value;
+    let nuevoTonerCompatible1 = campoTonerCompatible1.value.toUpperCase();
+    let nuevoTonerCompatible2 = campoTonerCompatible2.value.toUpperCase();
+
+    console.log(impresoras);
+
+    if (!impresoras.includes(nuevoNombre)){
+        const impresoraNueva = new Impresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2);
+        impresoras.push(impresoraNueva);
+    } else {
+        alert("Error: El Nombre esta repetido")        // No se puede generar Impresora con ID repetido
+    }
+
+    formNuevaImpresora.reset();
+    inputGrupoImpresoras.disabled = false;
+    btnAceptarNuevaImpresora.disabled = true;
+    btnCambioToner.disabled = false;
+    armarInputGrupoImpresoras(impresoras);
+
+    console.log(impresoras);
+}
+
+function crearImpresora(){
+    inputGrupoImpresoras.disabled = true;
+    btnAceptarNuevaImpresora.disabled = false;
+    btnCambioToner.disabled = true;
+    formNuevaImpresora.reset();
+}
+
 function armarInputGrupoToners(impresora){
 
     let opciones = `<option>${impresora.tonerCompatible1}</option>
@@ -153,20 +197,22 @@ function mostrarInfoImpresora(){
 
     console.log(impresora);
     
-    campoNombre.placeholder = impresora.nombre;
-    campoMarca.placeholder = impresora.marca;
-    campoTipo.placeholder = impresora.tipo;
-    campoModelo.placeholder = impresora.modelo;
-    campoIp.placeholder = impresora.ip;
-    campoTonerCompatible1.placeholder = impresora.tonerCompatible1;
-    campoTonerCompatible2.placeholder = impresora.tonerCompatible2;
-    campoUltimoContador.placeholder = impresora.contador;
+    campoNombre.value = impresora.nombre;
+    campoMarca.value = impresora.marca;
+    campoTipo.value = impresora.tipo;
+    campoModelo.value = impresora.modelo;
+    campoIp.value = impresora.ip;
+    campoTonerCompatible1.value = impresora.tonerCompatible1;
+    campoTonerCompatible2.value = impresora.tonerCompatible2;
+    campoUltimoContador.value = impresora.contador;
 
     armarInputGrupoToners(impresora);
 }
 
 function armarInputGrupoImpresoras (impresoras){
     
+    inputGrupoImpresoras.innerHTML = ``;
+
     for(const impresora of impresoras){
         const opcion = document.createElement("option");
         opcion.innerText = impresora.nombre;
@@ -180,6 +226,7 @@ function inicio (){
     // actualizarTabla(impresoras);
     // tituloTabla.innerText = "Listado General de Impresoras:";
     armarInputGrupoImpresoras(impresoras);
+    mostrarInfoImpresora();
 }
 
 // ********************************************** INICIO *****************************************************************
