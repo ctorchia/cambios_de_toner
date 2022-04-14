@@ -24,8 +24,8 @@ let impresoras;
 // ********************************************** CLASES *****************************************************************
 class Impresora {
 
-    constructor(id, sector, contador, rendimientoPromToner, modeloToner) {
-        this.id = id;  // {Number} id - ID de la impresora.
+    constructor(nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, tonerCompatible3) {
+        // this.id = id;  // {Number} id - ID de la impresora.
         this.sector = sector;  // {String} sector - Sector donde se ubica la impresora.
         this.contador = contador; // {Number} contador - Cantidad total de páginas impresas desde la instalación de la impresora.
         this.rendimientoPromToner = rendimientoPromToner; // {Number} rendimientoPromToner - Rendimiento Promedio de Impresiones del Toner
