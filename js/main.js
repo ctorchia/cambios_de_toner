@@ -9,6 +9,7 @@ const inputGrupoImpresoras = document.getElementById("inputGrupoImpresoras");
 const inputGrupoToners = document.getElementById("inputGrupoToners");
 const btnNuevaImpresora = document.getElementById("btnNuevaImpresora");
 const formNuevaImpresora = document.getElementById("formNuevaImpresora");
+const formCambioToner = document.getElementById("formCambioToner");
 const btnCambioToner = document.getElementById("btnCambioToner");
 const btnAceptarNuevaImpresora = document.getElementById("btnAceptarImpresora");
 
@@ -19,6 +20,7 @@ const btnAceptarNuevaImpresora = document.getElementById("btnAceptarImpresora");
 inputGrupoImpresoras.addEventListener("change", mostrarInfoImpresora);
 btnNuevaImpresora.addEventListener("click", crearImpresora);
 formNuevaImpresora.addEventListener("submit", aceptarNuevaImpresora);
+formCambioToner.addEventListener("submit", aceptarCambioToner);
 // btnCambioToner.addEventListener("submit", aceptarCambioToner);
 
 
@@ -35,6 +37,9 @@ let campoIp = document.getElementById("ip");
 let campoTonerCompatible1 = document.getElementById("tonerCompatible1");
 let campoTonerCompatible2 = document.getElementById("tonerCompatible2");
 let campoUltimoContador = document.getElementById("ultimoContador");
+let campoFechaCambio = document.getElementById("fechaCambio");
+let campoActualContador = document.getElementById("actualContador");
+let campoInputGrupoToners = document.getElementById("inputGrupoToners");
 
 
 // let id = document.getElementById("id");
@@ -59,6 +64,14 @@ class Impresora {
         this.tonerCompatible2 = tonerCompatible2; // {String} 2da opcion de Toner Compatible.
         this.contador = 0; // Inicializa contador de Immpresora.
         this.historialCambios = []; // Inicializa Historial de Cambios.
+    };
+
+    actualizarContador(actualContador){
+        this.contador = actualContador
+    }
+
+    cambiarToner(cambioToner){
+        this.historialCambios.push(cambioToner)
     }
 
     // consultarContador() {
@@ -78,6 +91,16 @@ class Impresora {
     //         alert("Error en el contador ingresado");
     //     }
     // }
+}
+
+class CambioToner {
+    constructor(fechaCambio, contadorPaginas, modeloToner, rendimientoPaginas){
+        this.fechaCambio = fechaCambio;
+        this.contadorPaginas = contadorPaginas;
+        this.modeloToner = modeloToner;
+        this.rendimientoPaginas = rendimientoPaginas;
+    }
+    
 }
 
 // ********************************************** FUNCIONES *****************************************************************
@@ -141,6 +164,28 @@ class Impresora {
 //         limpiarTabla();
 //         actualizarTabla(impresoras);
 // });
+
+function aceptarCambioToner(e){
+    e.preventDefault();
+
+    let fechaCambio = campoFechaCambio.value;
+    let actualContador = campoActualContador.value;
+    let inputGrupoToners = campoInputGrupoToners.value;
+
+    
+    const impresora = obtenerImpresoraDesdeArray();
+    let rendimientoPaginas = actualContador - impresora.contador;
+    impresora.actualizarContador(actualContador);
+
+    const cambioToner = new CambioToner (fechaCambio, actualContador, inputGrupoToners, rendimientoPaginas)
+
+    impresora.cambiarToner(cambioToner);
+    formCambioToner.reset();
+
+    campoUltimoContador.value = impresora.contador;
+
+    console.log(impresoras);
+}
 
 function aceptarNuevaImpresora(e){
     e.preventDefault();
