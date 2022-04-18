@@ -12,6 +12,7 @@ const formNuevaImpresora = document.getElementById("formNuevaImpresora");
 const formCambioToner = document.getElementById("formCambioToner");
 const btnCambioToner = document.getElementById("btnCambioToner");
 const btnAceptarNuevaImpresora = document.getElementById("btnAceptarImpresora");
+const listaCambiosToner = document.getElementById("listaCambiosToner");
 
 // const listaImpresoras = document.getElementById("listaImpresoras");
 // const inputFiltrar = document.getElementById("inputFiltrar");
@@ -165,6 +166,34 @@ class CambioToner {
 //         actualizarTabla(impresoras);
 // });
 
+
+function limpiarTablaCambiosToner(){
+    listaCambiosToner.innerHTML = ``;
+}
+
+function completarLinea(cambio){
+    
+    return `<th>${cambio.fechaCambio}</th>
+            <th>${cambio.contadorPaginas}</th>
+            <th>${cambio.modeloToner}</th>
+            <th>${cambio.rendimientoPaginas}</th>`; 
+}
+
+function actualizarTablaCambioToner() {     
+
+    limpiarTablaCambiosToner();
+    const impresora = obtenerImpresoraDesdeArray();
+    const cambiosToner = impresora.historialCambios;
+
+    for(const cambio of cambiosToner){
+        const linea = document.createElement("tr");
+        linea.innerHTML = completarLinea(cambio);        
+        listaCambiosToner.append(linea);    // agregar a tbody
+        console.log(cambio);
+        console.log(linea);
+    }
+}
+
 function aceptarCambioToner(e){
     e.preventDefault();
 
@@ -185,6 +214,7 @@ function aceptarCambioToner(e){
     campoUltimoContador.value = impresora.contador;
 
     console.log(impresoras);
+    actualizarTablaCambioToner()
 }
 
 function aceptarNuevaImpresora(e){
@@ -252,6 +282,7 @@ function mostrarInfoImpresora(){
     campoUltimoContador.value = impresora.contador;
 
     armarInputGrupoToners(impresora);
+    actualizarTablaCambioToner()
 }
 
 function armarInputGrupoImpresoras (impresoras){
