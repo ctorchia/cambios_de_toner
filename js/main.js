@@ -28,7 +28,7 @@ formCambioToner.addEventListener("submit", aceptarCambioToner);
 //inputFiltrar.addEventListener("keyup", opcionFiltrar);
 
 let impresoras;
-// let impresora;
+// let impresora = {};
 // let nombre;
 let campoNombre = document.getElementById("nombre");
 let campoMarca = document.getElementById("marca");
@@ -75,14 +75,6 @@ class Impresora {
         this.historialCambios.push(cambioToner)
     }
 
-    // consultarContador() {
-    //     return this.contador; // Consulta contador del último cambio de toner registrado
-    // }
-
-    // actualizarContador(nuevoContador) {  // Actualiza el contador con el valor actual al momento del cambio
-    //     this.contador = nuevoContador;
-    // }
-
     // cambiarToner(nuevoContador) { // Si el contador es un valor válido, aplica el cambio y actualiza los datos en el objeto
     //     if (nuevoContador > this.consultarContador()) {
     //         this.verificarRendimiento(contadorCambio);
@@ -101,7 +93,6 @@ class CambioToner {
         this.modeloToner = modeloToner;
         this.rendimientoPaginas = rendimientoPaginas;
     }
-    
 }
 
 // ********************************************** FUNCIONES *****************************************************************
@@ -136,37 +127,6 @@ class CambioToner {
 //     return impresorasPorToner;
 // }
 
-// function limpiarTabla(){
-//     listaImpresoras.innerHTML = "";
-// }
-
-// formImpresora.addEventListener("submit", (e) =>{   // Crear nueva Impresora
-
-//         e.preventDefault();
-
-//         let nuevoId = parseInt(id.value);
-//         let nuevoSector = sector.value;
-//         let nuevoContador = parseInt(contador.value);
-//         let nuevoRendimientoPromToner = parseInt(rendimientoPromToner.value);
-//         let nuevoModeloToner = modeloToner.value.toUpperCase(); 
-    
-//         const impresorasActuales = impresoras.map((el) => el.id);
-//         console.log(impresoras);
-        
-//         if (!impresorasActuales.includes(nuevoId)){
-//             const impresoraNueva = new Impresora(nuevoId, nuevoSector, nuevoContador, nuevoRendimientoPromToner, nuevoModeloToner);
-//             impresoras.push(impresoraNueva);
-//         } else {
-//             alert("Error: El ID esta repetido")        // No se puede generar Impresora con ID repetido
-//         }
-//         console.log(impresoras)
-
-//         formImpresora.reset();
-//         limpiarTabla();
-//         actualizarTabla(impresoras);
-// });
-
-
 function limpiarTablaCambiosToner(){
     listaCambiosToner.innerHTML = ``;
 }
@@ -198,10 +158,9 @@ function aceptarCambioToner(e){
     e.preventDefault();
 
     let fechaCambio = campoFechaCambio.value;
-    let actualContador = campoActualContador.value;
+    let actualContador = parseInt(campoActualContador.value);
     let inputGrupoToners = campoInputGrupoToners.value;
 
-    
     const impresora = obtenerImpresoraDesdeArray();
     let rendimientoPaginas = actualContador - impresora.contador;
     impresora.actualizarContador(actualContador);
@@ -215,6 +174,8 @@ function aceptarCambioToner(e){
 
     console.log(impresoras);
     actualizarTablaCambioToner()
+
+    // actualizarLocalStorage();
 }
 
 function aceptarNuevaImpresora(e){
@@ -242,6 +203,8 @@ function aceptarNuevaImpresora(e){
     btnAceptarNuevaImpresora.disabled = true;
     btnCambioToner.disabled = false;
     armarInputGrupoImpresoras(impresoras);
+
+    // actualizarLocalStorage();
 
     console.log(impresoras);
 }
@@ -297,23 +260,34 @@ function armarInputGrupoImpresoras (impresoras){
     }
 }
 
+// function actualizarLocalStorage(){
+//     baseEnJSON = JSON.stringify(impresoras);
+//     localStorage.setItem("impresoras",baseEnJSON);
+// }
+
+function crearArrayImpresoras(){
+    const ventas = new Impresora("Ventas", "HP", "LaserJet", "M608dn", "10.18.89.16", "237A","");  // Objetos de ejemplo
+    const calidad = new Impresora("Calidad", "Samsung", "Multifuncion", "SL-M4072FD", "10.18.89.26", "D203U","");
+    const despacho = new Impresora("Despacho", "HP", "LaserJet", "P4015n", "10.18.89.13", "CC364A","CC364X");
+
+    impresoras = [ventas, calidad, despacho];
+}
+
 function inicio (){
+    crearArrayImpresoras();
+    // impresoras = JSON.parse(localStorage.getItem("impresoras"));
+    // actualizarLocalStorage();
     console.log(impresoras);
-    // actualizarTabla(impresoras);
-    // tituloTabla.innerText = "Listado General de Impresoras:";
+    
     armarInputGrupoImpresoras(impresoras);
     mostrarInfoImpresora();
+    
+    // localStorage.setItem("impresoras","Lista de Impresoras");    // EJEMPLOS
+    // localStorage.removeItem("impresoras");                       // EJEMPLOS
+    // localStorage.clear(); // Borra TODO el localStorage
 }
 
 // ********************************************** INICIO *****************************************************************
-
-const ventas = new Impresora("Ventas", "HP", "LaserJet", "M608dn", "10.18.89.16", "237A","");  // Objetos de ejemplo
-const calidad = new Impresora("Calidad", "Samsung", "Multifuncion", "SL-M4072FD", "10.18.89.26", "D203U","");
-const despacho = new Impresora("Despacho", "HP", "LaserJet", "P4015n", "10.18.89.13", "CC364A","CC364X");
-
-impresoras = [ventas, calidad, despacho];
-
-// MenuPrincipal()
 
 inicio();
 
