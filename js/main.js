@@ -14,22 +14,7 @@ const btnCambioToner = document.getElementById("btnCambioToner");
 const btnAceptarNuevaImpresora = document.getElementById("btnAceptarImpresora");
 const listaCambiosToner = document.getElementById("listaCambiosToner");
 
-// const listaImpresoras = document.getElementById("listaImpresoras");
-// const inputFiltrar = document.getElementById("inputFiltrar");
-// const formImpresora = document.getElementById("formImpresora");
-
-inputGrupoImpresoras.addEventListener("change", mostrarInfoImpresora);
-btnNuevaImpresora.addEventListener("click", crearImpresora);
-formNuevaImpresora.addEventListener("submit", aceptarNuevaImpresora);
-formCambioToner.addEventListener("submit", aceptarCambioToner);
-// btnCambioToner.addEventListener("submit", aceptarCambioToner);
-
-
-//inputFiltrar.addEventListener("keyup", opcionFiltrar);
-
 let impresoras = [];
-// let impresora = {};
-// let nombre;
 let campoNombre = document.getElementById("nombre");
 let campoMarca = document.getElementById("marca");
 let campoTipo = document.getElementById("tipo");
@@ -42,13 +27,13 @@ let campoFechaCambio = document.getElementById("fechaCambio");
 let campoActualContador = document.getElementById("actualContador");
 let campoInputGrupoToners = document.getElementById("inputGrupoToners");
 
+inputGrupoImpresoras.addEventListener("change", mostrarInfoImpresora);
+btnNuevaImpresora.addEventListener("click", prepararFormNuevaImpresora);
+formNuevaImpresora.addEventListener("submit", aceptarNuevaImpresora);
+formCambioToner.addEventListener("submit", aceptarCambioToner);
+campoActualContador.addEventListener("change", verificarContador);
 
-// let id = document.getElementById("id");
-// let sector = document.getElementById("sector");
-// let contador = document.getElementById("contador");  
-// let rendimientoPromToner = document.getElementById("rendimientoPromToner");  
-// let modeloToner = document.getElementById("modeloToner");
-// let tituloTabla = document.getElementById("tituloTabla");
+//inputFiltrar.addEventListener("keyup", opcionFiltrar);
 
 
 // ********************************************** CLASES *****************************************************************
@@ -135,6 +120,15 @@ function actualizarTablaCambioToner() {
     }
 }
 
+function verificarContador(){
+    const impresora = obtenerImpresoraDesdeArray();
+    if (parseInt(campoActualContador.value) < impresora.contador){
+        alert("Error en el contador ingresado");
+        campoActualContador.value = "";
+    }
+    console.log(impresora.contador)
+}
+
 function aceptarCambioToner(e){
     e.preventDefault();
 
@@ -192,7 +186,7 @@ function aceptarNuevaImpresora(e){
     console.log(impresoras);
 }
 
-function crearImpresora(){
+function prepararFormNuevaImpresora(){
     inputGrupoImpresoras.disabled = true;
     btnAceptarNuevaImpresora.disabled = false;
     btnCambioToner.disabled = true;
