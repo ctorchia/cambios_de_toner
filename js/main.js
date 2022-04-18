@@ -27,7 +27,7 @@ formCambioToner.addEventListener("submit", aceptarCambioToner);
 
 //inputFiltrar.addEventListener("keyup", opcionFiltrar);
 
-let impresoras;
+let impresoras = [];
 // let impresora = {};
 // let nombre;
 let campoNombre = document.getElementById("nombre");
@@ -54,7 +54,7 @@ let campoInputGrupoToners = document.getElementById("inputGrupoToners");
 // ********************************************** CLASES *****************************************************************
 class Impresora {
 
-    constructor(nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2) {
+    constructor(nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, contador, historialCambios) {
         // this.id = id;  // {Number} id - ID de la impresora.
         this.nombre = nombre;  // {String} Nombre de la impresora.
         this.marca = marca; // {String} Marca de la impresora.
@@ -63,8 +63,8 @@ class Impresora {
         this.ip = ip; // {String} IP de Impresora.
         this.tonerCompatible1 = tonerCompatible1; // {String} 1ra opcion de Toner Compatible.
         this.tonerCompatible2 = tonerCompatible2; // {String} 2da opcion de Toner Compatible.
-        this.contador = 0; // Inicializa contador de Immpresora.
-        this.historialCambios = []; // Inicializa Historial de Cambios.
+        this.contador = contador; // Inicializa contador de Immpresora.
+        this.historialCambios = historialCambios; // Inicializa Historial de Cambios.
     };
 
     actualizarContador(actualContador){
@@ -96,23 +96,6 @@ class CambioToner {
 }
 
 // ********************************************** FUNCIONES *****************************************************************
-
-// function actualizarTabla (impresoras){     // Crear lineas
-//     for(const impresora of impresoras){
-//         const linea = document.createElement("tr");        
-//         listaImpresoras.append(completarLinea(impresora, linea));    // agregar a tbody
-//     }
-// }
-
-// function completarLinea (impresora, linea){    // Completar linea 
-    
-//     for (const propiedad in impresora){
-//         const item = document.createElement("th");
-//         item.innerText = impresora[propiedad];
-//         linea.append(item);
-//     }
-//     return linea;
-// }
 
 // function opcionFiltrar(){
 //     limpiarTabla();
@@ -149,8 +132,6 @@ function actualizarTablaCambioToner() {
         const linea = document.createElement("tr");
         linea.innerHTML = completarLinea(cambio);        
         listaCambiosToner.append(linea);    // agregar a tbody
-        console.log(cambio);
-        console.log(linea);
     }
 }
 
@@ -175,7 +156,7 @@ function aceptarCambioToner(e){
     console.log(impresoras);
     actualizarTablaCambioToner()
 
-    // actualizarLocalStorage();
+    actualizarLocalStorage();
 }
 
 function aceptarNuevaImpresora(e){
@@ -188,11 +169,13 @@ function aceptarNuevaImpresora(e){
     let nuevoIp = campoIp.value;
     let nuevoTonerCompatible1 = campoTonerCompatible1.value.toUpperCase();
     let nuevoTonerCompatible2 = campoTonerCompatible2.value.toUpperCase();
+    let nuevoContador = 0;
+    let nuevoHistorialCambios = [];
 
     console.log(impresoras);
 
     if (!impresoras.includes(nuevoNombre)){
-        const impresoraNueva = new Impresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2);
+        const impresoraNueva = new Impresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios);
         impresoras.push(impresoraNueva);
     } else {
         alert("Error: El Nombre esta repetido")        // No se puede generar Impresora con ID repetido
@@ -204,7 +187,7 @@ function aceptarNuevaImpresora(e){
     btnCambioToner.disabled = false;
     armarInputGrupoImpresoras(impresoras);
 
-    // actualizarLocalStorage();
+    actualizarLocalStorage();
 
     console.log(impresoras);
 }
@@ -233,8 +216,6 @@ function obtenerImpresoraDesdeArray(){
 function mostrarInfoImpresora(){
     const impresora = obtenerImpresoraDesdeArray();
 
-    console.log(impresora);
-    
     campoNombre.value = impresora.nombre;
     campoMarca.value = impresora.marca;
     campoTipo.value = impresora.tipo;
@@ -260,31 +241,36 @@ function armarInputGrupoImpresoras (impresoras){
     }
 }
 
-// function actualizarLocalStorage(){
-//     baseEnJSON = JSON.stringify(impresoras);
-//     localStorage.setItem("impresoras",baseEnJSON);
-// }
+function actualizarLocalStorage(){
+    baseEnJSON = JSON.stringify(impresoras);
+    localStorage.setItem("impresoras",baseEnJSON);
+}
+
+function importarLocalStorage(){
+    let impresorasAlmacenadas = JSON.parse(localStorage.getItem("impresoras"));
+    for (const impresora of impresorasAlmacenadas){
+        impresoras.push(new Impresora(impresora.nombre, impresora.marca, impresora.tipo,impresora.modelo, impresora.ip,impresora.tonerCompatible1,impresora.tonerCompatible2,impresora.contador,impresora.historialCambios ))
+    }
+    console.log(impresoras);
+}
 
 function crearArrayImpresoras(){
-    const ventas = new Impresora("Ventas", "HP", "LaserJet", "M608dn", "10.18.89.16", "237A","");  // Objetos de ejemplo
-    const calidad = new Impresora("Calidad", "Samsung", "Multifuncion", "SL-M4072FD", "10.18.89.26", "D203U","");
-    const despacho = new Impresora("Despacho", "HP", "LaserJet", "P4015n", "10.18.89.13", "CC364A","CC364X");
+    const ventas = new Impresora("Ventas", "HP", "LaserJet", "M608dn", "10.18.89.16", "237A","",0,[]);  // Objetos de ejemplo
+    const calidad = new Impresora("Calidad", "Samsung", "Multifuncion", "SL-M4072FD", "10.18.89.26", "D203U","",0,[]);
+    const despacho = new Impresora("Despacho", "HP", "LaserJet", "P4015n", "10.18.89.13", "CC364A","CC364X",0,[]);
 
     impresoras = [ventas, calidad, despacho];
 }
 
 function inicio (){
     crearArrayImpresoras();
-    // impresoras = JSON.parse(localStorage.getItem("impresoras"));
-    // actualizarLocalStorage();
+    // importarLocalStorage();
+    
     console.log(impresoras);
     
     armarInputGrupoImpresoras(impresoras);
     mostrarInfoImpresora();
     
-    // localStorage.setItem("impresoras","Lista de Impresoras");    // EJEMPLOS
-    // localStorage.removeItem("impresoras");                       // EJEMPLOS
-    // localStorage.clear(); // Borra TODO el localStorage
 }
 
 // ********************************************** INICIO *****************************************************************
