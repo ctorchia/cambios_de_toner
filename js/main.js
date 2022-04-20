@@ -249,8 +249,8 @@ function crearArrayImpresoras(){    // Array de Impresoras de Ejemplo
 }
 
 function inicio (){
-    // crearArrayImpresoras();
-    importarLocalStorage();
+    crearArrayImpresoras();
+    //importarLocalStorage();
     
     console.log(impresoras);
     
