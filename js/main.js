@@ -239,10 +239,15 @@ function actualizarLocalStorage(){      // Actualizar base de datos en Local Sto
 
 function importarLocalStorage(){        // Importar info desde Local Storage
     let impresorasAlmacenadas = JSON.parse(localStorage.getItem("impresoras"));
-    for (const impresora of impresorasAlmacenadas){
-        impresoras.push(new Impresora(impresora.nombre, impresora.marca, impresora.tipo,impresora.modelo, impresora.ip,impresora.tonerCompatible1,impresora.tonerCompatible2,impresora.contador,impresora.historialCambios ))
+    // console.log(impresorasAlmacenadas);
+    if (impresorasAlmacenadas) {
+        for (const impresora of impresorasAlmacenadas){
+            impresoras.push(new Impresora(impresora.nombre, impresora.marca, impresora.tipo,impresora.modelo, impresora.ip,impresora.tonerCompatible1,impresora.tonerCompatible2,impresora.contador,impresora.historialCambios ))
+        }
+        return true;
+    } else {
+        return false;
     }
-    console.log(impresoras);
 }
 
 function crearArrayImpresoras(){    // Array de Impresoras de Ejemplo
@@ -251,12 +256,14 @@ function crearArrayImpresoras(){    // Array de Impresoras de Ejemplo
     const despacho = new Impresora("Despacho", "HP", "LaserJet", "P4015n", "10.18.89.13", "CC364A","CC364X",0,[]);
 
     impresoras = [ventas, calidad, despacho];
+
+    console.log("CrearArrayImpresoras");
 }
 
 function inicio (){
-    crearArrayImpresoras();
-    //importarLocalStorage();
     
+    importarLocalStorage() || crearArrayImpresoras(); // Si no existe Info en LocalStorage genera impresoras de Ejemplo.
+
     console.log(impresoras);
     
     armarInputGrupoImpresoras(impresoras);
