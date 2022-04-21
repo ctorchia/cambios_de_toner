@@ -147,6 +147,15 @@ function agregarCambioToner(e){     // Agregar Cambio de Toner
     actualizarLocalStorage();
 }
 
+function crearImpresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios) {
+    const impresoraNueva = new Impresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios);
+    impresoras.push(impresoraNueva);
+}
+
+function nombreImpresoraRepetido(nombreParaVerificar){
+    return impresoras.find((el) => el.nombre.includes(nombreParaVerificar));
+}
+
 function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     e.preventDefault();
 
@@ -161,13 +170,9 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     let nuevoHistorialCambios = [];
 
     console.log(impresoras);
+    console.log(!impresoras.includes(nuevoNombre));
 
-    if (!impresoras.includes(nuevoNombre)){
-        const impresoraNueva = new Impresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios);
-        impresoras.push(impresoraNueva);
-    } else {
-        alert("Error: El Nombre esta repetido")        // No se puede generar Impresora con ID repetido
-    }
+    !nombreImpresoraRepetido(nuevoNombre) ? crearImpresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios) : alert("Error: El Nombre de la impresora esta repetido");
 
     formNuevaImpresora.reset();
     inputGrupoImpresoras.disabled = false;
