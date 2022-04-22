@@ -172,6 +172,7 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     console.log(impresoras);
     console.log(!impresoras.includes(nuevoNombre));
 
+    // OPERADOR TERNARIO
     !nombreImpresoraRepetido(nuevoNombre) ? crearImpresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios) : alert("Error: El Nombre de la impresora esta repetido");
 
     formNuevaImpresora.reset();
@@ -208,14 +209,17 @@ function obtenerImpresoraDesdeArray(){      // Obtener impresora seleccionada de
 function mostrarInfoImpresora(){            // Mostrar informacion de la impresora seleccionada
     const impresora = obtenerImpresoraDesdeArray();
 
-    campoNombre.value = impresora.nombre;
-    campoMarca.value = impresora.marca;
-    campoTipo.value = impresora.tipo;
-    campoModelo.value = impresora.modelo;
-    campoIp.value = impresora.ip;
-    campoTonerCompatible1.value = impresora.tonerCompatible1;
-    campoTonerCompatible2.value = impresora.tonerCompatible2;
-    campoUltimoContador.value = impresora.contador;
+    // DESESTRUCTURACION 
+    const {nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, contador} = impresora;
+    
+    campoNombre.value = nombre;
+    campoMarca.value = marca;
+    campoTipo.value = tipo;
+    campoModelo.value = modelo;
+    campoIp.value = ip;
+    campoTonerCompatible1.value = tonerCompatible1;
+    campoTonerCompatible2.value = tonerCompatible2;
+    campoUltimoContador.value = contador;
 
     armarInputGrupoToners(impresora);
     actualizarTablaCambioToner()
@@ -237,17 +241,18 @@ function actualizarLocalStorage(){      // Actualizar base de datos en Local Sto
     localStorage.setItem("impresoras",baseEnJSON);
 }
 
+function instanciarObjetosImportados (impresorasAlmacenadas){
+    for (const impresora of impresorasAlmacenadas){
+        impresoras.push(new Impresora(impresora.nombre, impresora.marca, impresora.tipo,impresora.modelo, impresora.ip,impresora.tonerCompatible1,impresora.tonerCompatible2,impresora.contador,impresora.historialCambios ))
+     }
+     return true;
+}
+
 function importarLocalStorage(){        // Importar info desde Local Storage
     let impresorasAlmacenadas = JSON.parse(localStorage.getItem("impresoras"));
-    // console.log(impresorasAlmacenadas);
-    if (impresorasAlmacenadas) {
-        for (const impresora of impresorasAlmacenadas){
-            impresoras.push(new Impresora(impresora.nombre, impresora.marca, impresora.tipo,impresora.modelo, impresora.ip,impresora.tonerCompatible1,impresora.tonerCompatible2,impresora.contador,impresora.historialCambios ))
-        }
-        return true;
-    } else {
-        return false;
-    }
+    // ASIGNACION CONDICIONAL
+    const importacionCorrecta = impresorasAlmacenadas ? instanciarObjetosImportados(impresorasAlmacenadas) : false;
+    return importacionCorrecta
 }
 
 function crearArrayImpresoras(){    // Array de Impresoras de Ejemplo
@@ -262,6 +267,7 @@ function crearArrayImpresoras(){    // Array de Impresoras de Ejemplo
 
 function inicio (){
     
+    // OPERADOR OR
     importarLocalStorage() || crearArrayImpresoras(); // Si no existe Info en LocalStorage genera impresoras de Ejemplo.
 
     console.log(impresoras);
@@ -275,3 +281,5 @@ function inicio (){
 
 inicio();
 
+
+// CONTADOR TOTAL DE IMPRESIONES USANDO SPREAD
