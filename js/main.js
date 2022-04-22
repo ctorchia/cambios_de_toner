@@ -28,6 +28,7 @@ let campoUltimoContador = document.getElementById("ultimoContador");
 let campoFechaCambio = document.getElementById("fechaCambio");
 let campoActualContador = document.getElementById("actualContador");
 let campoInputGrupoToners = document.getElementById("inputGrupoToners");
+// let impresoraMasImpresiones = document.getElementById("impresoraMasImpresiones");
 
 // Declaracion de EventListeners:
 
@@ -87,6 +88,21 @@ class CambioToner {
 //     toner = inputFiltrar.value.toUpperCase();
 //     const impresorasPorToner = impresoras.filter((el) => el.modeloToner.includes(toner));
 //     return impresorasPorToner;
+// }
+
+// function sumarContadoresImpresoras(contadores){
+//     console.log(contadores);
+//     let suma = (math.add(...contadores));
+//     return suma;
+// }
+
+// function mostrarTotalImpresionesEmpresa() {
+//     let contadores = [];
+//     for (const impresora of impresoras){
+//         contadores.push(impresora.contador);
+//     }
+//     contadorTotalEmpresa.innerText(sumarContadoresImpresoras(contadores));
+
 // }
 
 function limpiarTablaCambiosToner(){    // Limpiar la tabla de Cambios de Toner
@@ -274,6 +290,8 @@ function inicio (){
     
     armarInputGrupoImpresoras(impresoras);
     mostrarInfoImpresora();
+
+    // mostrarTotalImpresionesEmpresa();
     
 }
 
