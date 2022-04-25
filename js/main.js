@@ -5,6 +5,10 @@
 // El sistema realiza una diferencia entre en valor actual y el registrado en el último cambio de toner para determinar el rendimiento del mismo.
 // Analiza si es superior o inferior al promedio de copias sugerido y almacena el nuevo valor.
 
+const DateTime = luxon.DateTime;
+const pepe = math.add(2,3,4); 
+console.log(pepe);
+
 // Declaracion de Variables:
 
 const inputGrupoImpresoras = document.getElementById("inputGrupoImpresoras");
@@ -28,7 +32,7 @@ let campoUltimoContador = document.getElementById("ultimoContador");
 let campoFechaCambio = document.getElementById("fechaCambio");
 let campoActualContador = document.getElementById("actualContador");
 let campoInputGrupoToners = document.getElementById("inputGrupoToners");
-// let impresoraMasImpresiones = document.getElementById("impresoraMasImpresiones");
+let totalImpresionesEmpresa = document.getElementById("totalImpresionesEmpresa");
 
 // Declaracion de EventListeners:
 
@@ -90,20 +94,20 @@ class CambioToner {
 //     return impresorasPorToner;
 // }
 
-// function sumarContadoresImpresoras(contadores){
-//     console.log(contadores);
-//     let suma = (math.add(...contadores));
-//     return suma;
-// }
+// SPREAD DE ARRAY
+function sumarContadoresImpresoras(contadores){
+    console.log(contadores);
+    let suma = (math.add(...contadores));
+    return suma;
+}
 
-// function mostrarTotalImpresionesEmpresa() {
-//     let contadores = [];
-//     for (const impresora of impresoras){
-//         contadores.push(impresora.contador);
-//     }
-//     contadorTotalEmpresa.innerText(sumarContadoresImpresoras(contadores));
-
-// }
+function mostrarTotalImpresionesEmpresa() {
+    let contadores = [];
+    for (const impresora of impresoras){
+        contadores.push(impresora.contador);
+    }
+    totalImpresionesEmpresa.innerText = sumarContadoresImpresoras(contadores);
+}
 
 function limpiarTablaCambiosToner(){    // Limpiar la tabla de Cambios de Toner
     listaCambiosToner.innerHTML = ``;
@@ -161,6 +165,7 @@ function agregarCambioToner(e){     // Agregar Cambio de Toner
     actualizarTablaCambioToner()
 
     actualizarLocalStorage();
+    mostrarTotalImpresionesEmpresa();
 }
 
 function crearImpresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios) {
@@ -291,7 +296,7 @@ function inicio (){
     armarInputGrupoImpresoras(impresoras);
     mostrarInfoImpresora();
 
-    // mostrarTotalImpresionesEmpresa();
+    mostrarTotalImpresionesEmpresa();
     
 }
 
