@@ -5,10 +5,6 @@
 // El sistema realiza una diferencia entre en valor actual y el registrado en el último cambio de toner para determinar el rendimiento del mismo.
 // Analiza si es superior o inferior al promedio de copias sugerido y almacena el nuevo valor.
 
-const DateTime = luxon.DateTime;
-const pepe = math.add(2,3,4); 
-console.log(pepe);
-
 // Declaracion de Variables:
 
 const inputGrupoImpresoras = document.getElementById("inputGrupoImpresoras");
@@ -146,10 +142,18 @@ function verificarContador(){   // Verificar si el contador ingresado es menor a
 function agregarCambioToner(e){     // Agregar Cambio de Toner
     e.preventDefault();
 
-    let fechaCambio = campoFechaCambio.value;
+    let fechaCambio = dateFns.format(campoFechaCambio.value, 'DD/MM/YYYY');
     let actualContador = parseInt(campoActualContador.value);
     let inputGrupoToners = campoInputGrupoToners.value;
 
+    // Prueba Resta de Fechas  *************************************************
+    var result = dateFns.differenceInDays(
+        campoFechaCambio.value, 
+        new Date(2021,07,03));
+
+    console.log(result);  
+    //**************************************************************************
+    
     const impresora = obtenerImpresoraDesdeArray();
     let rendimientoPaginas = actualContador - impresora.contador;
     impresora.actualizarContador(actualContador);
@@ -161,11 +165,10 @@ function agregarCambioToner(e){     // Agregar Cambio de Toner
 
     campoUltimoContador.value = impresora.contador;
 
-    console.log(impresoras);
     actualizarTablaCambioToner()
-
     actualizarLocalStorage();
     mostrarTotalImpresionesEmpresa();
+    mostrarInfoImpresora();
 }
 
 function crearImpresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios) {
@@ -189,9 +192,6 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     let nuevoTonerCompatible2 = campoTonerCompatible2.value.toUpperCase();
     let nuevoContador = 0;
     let nuevoHistorialCambios = [];
-
-    console.log(impresoras);
-    console.log(!impresoras.includes(nuevoNombre));
 
     // OPERADOR TERNARIO
     !nombreImpresoraRepetido(nuevoNombre) ? crearImpresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios) : alert("Error: El Nombre de la impresora esta repetido");
@@ -241,6 +241,7 @@ function mostrarInfoImpresora(){            // Mostrar informacion de la impreso
     campoTonerCompatible1.value = tonerCompatible1;
     campoTonerCompatible2.value = tonerCompatible2;
     campoUltimoContador.value = contador;
+    campoFechaCambio.valueAsDate = new Date(); 
 
     armarInputGrupoToners(impresora);
     actualizarTablaCambioToner()
@@ -303,6 +304,3 @@ function inicio (){
 // ********************************************** INICIO *****************************************************************
 
 inicio();
-
-
-// CONTADOR TOTAL DE IMPRESIONES USANDO SPREAD
