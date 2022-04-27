@@ -71,7 +71,7 @@
                         </div>
                         <div class="mt-2">
                             <label for="fechaTonerActualColocado">Fecha Toner Actual Colocado:</label>
-                            <input type="text" class="form-control mb-2" id="fechaTonerActualColocado" placeholder="" required="required">
+                            <input type="date" class="form-control mb-2" id="fechaTonerActualColocado" placeholder="" required="required">
                         </div>
                         <div class="mt-5 pt-2">
                             <button class="m-2 btn btn-primary" id="btnAgregarImpresora" disabled >
@@ -128,10 +128,11 @@
                 <table class="table">
                     <thead class="table-primary">
                         <tr>
-                            <th>Fecha de Cambio</th>
+                            <th>Fecha de Colocación</th>
                             <th>Contador de páginas</th>
                             <th>Modelo de Toner</th>
-                            <th>Rend. Toner</th>
+                            <th>Rend. (Hojas)</th>
+                            <th>Rend. (Dias)</th>
                         </tr>
                     </thead>
                     <tbody id="listaCambiosToner">

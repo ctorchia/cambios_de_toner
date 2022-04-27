@@ -65,17 +65,26 @@ class Impresora {
         this.contador = actualContador
     }
 
+    actualizarTonerActualColocado(tonerActualColocado){
+        this.tonerActualColocado = tonerActualColocado
+    }  
+
+    actualizarFechaTonerActualColocado(fechaTonerActualColocado){
+        this.fechaTonerActualColocado = fechaTonerActualColocado
+    }    
+
     cambiarToner(cambioToner){
         this.historialCambios.push(cambioToner)
     }
 }
 
 class CambioToner {
-    constructor(fechaCambio, contadorPaginas, modeloToner, rendimientoPaginas){
+    constructor(fechaCambio, contadorPaginas, modeloToner, rendimientoPaginas, rendimientoDias){
         this.fechaCambio = fechaCambio;
         this.contadorPaginas = contadorPaginas;
         this.modeloToner = modeloToner;
         this.rendimientoPaginas = rendimientoPaginas;
+        this.rendimientoDias = rendimientoDias;
     }
 }
 
@@ -118,7 +127,8 @@ function completarLinea(cambio){        // Armar linea con cambio de Toner para 
     return `<th>${dateFns.format(cambio.fechaCambio, 'DD/MM/YYYY')}</th>      
             <th>${cambio.contadorPaginas}</th>
             <th>${cambio.modeloToner}</th>
-            <th>${cambio.rendimientoPaginas}</th>`;     // Muestro la fecha en formato DD/MM/AAAA pero esta almacenada en formato Original
+            <th>${cambio.rendimientoPaginas}</th>
+            <th>${cambio.rendimientoDias}</th>`;     // Muestro la fecha en formato DD/MM/AAAA pero esta almacenada en formato Original
 }
 
 function actualizarTablaCambioToner() {     // Actualizar Tabla de Cambios de Toner
@@ -143,30 +153,24 @@ function verificarContador(){   // Verificar si el contador ingresado es menor a
     console.log(impresora.contador)
 }
 
-function agregarCambioToner(e){     // Agregar Cambio de Toner
+function agregarCambioToner(e){     // Agregar Cambio de Toner                   VERRRRRRRRR
     e.preventDefault();
-
-    // let fechaCambio = dateFns.format(campoFechaCambio.value, 'DD/MM/YYYY');
     let fechaCambio = campoFechaCambio.value;
-    let actualContador = parseInt(campoActualContador.value);
+    // let fechaCambio = dateFns.format(campoFechaCambio.value, 'DD/MM/YYYY');
     let inputGrupoToners = campoInputGrupoToners.value;
-
-    // Prueba Resta de Fechas  *************************************************
-    console.log(fechaCambio);  
-    console.log(campoFechaCambio.value);  
-    
-    var result = dateFns.differenceInDays(
-        campoFechaCambio.value, 
-        new Date(2021,07,03));
-
-    console.log(result);  
-    //**************************************************************************
-    
     const impresora = obtenerImpresoraDesdeArray();
+    let nuevoTonerActualColocado = impresora.tonerActualColocado;
+    let nuevaFechaActualTonerColocado = impresora.fechaTonerActualColocado;
+    impresora.actualizarTonerActualColocado(inputGrupoToners);
+    impresora.actualizarFechaTonerActualColocado(fechaCambio);
+    
+    let actualContador = parseInt(campoActualContador.value);
+    // let modeloToner = impresora.tonerActualColocado;
     let rendimientoPaginas = actualContador - impresora.contador;
     impresora.actualizarContador(actualContador);
+    let rendimientoDias = dateFns.differenceInDays(fechaCambio, nuevaFechaActualTonerColocado);
 
-    const cambioToner = new CambioToner (fechaCambio, actualContador, inputGrupoToners, rendimientoPaginas)
+    const cambioToner = new CambioToner (nuevaFechaActualTonerColocado, actualContador, nuevoTonerActualColocado, rendimientoPaginas, rendimientoDias)
 
     impresora.cambiarToner(cambioToner);
     formCambioToner.reset();
@@ -179,8 +183,8 @@ function agregarCambioToner(e){     // Agregar Cambio de Toner
     mostrarInfoImpresora();
 }
 
-function crearImpresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios) {
-    const impresoraNueva = new Impresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios);
+function crearImpresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios, nuevoTonerActualColocado, nuevoFechaTonerActualColocado) {
+    const impresoraNueva = new Impresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios, nuevoTonerActualColocado, nuevoFechaTonerActualColocado);
     impresoras.push(impresoraNueva);
 }
 
@@ -198,11 +202,13 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     let nuevoIp = campoIp.value;
     let nuevoTonerCompatible1 = campoTonerCompatible1.value.toUpperCase();
     let nuevoTonerCompatible2 = campoTonerCompatible2.value.toUpperCase();
+    let nuevoTonerActualColocado = campoTonerActualColocado.value.toUpperCase();
+    let nuevoFechaTonerActualColocado = campoFechaTonerActualColocado.value;
     let nuevoContador = 0;
     let nuevoHistorialCambios = [];
 
     // OPERADOR TERNARIO
-    !nombreImpresoraRepetido(nuevoNombre) ? crearImpresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios) : alert("Error: El Nombre de la impresora esta repetido");
+    !nombreImpresoraRepetido(nuevoNombre) ? crearImpresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios, nuevoTonerActualColocado, nuevoFechaTonerActualColocado) : alert("Error: El Nombre de la impresora esta repetido");
 
     formNuevaImpresora.reset();
     inputGrupoImpresoras.disabled = false;
@@ -220,6 +226,7 @@ function prepararFormNuevaImpresora(){      // Preparar Formulario para completa
     btnAgregarNuevaImpresora.disabled = false;
     btnCambioToner.disabled = true;
     formNuevaImpresora.reset();
+    campoFechaTonerActualColocado.valueAsDate = new Date();   
 }
 
 function armarInputGrupoToners(impresora){  // Armar Select con las impresoras disponibles en la base
@@ -249,7 +256,8 @@ function mostrarInfoImpresora(){            // Mostrar informacion de la impreso
     campoTonerCompatible1.value = tonerCompatible1;
     campoTonerCompatible2.value = tonerCompatible2;
     campoTonerActualColocado.value = tonerActualColocado;
-    campoFechaTonerActualColocado.value = dateFns.format(fechaTonerActualColocado, 'DD/MM/YYYY');
+    campoFechaTonerActualColocado.value = fechaTonerActualColocado;   // Probar con .valueAsDate
+    // campoFechaTonerActualColocado.value = dateFns.format(fechaTonerActualColocado, 'DD/MM/YYYY');
     campoUltimoContador.value = contador;
     campoFechaCambio.valueAsDate = new Date(); 
 
