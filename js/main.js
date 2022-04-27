@@ -153,10 +153,9 @@ function verificarContador(){   // Verificar si el contador ingresado es menor a
     console.log(impresora.contador)
 }
 
-function agregarCambioToner(e){     // Agregar Cambio de Toner                   VERRRRRRRRR
+function agregarCambioToner(e){     // Agregar Cambio de Toner
     e.preventDefault();
     let fechaCambio = campoFechaCambio.value;
-    // let fechaCambio = dateFns.format(campoFechaCambio.value, 'DD/MM/YYYY');
     let inputGrupoToners = campoInputGrupoToners.value;
     const impresora = obtenerImpresoraDesdeArray();
     let nuevoTonerActualColocado = impresora.tonerActualColocado;
@@ -165,7 +164,6 @@ function agregarCambioToner(e){     // Agregar Cambio de Toner                  
     impresora.actualizarFechaTonerActualColocado(fechaCambio);
     
     let actualContador = parseInt(campoActualContador.value);
-    // let modeloToner = impresora.tonerActualColocado;
     let rendimientoPaginas = actualContador - impresora.contador;
     impresora.actualizarContador(actualContador);
     let rendimientoDias = dateFns.differenceInDays(fechaCambio, nuevaFechaActualTonerColocado);
@@ -257,7 +255,6 @@ function mostrarInfoImpresora(){            // Mostrar informacion de la impreso
     campoTonerCompatible2.value = tonerCompatible2;
     campoTonerActualColocado.value = tonerActualColocado;
     campoFechaTonerActualColocado.value = fechaTonerActualColocado;   // Probar con .valueAsDate
-    // campoFechaTonerActualColocado.value = dateFns.format(fechaTonerActualColocado, 'DD/MM/YYYY');
     campoUltimoContador.value = contador;
     campoFechaCambio.valueAsDate = new Date(); 
 
