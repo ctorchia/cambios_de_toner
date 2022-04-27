@@ -54,16 +54,24 @@
                             <label for="modelo">Modelo:</label>
                             <input type="text" class="form-control" id="modelo" placeholder="Modelo" required="required">
                         </div>
-                    </div>
-                    <div class="m-2 text-center">
                         <div class="mt-2">
                             <label for="ip">IP:</label>
                             <input type="text" class="form-control" id="ip" placeholder="IP" required="required">
                         </div>
+                    </div>
+                    <div class="m-2 text-center">
                         <div class="mt-2">
                             <label for="tonerCompatible1">Toners Compatibles:</label>
                             <input type="text" class="form-control mb-2" id="tonerCompatible1" placeholder="" required="required">
                             <input type="text" class="form-control mt-2" id="tonerCompatible2" placeholder="" >
+                        </div>
+                        <div class="mt-2">
+                            <label for="tonerActualColocado">Toner Actual Colocado:</label>
+                            <input type="text" class="form-control mb-2" id="tonerActualColocado" placeholder="" required="required">
+                        </div>
+                        <div class="mt-2">
+                            <label for="fechaTonerActualColocado">Fecha Toner Actual Colocado:</label>
+                            <input type="text" class="form-control mb-2" id="fechaTonerActualColocado" placeholder="" required="required">
                         </div>
                         <div class="mt-5 pt-2">
                             <button class="m-2 btn btn-primary" id="btnAgregarImpresora" disabled >
@@ -75,7 +83,7 @@
             </form>
             </div>
             
-            <div class="border border-1 d-flex flex-column p-3 m-1 text-center">
+            <div class="border border-1 d-flex flex-column p-3 m-1 text-center col-3">
                 <form action="" id="formCambioToner">
                     <div>
                         <label for="fechaCambio">Fecha de Cambio:</label>
@@ -83,7 +91,7 @@
                     </div>
                     <div class="d-flex mt-4">
                         <div class="m-2">
-                            <label for="ultimoContador">Ultimo Contador Reg.:</label>
+                            <label for="ultimoContador">Ultimo Contador:</label>
                             <input type="number" class="form-control" id="ultimoContador" placeholder="Ultimo" required="required">
                         </div>
                         <div class="m-2">

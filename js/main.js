@@ -24,6 +24,8 @@ let campoModelo = document.getElementById("modelo");
 let campoIp = document.getElementById("ip");
 let campoTonerCompatible1 = document.getElementById("tonerCompatible1");
 let campoTonerCompatible2 = document.getElementById("tonerCompatible2");
+let campoTonerActualColocado = document.getElementById("tonerActualColocado");
+let campoFechaTonerActualColocado = document.getElementById("fechaTonerActualColocado");
 let campoUltimoContador = document.getElementById("ultimoContador");
 let campoFechaCambio = document.getElementById("fechaCambio");
 let campoActualContador = document.getElementById("actualContador");
@@ -44,7 +46,7 @@ campoActualContador.addEventListener("change", verificarContador);
 // ********************************************** CLASES *****************************************************************
 class Impresora {
 
-    constructor(nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, contador, historialCambios) {
+    constructor(nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, contador, historialCambios, tonerActualColocado, fechaTonerActualColocado) {
         // this.id = id;  // {Number} id - ID de la impresora.
         this.nombre = nombre;  // {String} Nombre de la impresora.
         this.marca = marca; // {String} Marca de la impresora.
@@ -55,6 +57,8 @@ class Impresora {
         this.tonerCompatible2 = tonerCompatible2; // {String} 2da opcion de Toner Compatible.
         this.contador = contador; // Inicializa contador de Immpresora.
         this.historialCambios = historialCambios; // Inicializa Historial de Cambios.
+        this.tonerActualColocado = tonerActualColocado; // Toner Instalado actualmente.
+        this.fechaTonerActualColocado = fechaTonerActualColocado; // Fecha en que se instaló el actual toner
     };
 
     actualizarContador(actualContador){
@@ -235,7 +239,7 @@ function mostrarInfoImpresora(){            // Mostrar informacion de la impreso
     const impresora = obtenerImpresoraDesdeArray();
 
     // DESESTRUCTURACION 
-    const {nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, contador} = impresora;
+    const {nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, tonerActualColocado, fechaTonerActualColocado, contador} = impresora;
     
     campoNombre.value = nombre;
     campoMarca.value = marca;
@@ -244,6 +248,8 @@ function mostrarInfoImpresora(){            // Mostrar informacion de la impreso
     campoIp.value = ip;
     campoTonerCompatible1.value = tonerCompatible1;
     campoTonerCompatible2.value = tonerCompatible2;
+    campoTonerActualColocado.value = tonerActualColocado;
+    campoFechaTonerActualColocado.value = dateFns.format(fechaTonerActualColocado, 'DD/MM/YYYY');
     campoUltimoContador.value = contador;
     campoFechaCambio.valueAsDate = new Date(); 
 
@@ -269,7 +275,7 @@ function actualizarLocalStorage(){      // Actualizar base de datos en Local Sto
 
 function instanciarObjetosImportados (impresorasAlmacenadas){
     for (const impresora of impresorasAlmacenadas){
-        impresoras.push(new Impresora(impresora.nombre, impresora.marca, impresora.tipo,impresora.modelo, impresora.ip,impresora.tonerCompatible1,impresora.tonerCompatible2,impresora.contador,impresora.historialCambios ))
+        impresoras.push(new Impresora(impresora.nombre, impresora.marca, impresora.tipo,impresora.modelo, impresora.ip,impresora.tonerCompatible1,impresora.tonerCompatible2,impresora.contador,impresora.historialCambios, impresora.tonerActualColocado, impresora.fechaTonerActualColocado ))
      }
      return true;
 }
@@ -282,9 +288,9 @@ function importarLocalStorage(){        // Importar info desde Local Storage
 }
 
 function crearArrayImpresoras(){    // Array de Impresoras de Ejemplo
-    const ventas = new Impresora("Ventas", "HP", "LaserJet", "M608dn", "10.18.89.16", "237A","",0,[]);  // Objetos de ejemplo
-    const calidad = new Impresora("Calidad", "Samsung", "Multifuncion", "SL-M4072FD", "10.18.89.26", "D203U","",0,[]);
-    const despacho = new Impresora("Despacho", "HP", "LaserJet", "P4015n", "10.18.89.13", "CC364A","CC364X",0,[]);
+    const ventas = new Impresora("Ventas", "HP", "LaserJet", "M608dn", "10.18.89.16", "237A","",0,[],"237A","2022-02-01");  // Objetos de ejemplo
+    const calidad = new Impresora("Calidad", "Samsung", "Multifuncion", "SL-M4072FD", "10.18.89.26", "D203U","",0,[],"D203U","2022-01-03"); //
+    const despacho = new Impresora("Despacho", "HP", "LaserJet", "P4015n", "10.18.89.13", "CC364A","CC364X",0,[],"CC364A","2021-11-02");
 
     impresoras = [ventas, calidad, despacho];
 
