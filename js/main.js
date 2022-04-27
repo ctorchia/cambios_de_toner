@@ -111,10 +111,10 @@ function limpiarTablaCambiosToner(){    // Limpiar la tabla de Cambios de Toner
 
 function completarLinea(cambio){        // Armar linea con cambio de Toner para mostrar en Tabla
     
-    return `<th>${cambio.fechaCambio}</th>
+    return `<th>${dateFns.format(cambio.fechaCambio, 'DD/MM/YYYY')}</th>      
             <th>${cambio.contadorPaginas}</th>
             <th>${cambio.modeloToner}</th>
-            <th>${cambio.rendimientoPaginas}</th>`; 
+            <th>${cambio.rendimientoPaginas}</th>`;     // Muestro la fecha en formato DD/MM/AAAA pero esta almacenada en formato Original
 }
 
 function actualizarTablaCambioToner() {     // Actualizar Tabla de Cambios de Toner
@@ -142,11 +142,15 @@ function verificarContador(){   // Verificar si el contador ingresado es menor a
 function agregarCambioToner(e){     // Agregar Cambio de Toner
     e.preventDefault();
 
-    let fechaCambio = dateFns.format(campoFechaCambio.value, 'DD/MM/YYYY');
+    // let fechaCambio = dateFns.format(campoFechaCambio.value, 'DD/MM/YYYY');
+    let fechaCambio = campoFechaCambio.value;
     let actualContador = parseInt(campoActualContador.value);
     let inputGrupoToners = campoInputGrupoToners.value;
 
     // Prueba Resta de Fechas  *************************************************
+    console.log(fechaCambio);  
+    console.log(campoFechaCambio.value);  
+    
     var result = dateFns.differenceInDays(
         campoFechaCambio.value, 
         new Date(2021,07,03));
