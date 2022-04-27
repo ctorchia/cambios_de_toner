@@ -147,7 +147,12 @@ function actualizarTablaCambioToner() {     // Actualizar Tabla de Cambios de To
 function verificarContador(){   // Verificar si el contador ingresado es menor al último registrado
     const impresora = obtenerImpresoraDesdeArray();
     if (parseInt(campoActualContador.value) < impresora.contador){
-        alert("Error en el contador ingresado");
+        swal({
+            title: "Error",
+            text: "El contador actual no puede ser inferior al último registrado",
+            icon: "error",
+            button: "Aceptar",
+        });    
         campoActualContador.value = "";
     }
     console.log(impresora.contador)
@@ -206,7 +211,13 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     let nuevoHistorialCambios = [];
 
     // OPERADOR TERNARIO
-    !nombreImpresoraRepetido(nuevoNombre) ? crearImpresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios, nuevoTonerActualColocado, nuevoFechaTonerActualColocado) : alert("Error: El Nombre de la impresora esta repetido");
+    !nombreImpresoraRepetido(nuevoNombre) ? crearImpresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios, nuevoTonerActualColocado, nuevoFechaTonerActualColocado) : 
+    swal({
+        title: "Error",
+        text: "El nombre de impresora ingresado ya existe",
+        icon: "error",
+        button: "Aceptar",
+    });
 
     formNuevaImpresora.reset();
     inputGrupoImpresoras.disabled = false;
