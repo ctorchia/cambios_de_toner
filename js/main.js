@@ -105,7 +105,6 @@ class CambioToner {
 
 // SPREAD DE ARRAY
 function sumarContadoresImpresoras(contadores){
-    console.log(contadores);
     let suma = (math.add(...contadores));
     return suma;
 }
@@ -155,7 +154,6 @@ function verificarContador(){   // Verificar si el contador ingresado es menor a
         });    
         campoActualContador.value = "";
     }
-    console.log(impresora.contador)
 }
 
 function agregarCambioToner(e){     // Agregar Cambio de Toner
@@ -227,7 +225,7 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
 
     actualizarLocalStorage();
 
-    console.log(impresoras);
+    // console.log(impresoras);
 }
 
 function prepararFormNuevaImpresora(){      // Preparar Formulario para completar datos de nueva impresora
@@ -309,8 +307,6 @@ function crearArrayImpresoras(){    // Array de Impresoras de Ejemplo
     const despacho = new Impresora("Despacho", "HP", "LaserJet", "P4015n", "10.18.89.13", "CC364A","CC364X",0,[],"CC364A","2021-11-02");
 
     impresoras = [ventas, calidad, despacho];
-
-    console.log("CrearArrayImpresoras");
 }
 
 function inicio (){
