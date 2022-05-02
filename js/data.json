@@ -1,0 +1,42 @@
+[
+    {
+        "nombre": "Ventas",
+        "marca" : "HP",
+        "tipo" : "LaserJet",
+        "modelo" : "M608dn",
+        "ip" : "10.18.89.16",
+        "tonerCompatible1" : "237A",
+        "tonerCompatible2" : "",
+        "contador" : 0,
+        "historialCambios" : [],
+        "tonerActualColocado" : "237A",
+        "fechaTonerActualColocado" : "2022-02-01"
+    },
+    {
+        "nombre": "Calidad",
+        "marca" : "Samsung",
+        "tipo" : "Multifuncion",
+        "modelo" : "SL-M4072FD",
+        "ip" : "10.18.89.26",
+        "tonerCompatible1" : "D203U",
+        "tonerCompatible2" : "",
+        "contador" : 0,
+        "historialCambios" : [],
+        "tonerActualColocado" : "D203U",
+        "fechaTonerActualColocado" : "2022-01-03"
+    },
+    {
+        "nombre": "Despacho",
+        "marca" : "HP",
+        "tipo" : "LaserJet",
+        "modelo" : "P4015n",
+        "ip" : "10.18.89.13",
+        "tonerCompatible1" : "CC364A",
+        "tonerCompatible2" : "CC364X",
+        "contador" : 0,
+        "historialCambios" : [],
+        "tonerActualColocado" : "CC364A",
+        "fechaTonerActualColocado" : "2021-11-02"
+    }
+]
+

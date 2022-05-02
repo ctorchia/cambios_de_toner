@@ -252,6 +252,8 @@ function obtenerImpresoraDesdeArray(){      // Obtener impresora seleccionada de
 function mostrarInfoImpresora(){            // Mostrar informacion de la impresora seleccionada
     const impresora = obtenerImpresoraDesdeArray();
 
+    console.log(impresora);
+
     // DESESTRUCTURACION 
     const {nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, tonerActualColocado, fechaTonerActualColocado, contador} = impresora;
     
@@ -307,12 +309,27 @@ function crearArrayImpresoras(){    // Array de Impresoras de Ejemplo
     const despacho = new Impresora("Despacho", "HP", "LaserJet", "P4015n", "10.18.89.13", "CC364A","CC364X",0,[],"CC364A","2021-11-02");
 
     impresoras = [ventas, calidad, despacho];
+    console.log(impresoras)
+
+}
+
+function importarData(){
+    fetch("./js/data.json")
+        .then( (res) => res.json())
+        .then( (data) => {
+            data.forEach((impresora) => {
+                impresoras.push(new Impresora(impresora.nombre, impresora.marca, impresora.tipo,impresora.modelo, impresora.ip,impresora.tonerCompatible1,impresora.tonerCompatible2,impresora.contador,impresora.historialCambios, impresora.tonerActualColocado, impresora.fechaTonerActualColocado))
+            })
+        });
+    console.log(impresoras)
 }
 
 function inicio (){
     
     // OPERADOR OR
-    importarLocalStorage() || crearArrayImpresoras(); // Si no existe Info en LocalStorage genera impresoras de Ejemplo.
+     importarLocalStorage() || crearArrayImpresoras(); // Si no existe Info en LocalStorage genera impresoras de Ejemplo.
+
+    //importarData();
 
     console.log(impresoras);
     
