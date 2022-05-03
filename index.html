@@ -26,12 +26,12 @@
 
             <div class="p-2 m-2">
                 <button class="btn btn-primary" id="btnNuevaImpresora">
-                    Nueva Impresora
+                    Agregar Impresora
                 </button>
             </div>
         </div>
 
-        <div class="d-flex flex-row m-3">
+        <div class="d-flex justify-content-center">
             <form action="" id="formNuevaImpresora">
                 <div class="border border-1 d-flex flex-row p-3 m-1">
                     <div>
@@ -115,15 +115,8 @@
             </div>
         </div>
 
-        <div>
-            <div class="m-3 col-4">
-                <p>Impresiones Totales por empresa:</p>
-                <p id="totalImpresionesEmpresa" class="form-control"></p>
-            </div>
-        </div>
-        
-        <div>
-            <div class="container m-1">
+        <div class="d-flex justify-content-center">
+            <div class="container m-1 text-center">
                 <p id="tituloTabla"></p>
                 <table class="table">
                     <thead class="table-primary">
@@ -140,7 +133,18 @@
                 </table>
             </div>
         </div>
+        
+        <hr>
+        
+        <div class="d-flex justify-content-center">
+            <div class="m-3 col-2 text-center">
+                <p>Impresiones Totales por empresa:</p>
+                <p id="totalImpresionesEmpresa" class="form-control"></p>
+            </div>
+        </div>
+
     </div>
+
 
     <!-- Manejo de Fechas - date-fns v1.30.1 -->
     <script src="js/date_fns.min.js"></script>

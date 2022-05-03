@@ -232,6 +232,18 @@ function prepararFormNuevaImpresora(){      // Preparar Formulario para completa
     inputGrupoImpresoras.disabled = true;
     btnAgregarNuevaImpresora.disabled = false;
     btnCambioToner.disabled = true;
+
+    campoNombre.disabled = false;
+    campoMarca.disabled = false;
+    campoTipo.disabled = false;
+    campoModelo.disabled = false;
+    campoIp.disabled = false;
+    campoTonerCompatible1.disabled = false;
+    campoTonerCompatible2.disabled = false;
+    campoTonerActualColocado.disabled = false;
+    campoFechaTonerActualColocado.disabled = false;
+    campoUltimoContador.disabled = false;
+
     formNuevaImpresora.reset();
     campoFechaTonerActualColocado.valueAsDate = new Date();   
 }
@@ -269,6 +281,17 @@ function mostrarInfoImpresora(){            // Mostrar informacion de la impreso
     campoUltimoContador.value = contador;
     campoFechaCambio.valueAsDate = new Date(); 
 
+    campoNombre.disabled = true;
+    campoMarca.disabled = true;
+    campoTipo.disabled = true;
+    campoModelo.disabled = true;
+    campoIp.disabled = true;
+    campoTonerCompatible1.disabled = true;
+    campoTonerCompatible2.disabled = true;
+    campoTonerActualColocado.disabled = true;
+    campoFechaTonerActualColocado.disabled = true;
+    campoUltimoContador.disabled = true;
+
     armarInputGrupoToners(impresora);
     actualizarTablaCambioToner()
 }
@@ -302,15 +325,6 @@ function importarLocalStorage(){        // Importar info desde Local Storage
     const importacionCorrecta = impresorasAlmacenadas ? instanciarObjetosImportados(impresorasAlmacenadas) : false;
     return importacionCorrecta
 }
-
-// function crearArrayImpresoras(){    // Array de Impresoras de Ejemplo
-//     const ventas = new Impresora("Ventas", "HP", "LaserJet", "M608dn", "10.18.89.16", "237A","",0,[],"237A","2022-02-01");  // Objetos de ejemplo
-//     const calidad = new Impresora("Calidad", "Samsung", "Multifuncion", "SL-M4072FD", "10.18.89.26", "D203U","",0,[],"D203U","2022-01-03"); //
-//     const despacho = new Impresora("Despacho", "HP", "LaserJet", "P4015n", "10.18.89.13", "CC364A","CC364X",0,[],"CC364A","2021-11-02");
-
-//     impresoras = [ventas, calidad, despacho];
-//     console.log(impresoras)
-// }
 
 async function importarData(){
     await fetch("./js/data.json")
