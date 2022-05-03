@@ -303,18 +303,17 @@ function importarLocalStorage(){        // Importar info desde Local Storage
     return importacionCorrecta
 }
 
-function crearArrayImpresoras(){    // Array de Impresoras de Ejemplo
-    const ventas = new Impresora("Ventas", "HP", "LaserJet", "M608dn", "10.18.89.16", "237A","",0,[],"237A","2022-02-01");  // Objetos de ejemplo
-    const calidad = new Impresora("Calidad", "Samsung", "Multifuncion", "SL-M4072FD", "10.18.89.26", "D203U","",0,[],"D203U","2022-01-03"); //
-    const despacho = new Impresora("Despacho", "HP", "LaserJet", "P4015n", "10.18.89.13", "CC364A","CC364X",0,[],"CC364A","2021-11-02");
+// function crearArrayImpresoras(){    // Array de Impresoras de Ejemplo
+//     const ventas = new Impresora("Ventas", "HP", "LaserJet", "M608dn", "10.18.89.16", "237A","",0,[],"237A","2022-02-01");  // Objetos de ejemplo
+//     const calidad = new Impresora("Calidad", "Samsung", "Multifuncion", "SL-M4072FD", "10.18.89.26", "D203U","",0,[],"D203U","2022-01-03"); //
+//     const despacho = new Impresora("Despacho", "HP", "LaserJet", "P4015n", "10.18.89.13", "CC364A","CC364X",0,[],"CC364A","2021-11-02");
 
-    impresoras = [ventas, calidad, despacho];
-    console.log(impresoras)
+//     impresoras = [ventas, calidad, despacho];
+//     console.log(impresoras)
+// }
 
-}
-
-function importarData(){
-    fetch("./js/data.json")
+async function importarData(){
+    await fetch("./js/data.json")
         .then( (res) => res.json())
         .then( (data) => {
             data.forEach((impresora) => {
@@ -324,20 +323,16 @@ function importarData(){
     console.log(impresoras)
 }
 
-function inicio (){
+async function inicio (){
     
     // OPERADOR OR
-     importarLocalStorage() || crearArrayImpresoras(); // Si no existe Info en LocalStorage genera impresoras de Ejemplo.
-
-    //importarData();
-
-    console.log(impresoras);
-    
+    importarLocalStorage() || await importarData(); // Si no existe Info en LocalStorage genera impresoras de Ejemplo.
+        
     armarInputGrupoImpresoras(impresoras);
     mostrarInfoImpresora();
-
     mostrarTotalImpresionesEmpresa();
-    
+
+    console.log(impresoras);
 }
 
 // ********************************************** INICIO *****************************************************************
