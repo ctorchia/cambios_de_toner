@@ -60,22 +60,6 @@ class Impresora {
         this.tonerActualColocado = tonerActualColocado; // Toner Instalado actualmente.
         this.fechaTonerActualColocado = fechaTonerActualColocado; // Fecha en que se instaló el actual toner
     };
-
-    actualizarContador(actualContador){
-        this.contador = actualContador
-    }
-
-    actualizarTonerActualColocado(tonerActualColocado){
-        this.tonerActualColocado = tonerActualColocado
-    }  
-
-    actualizarFechaTonerActualColocado(fechaTonerActualColocado){
-        this.fechaTonerActualColocado = fechaTonerActualColocado
-    }    
-
-    cambiarToner(cambioToner){
-        this.historialCambios.push(cambioToner)
-    }
 }
 
 class CambioToner {
@@ -156,6 +140,12 @@ function verificarContador(){   // Verificar si el contador ingresado es menor a
     }
 }
 
+function actualizarInfoCambioToner(impresora,actualContador, tonerActualColocado, fechaTonerActualColocado){
+    impresora.contador = actualContador
+    impresora.tonerActualColocado = tonerActualColocado
+    impresora.fechaTonerActualColocado = fechaTonerActualColocado
+}
+
 function agregarCambioToner(e){     // Agregar Cambio de Toner
     e.preventDefault();
     let fechaCambio = campoFechaCambio.value;
@@ -163,17 +153,15 @@ function agregarCambioToner(e){     // Agregar Cambio de Toner
     const impresora = obtenerImpresoraDesdeArray();
     let nuevoTonerActualColocado = impresora.tonerActualColocado;
     let nuevaFechaActualTonerColocado = impresora.fechaTonerActualColocado;
-    impresora.actualizarTonerActualColocado(inputGrupoToners);
-    impresora.actualizarFechaTonerActualColocado(fechaCambio);
-    
     let actualContador = parseInt(campoActualContador.value);
     let rendimientoPaginas = actualContador - impresora.contador;
-    impresora.actualizarContador(actualContador);
+    
+    actualizarInfoCambioToner(impresora,actualContador, inputGrupoToners, fechaCambio);
+
     let rendimientoDias = dateFns.differenceInDays(fechaCambio, nuevaFechaActualTonerColocado);
 
     const cambioToner = new CambioToner (nuevaFechaActualTonerColocado, actualContador, nuevoTonerActualColocado, rendimientoPaginas, rendimientoDias)
-
-    impresora.cambiarToner(cambioToner);
+    impresora.historialCambios.push(cambioToner);
     formCambioToner.reset();
 
     campoUltimoContador.value = impresora.contador;
@@ -330,11 +318,10 @@ async function importarData(){
     await fetch("./js/data.json")
         .then( (res) => res.json())
         .then( (data) => {
-            data.forEach((impresora) => {
-                impresoras.push(new Impresora(impresora.nombre, impresora.marca, impresora.tipo,impresora.modelo, impresora.ip,impresora.tonerCompatible1,impresora.tonerCompatible2,impresora.contador,impresora.historialCambios, impresora.tonerActualColocado, impresora.fechaTonerActualColocado))
-            })
+            impresoras = data;
+            // console.log(data);
         });
-    console.log(impresoras)
+    // console.log(impresoras)
 }
 
 async function inicio (){
