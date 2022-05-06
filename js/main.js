@@ -9,11 +9,11 @@
 
 const inputGrupoImpresoras = document.getElementById("inputGrupoImpresoras");
 const inputGrupoToners = document.getElementById("inputGrupoToners");
-const btnNuevaImpresora = document.getElementById("btnNuevaImpresora");
+const btnAgregarImpresora = document.getElementById("btnAgregarImpresora");
 const formNuevaImpresora = document.getElementById("formNuevaImpresora");
 const formCambioToner = document.getElementById("formCambioToner");
 const btnCambioToner = document.getElementById("btnCambioToner");
-const btnAgregarNuevaImpresora = document.getElementById("btnAgregarImpresora");
+const btnAceptarNuevaImpresora = document.getElementById("btnAceptarNuevaImpresora");
 const listaCambiosToner = document.getElementById("listaCambiosToner");
 
 let impresoras = [];
@@ -35,7 +35,7 @@ let totalImpresionesEmpresa = document.getElementById("totalImpresionesEmpresa")
 // Declaracion de EventListeners:
 
 inputGrupoImpresoras.addEventListener("change", mostrarInfoImpresora);
-btnNuevaImpresora.addEventListener("click", prepararFormNuevaImpresora);
+btnAgregarImpresora.addEventListener("click", prepararFormNuevaImpresora);
 formNuevaImpresora.addEventListener("submit", agregarNuevaImpresora);
 formCambioToner.addEventListener("submit", agregarCambioToner);
 campoActualContador.addEventListener("change", verificarContador);
@@ -207,7 +207,8 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
 
     formNuevaImpresora.reset();
     inputGrupoImpresoras.disabled = false;
-    btnAgregarNuevaImpresora.disabled = true;
+    btnAceptarNuevaImpresora.disabled = true;
+    btnAgregarImpresora.disabled = false;
     btnCambioToner.disabled = false;
     armarInputGrupoImpresoras(impresoras);
 
@@ -218,8 +219,9 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
 
 function prepararFormNuevaImpresora(){      // Preparar Formulario para completar datos de nueva impresora
     inputGrupoImpresoras.disabled = true;
-    btnAgregarNuevaImpresora.disabled = false;
+    btnAceptarNuevaImpresora.disabled = false;
     btnCambioToner.disabled = true;
+    btnAgregarImpresora.disabled = true;
 
     campoNombre.disabled = false;
     campoMarca.disabled = false;
