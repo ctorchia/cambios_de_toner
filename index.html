@@ -15,134 +15,159 @@
 
 <body>
     <!-- <div class="d-flex flex-column"> -->
-    <div class="container">    
-        
+    <div class="container">
+
         <div class="ml-4 p-3 d-flex flex-row justify-content-start">
-            
+            <div class="p-2 m-2 d-flex align-items-center">
+                <div class="font-italic">Seleccionar la Impresora:</div>
+            </div>
             <div class="p-2 m-2">
                 <select id="inputGrupoImpresoras" class="form-control">
-                    
+
                 </select>
             </div>
 
-            <div class="p-2 m-2">
-                <button class="btn btn-primary" id="btnNuevaImpresora">
-                    Agregar Impresora
-                </button>
-            </div>
+            
         </div>
 
         <div class="d-flex justify-content-center">
-            <form action="" id="formNuevaImpresora">
-                <div class="border border-1 d-flex flex-row p-3 m-1">
-                    <div>
-                        <img src="./imagenes/ventas.png" class="img-fluid" alt="">
+            <div class="border border-1 m-1">
+                <div class="text-center mt-2">
+                    <div class="font-weight-bold font-italic"><h4>Información de Impresora</h4></div>
+                </div>
+                <div class="p-2">
+                    <form action="" id="formNuevaImpresora">
+                        <div class="d-flex flex-row">
+                            <div>
+                                <img src="./imagenes/ventas.png" class="img-fluid" alt="">
+                            </div>
+                            <div class="m-2 text-center">
+                                <div class="mt-2">
+                                    <label for="nombre">Nombre:</label>
+                                    <input type="text" class="form-control" id="nombre" placeholder="Nombre de la Impresora"
+                                        required="required">
+                                </div>
+                                <div class="mt-2">
+                                    <label for="marca">Marca:</label>
+                                    <input type="text" class="form-control" id="marca" placeholder="Marca" required="required">
+                                </div>
+                                <div class="mt-2">
+                                    <label for="tipo">Tipo:</label>
+                                    <input type="text" class="form-control" id="tipo" placeholder="Tipo" required="required">
+                                </div>
+                                <div class="mt-2">
+                                    <label for="modelo">Modelo:</label>
+                                    <input type="text" class="form-control" id="modelo" placeholder="Modelo"
+                                        required="required">
+                                </div>
+                                <div class="mt-2">
+                                    <label for="ip">IP:</label>
+                                    <input type="text" class="form-control" id="ip" placeholder="IP" required="required">
+                                </div>
+                            </div>
+                            <div class="m-2 text-center">
+                                <div class="mt-2">
+                                    <label for="tonerCompatible1">Toners Compatibles:</label>
+                                    <input type="text" class="form-control mb-2" id="tonerCompatible1" placeholder=""
+                                        required="required">
+                                    <input type="text" class="form-control mt-2" id="tonerCompatible2" placeholder="">
+                                </div>
+                                <div class="mt-2">
+                                    <label for="tonerActualColocado">Toner Actual Colocado:</label>
+                                    <input type="text" class="form-control mb-2" id="tonerActualColocado" placeholder=""
+                                        required="required">
+                                </div>
+                                <div class="mt-2">
+                                    <label for="fechaTonerActualColocado">Fecha Toner Actual Colocado:</label>
+                                    <input type="date" class="form-control mb-2" id="fechaTonerActualColocado" placeholder=""
+                                        required="required">
+                                </div>
+                                <div class="mt-5">
+                                    <button class="btn btn-primary" id="btnAgregarImpresora" disabled>
+                                        Aceptar Cambios
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="d-flex">
+                    <div class="p-2 m-2">
+                        <button class="btn btn-primary" id="btnNuevaImpresora">
+                            Agregar Impresora
+                        </button>
                     </div>
-                    <div class="m-2 text-center">
-                        <div class="mt-2">
-                            <label for="nombre">Nombre:</label>
-                            <input type="text" class="form-control" id="nombre" placeholder="Nombre de la Impresora" required="required">
+                </div>
+            </div>
+        
+            <div class="border border-1 d-flex flex-column text-center col-3 m-1">
+                <div class="text-center mt-2">
+                    <div class="font-weight-bold font-italic"><h4>Cambio de Toner</h4></div>
+                </div>
+                <div class="mt-4">
+                    <form action="" id="formCambioToner">
+                        <div>
+                            <label for="fechaCambio">Fecha de Cambio:</label>
+                            <input type="date" class="form-control" id="fechaCambio" placeholder="Fecha de Cambio"
+                                required="required">
+                        </div>
+                        <div class="d-flex mt-4">
+                            <div class="m-2">
+                                <label for="ultimoContador">Ultimo Contador:</label>
+                                <input type="number" class="form-control" id="ultimoContador" placeholder="Ultimo"
+                                    required="required">
+                            </div>
+                            <div class="m-2">
+                                <label for="actualContador">Actual Contador:</label>
+                                <input type="number" class="form-control" id="actualContador" placeholder="Actual"
+                                    required="required">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <label>Modelo de Toner:</label>
+                            <div>
+                                <select class="form-control" id="inputGrupoToners">
+                                </select>
+                            </div>
                         </div>
                         <div class="mt-2">
-                            <label for="marca">Marca:</label>
-                            <input type="text" class="form-control" id="marca" placeholder="Marca" required="required">
-                        </div>
-                        <div class="mt-2">
-                            <label for="tipo">Tipo:</label>
-                            <input type="text" class="form-control" id="tipo" placeholder="Tipo" required="required">
-                        </div>
-                        <div class="mt-2">
-                            <label for="modelo">Modelo:</label>
-                            <input type="text" class="form-control" id="modelo" placeholder="Modelo" required="required">
-                        </div>
-                        <div class="mt-2">
-                            <label for="ip">IP:</label>
-                            <input type="text" class="form-control" id="ip" placeholder="IP" required="required">
-                        </div>
-                    </div>
-                    <div class="m-2 text-center">
-                        <div class="mt-2">
-                            <label for="tonerCompatible1">Toners Compatibles:</label>
-                            <input type="text" class="form-control mb-2" id="tonerCompatible1" placeholder="" required="required">
-                            <input type="text" class="form-control mt-2" id="tonerCompatible2" placeholder="" >
-                        </div>
-                        <div class="mt-2">
-                            <label for="tonerActualColocado">Toner Actual Colocado:</label>
-                            <input type="text" class="form-control mb-2" id="tonerActualColocado" placeholder="" required="required">
-                        </div>
-                        <div class="mt-2">
-                            <label for="fechaTonerActualColocado">Fecha Toner Actual Colocado:</label>
-                            <input type="date" class="form-control mb-2" id="fechaTonerActualColocado" placeholder="" required="required">
-                        </div>
-                        <div class="mt-5 pt-2">
-                            <button class="m-2 btn btn-primary" id="btnAgregarImpresora" disabled >
+                            <button class="m-2 btn btn-primary" id="btnCambioToner">
                                 Aceptar
                             </button>
                         </div>
-                
-                    </div>
-            </form>
-            </div>
-            
-            <div class="border border-1 d-flex flex-column p-3 m-1 text-center col-3">
-                <form action="" id="formCambioToner">
-                    <div>
-                        <label for="fechaCambio">Fecha de Cambio:</label>
-                        <input type="date" class="form-control" id="fechaCambio" placeholder="Fecha de Cambio" required="required">
-                    </div>
-                    <div class="d-flex mt-4">
-                        <div class="m-2">
-                            <label for="ultimoContador">Ultimo Contador:</label>
-                            <input type="number" class="form-control" id="ultimoContador" placeholder="Ultimo" required="required">
-                        </div>
-                        <div class="m-2">
-                            <label for="actualContador">Actual Contador:</label>
-                            <input type="number" class="form-control" id="actualContador" placeholder="Actual" required="required">
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <label>Modelo de Toner:</label>
-                        <div>
-                            <select class="form-control" id="inputGrupoToners">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mt-2">
-                        <button class="m-2 btn btn-primary" id="btnCambioToner">
-                            Aceptar
-                        </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="d-flex justify-content-center">
-            <div class="container m-1 text-center">
-                <p id="tituloTabla"></p>
-                <table class="table">
-                    <thead class="table-primary">
-                        <tr>
-                            <th>Fecha de Colocación</th>
-                            <th>Contador de páginas</th>
-                            <th>Modelo de Toner</th>
-                            <th>Rend. (Hojas)</th>
-                            <th>Rend. (Dias)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="listaCambiosToner">
-                    </tbody>
-                </table>
-            </div>
+    <div class="d-flex justify-content-center">
+        <div class="container m-1 text-center">
+            <p id="tituloTabla"></p>
+            <table class="table">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Fecha de Colocación</th>
+                        <th>Contador de páginas</th>
+                        <th>Modelo de Toner</th>
+                        <th>Rend. (Hojas)</th>
+                        <th>Rend. (Dias)</th>
+                    </tr>
+                </thead>
+                <tbody id="listaCambiosToner">
+                </tbody>
+            </table>
         </div>
-        
-        <hr>
-        
-        <div class="d-flex justify-content-center">
-            <div class="m-3 col-2 text-center">
-                <p>Impresiones Totales por empresa:</p>
-                <p id="totalImpresionesEmpresa" class="form-control"></p>
-            </div>
+    </div>
+
+    <hr>
+
+    <div class="d-flex justify-content-center">
+        <div class="m-3 col-2 text-center">
+            <p>Impresiones Totales por empresa:</p>
+            <p id="totalImpresionesEmpresa" class="form-control"></p>
         </div>
+    </div>
 
     </div>
 
@@ -153,7 +178,7 @@
     <script src="js/math.js"></script>
     <!-- Manejo de Alertas -->
     <script src="js/sweetalert.min.js"></script>
-     <!--Bootstrap  -->
+    <!--Bootstrap  -->
     <script src="js/main.js"></script>
 
 </body>
