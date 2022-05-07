@@ -14,6 +14,7 @@ const formNuevaImpresora = document.getElementById("formNuevaImpresora");
 const formCambioToner = document.getElementById("formCambioToner");
 const btnCambioToner = document.getElementById("btnCambioToner");
 const btnAceptarNuevaImpresora = document.getElementById("btnAceptarNuevaImpresora");
+const btnCancelarAgregarImpresora = document.getElementById("btnCancelarAgregarImpresora");
 const listaCambiosToner = document.getElementById("listaCambiosToner");
 
 let impresoras = [];
@@ -36,6 +37,7 @@ let totalImpresionesEmpresa = document.getElementById("totalImpresionesEmpresa")
 
 inputGrupoImpresoras.addEventListener("change", mostrarInfoImpresora);
 btnAgregarImpresora.addEventListener("click", prepararFormNuevaImpresora);
+btnCancelarAgregarImpresora.addEventListener("click", cancelarAgregarImpresora);
 formNuevaImpresora.addEventListener("submit", agregarNuevaImpresora);
 formCambioToner.addEventListener("submit", agregarCambioToner);
 campoActualContador.addEventListener("change", verificarContador);
@@ -181,6 +183,10 @@ function nombreImpresoraRepetido(nombreParaVerificar){
     return impresoras.find((el) => el.nombre.includes(nombreParaVerificar));
 }
 
+function cancelarAgregarImpresora(){
+    location.reload();
+}
+
 function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     e.preventDefault();
 
@@ -210,6 +216,7 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     btnAceptarNuevaImpresora.disabled = true;
     btnAgregarImpresora.disabled = false;
     btnCambioToner.disabled = false;
+    btnCancelarAgregarImpresora.disabled = true;
     armarInputGrupoImpresoras(impresoras);
 
     actualizarLocalStorage();
@@ -222,6 +229,7 @@ function prepararFormNuevaImpresora(){      // Preparar Formulario para completa
     btnAceptarNuevaImpresora.disabled = false;
     btnCambioToner.disabled = true;
     btnAgregarImpresora.disabled = true;
+    btnCancelarAgregarImpresora.disabled = false;
 
     campoNombre.disabled = false;
     campoMarca.disabled = false;
