@@ -199,7 +199,7 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     let nuevoTonerCompatible2 = campoTonerCompatible2.value.toUpperCase();
     let nuevoTonerActualColocado = campoTonerActualColocado.value.toUpperCase();
     let nuevoFechaTonerActualColocado = campoFechaTonerActualColocado.value;
-    let nuevoContador = 0;
+    let nuevoContador = parseInt(campoUltimoContador.value);
     let nuevoHistorialCambios = [];
 
     // OPERADOR TERNARIO
@@ -217,6 +217,10 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     btnAgregarImpresora.disabled = false;
     btnCambioToner.disabled = false;
     btnCancelarAgregarImpresora.disabled = true;
+    campoFechaCambio.disabled = false;
+    campoActualContador.disabled = false;
+    inputGrupoToners.disabled = false;
+
     armarInputGrupoImpresoras(impresoras);
 
     actualizarLocalStorage();
@@ -230,7 +234,7 @@ function prepararFormNuevaImpresora(){      // Preparar Formulario para completa
     btnCambioToner.disabled = true;
     btnAgregarImpresora.disabled = true;
     btnCancelarAgregarImpresora.disabled = false;
-
+    
     campoNombre.disabled = false;
     campoMarca.disabled = false;
     campoTipo.disabled = false;
@@ -241,6 +245,10 @@ function prepararFormNuevaImpresora(){      // Preparar Formulario para completa
     campoTonerActualColocado.disabled = false;
     campoFechaTonerActualColocado.disabled = false;
     campoUltimoContador.disabled = false;
+    campoFechaCambio.disabled = true;
+    campoActualContador.disabled = true;
+    inputGrupoToners.disabled = true;
+
 
     formNuevaImpresora.reset();
     campoFechaTonerActualColocado.valueAsDate = new Date();   
