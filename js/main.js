@@ -224,6 +224,9 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     armarInputGrupoImpresoras(impresoras);
 
     actualizarLocalStorage();
+    // location.reload();
+    mostrarInfoImpresora();
+
 
     // console.log(impresoras);
 }
@@ -245,6 +248,7 @@ function prepararFormNuevaImpresora(){      // Preparar Formulario para completa
     campoTonerActualColocado.disabled = false;
     campoFechaTonerActualColocado.disabled = false;
     campoUltimoContador.disabled = false;
+    campoUltimoContador.value = 0;
     campoFechaCambio.disabled = true;
     campoActualContador.disabled = true;
     inputGrupoToners.disabled = true;
