@@ -15,6 +15,7 @@ const formCambioToner = document.getElementById("formCambioToner");
 const btnCambioToner = document.getElementById("btnCambioToner");
 const btnAceptarNuevaImpresora = document.getElementById("btnAceptarNuevaImpresora");
 const btnCancelarAgregarImpresora = document.getElementById("btnCancelarAgregarImpresora");
+const btnActualizarImpresora = document.getElementById("btnActualizarImpresora");
 const listaCambiosToner = document.getElementById("listaCambiosToner");
 
 let impresoras = [];
@@ -237,6 +238,7 @@ function prepararFormNuevaImpresora(){      // Preparar Formulario para completa
     btnCambioToner.disabled = true;
     btnAgregarImpresora.disabled = true;
     btnCancelarAgregarImpresora.disabled = false;
+    btnActualizarImpresora.disabled = true;
     
     campoNombre.disabled = false;
     campoMarca.disabled = false;

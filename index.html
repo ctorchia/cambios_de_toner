@@ -82,10 +82,17 @@
                                     <input type="date" class="form-control mb-2" id="fechaTonerActualColocado" placeholder=""
                                         required="required">
                                 </div>
-                                <div class="mt-5">
-                                    <button class="btn btn-primary" id="btnAceptarNuevaImpresora" disabled>
-                                        Aceptar
-                                    </button>
+                                <div class="d-flex mt-5">
+                                    <div class="p-1">
+                                        <button class="btn btn-success" id="btnAceptarNuevaImpresora" disabled>
+                                            Aceptar
+                                        </button>
+                                    </div>
+                                    <div class="p-1">
+                                        <button class="btn btn-danger" id="btnCancelarAgregarImpresora" disabled>
+                                            Cancelar
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -98,8 +105,8 @@
                         </button>
                     </div>
                     <div class="p-2 m-2">
-                        <button class="btn btn-danger" id="btnCancelarAgregarImpresora" disabled>
-                            Cancelar
+                        <button class="btn btn-warning" id="btnActualizarImpresora">
+                            Actualizar Impresora
                         </button>
                     </div>
                 </div>
@@ -134,7 +141,7 @@
                             </div>
                         </div>
                         <div class="mt-2">
-                            <button class="m-2 btn btn-primary" id="btnCambioToner">
+                            <button class="m-2 btn btn-success" id="btnCambioToner">
                                 Aceptar
                             </button>
                         </div>
