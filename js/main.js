@@ -17,6 +17,7 @@ const btnAceptarNuevaImpresora = document.getElementById("btnAceptarNuevaImpreso
 const btnCancelarAgregarImpresora = document.getElementById("btnCancelarAgregarImpresora");
 const btnAceptarActualizarImpresora = document.getElementById("btnAceptarActualizarImpresora");
 const btnActualizarImpresora = document.getElementById("btnActualizarImpresora");
+const btnBorrarImpresora = document.getElementById("btnBorrarImpresora");
 const listaCambiosToner = document.getElementById("listaCambiosToner");
 
 let impresoras = [];
@@ -40,6 +41,7 @@ let totalImpresionesEmpresa = document.getElementById("totalImpresionesEmpresa")
 inputGrupoImpresoras.addEventListener("change", mostrarInfoImpresora);
 btnAgregarImpresora.addEventListener("click", prepararFormNuevaImpresora);
 btnActualizarImpresora.addEventListener("click", prepararFormActualizarImpresora);
+btnBorrarImpresora.addEventListener("click", eliminarImpresora);
 btnAceptarActualizarImpresora.addEventListener("click", actualizarInfoImpresora);
 btnCancelarAgregarImpresora.addEventListener("click", cancelarAgregarImpresora);
 formNuevaImpresora.addEventListener("submit", agregarNuevaImpresora);
@@ -192,6 +194,16 @@ function cancelarAgregarImpresora(e){
     location.reload();
 }
 
+function eliminarImpresora(e){
+    e.preventDefault();
+    console.log(impresoras);
+    const impresora = obtenerImpresoraDesdeArray();
+    impresoras = impresoras.filter((item) => item.nombre !== impresora.nombre);
+
+    actualizarLocalStorage();
+    location.reload();
+}
+
 function actualizarInfoImpresora(e){
     e.preventDefault();
     const impresora = obtenerImpresoraDesdeArray();
@@ -218,6 +230,8 @@ function prepararFormActualizarImpresora(){
     btnCambioToner.disabled = true;
     btnCancelarAgregarImpresora.disabled = false;
     btnAceptarActualizarImpresora.disabled = false;
+    btnBorrarImpresora.disabled = true;
+
     
     btnAceptarActualizarImpresora.style.display = "";
     btnCancelarAgregarImpresora.style.display = "";
@@ -276,7 +290,6 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
 
     actualizarLocalStorage();
     mostrarInfoImpresora();
-    // console.log(impresoras);
 }
 
 function prepararFormNuevaImpresora(){      // Preparar Formulario para completar datos de nueva impresora
@@ -286,6 +299,7 @@ function prepararFormNuevaImpresora(){      // Preparar Formulario para completa
     btnAgregarImpresora.disabled = true;
     btnCancelarAgregarImpresora.disabled = false;
     btnActualizarImpresora.disabled = true;
+    btnBorrarImpresora.disabled = true;
 
     btnAceptarNuevaImpresora.style.display = "";
     btnCancelarAgregarImpresora.style.display = "";
@@ -387,11 +401,9 @@ function actualizarLocalStorage(){      // Actualizar base de datos en Local Sto
 
 function importarLocalStorage(){        // Importar info desde Local Storage
     let impresorasAlmacenadas = JSON.parse(localStorage.getItem("impresoras"));
-    // console.log(impresorasAlmacenadas);
+    
     // ASIGNACION CONDICIONAL
-    // const importacionCorrecta = impresorasAlmacenadas ? instanciarObjetosImportados(impresorasAlmacenadas) : false;
     const importacionCorrecta = impresorasAlmacenadas ? impresoras = impresorasAlmacenadas : false;
-
     return importacionCorrecta
 }
 
