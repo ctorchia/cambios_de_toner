@@ -15,6 +15,7 @@ const formCambioToner = document.getElementById("formCambioToner");
 const btnCambioToner = document.getElementById("btnCambioToner");
 const btnAceptarNuevaImpresora = document.getElementById("btnAceptarNuevaImpresora");
 const btnCancelarAgregarImpresora = document.getElementById("btnCancelarAgregarImpresora");
+const btnAceptarActualizarImpresora = document.getElementById("btnAceptarActualizarImpresora");
 const btnActualizarImpresora = document.getElementById("btnActualizarImpresora");
 const listaCambiosToner = document.getElementById("listaCambiosToner");
 
@@ -38,6 +39,8 @@ let totalImpresionesEmpresa = document.getElementById("totalImpresionesEmpresa")
 
 inputGrupoImpresoras.addEventListener("change", mostrarInfoImpresora);
 btnAgregarImpresora.addEventListener("click", prepararFormNuevaImpresora);
+btnActualizarImpresora.addEventListener("click", prepararFormActualizarImpresora);
+btnAceptarActualizarImpresora.addEventListener("click", actualizarInfoImpresora);
 btnCancelarAgregarImpresora.addEventListener("click", cancelarAgregarImpresora);
 formNuevaImpresora.addEventListener("submit", agregarNuevaImpresora);
 formCambioToner.addEventListener("submit", agregarCambioToner);
@@ -184,8 +187,54 @@ function nombreImpresoraRepetido(nombreParaVerificar){
     return impresoras.find((el) => el.nombre.includes(nombreParaVerificar));
 }
 
-function cancelarAgregarImpresora(){
+function cancelarAgregarImpresora(e){
+    e.preventDefault();
     location.reload();
+}
+
+function actualizarInfoImpresora(e){
+    e.preventDefault();
+    const impresora = obtenerImpresoraDesdeArray();
+
+    impresora.nombre = campoNombre.value;
+    impresora.marca = campoMarca.value;
+    impresora.tipo = campoTipo.value;
+    impresora.modelo = campoModelo.value;
+    impresora.ip = campoIp.value;
+    impresora.tonerCompatible1 = campoTonerCompatible1.value.toUpperCase();
+    impresora.tonerCompatible2 = campoTonerCompatible2.value.toUpperCase();
+    impresora.tonerActualColocado = campoTonerActualColocado.value.toUpperCase();
+    impresora.fechaTonerActualColocado = campoFechaTonerActualColocado.value;
+    impresora.contador = parseInt(campoUltimoContador.value);
+
+    actualizarLocalStorage();
+    location.reload();
+}
+
+function prepararFormActualizarImpresora(){
+    inputGrupoImpresoras.disabled = true;
+    btnAgregarImpresora.disabled = true;
+    btnActualizarImpresora.disabled = true;
+    btnCambioToner.disabled = true;
+    btnCancelarAgregarImpresora.disabled = false;
+    btnAceptarActualizarImpresora.disabled = false;
+    
+    btnAceptarActualizarImpresora.style.display = "";
+    btnCancelarAgregarImpresora.style.display = "";
+
+    campoNombre.disabled = false;
+    campoMarca.disabled = false;
+    campoTipo.disabled = false;
+    campoModelo.disabled = false;
+    campoIp.disabled = false;
+    campoTonerCompatible1.disabled = false;
+    campoTonerCompatible2.disabled = false;
+    campoTonerActualColocado.disabled = false;
+    campoFechaTonerActualColocado.disabled = false;
+    campoUltimoContador.disabled = false;
+    campoFechaCambio.disabled = true;
+    campoActualContador.disabled = true;
+    inputGrupoToners.disabled = true;
 }
 
 function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
@@ -218,17 +267,14 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     btnAgregarImpresora.disabled = false;
     btnCambioToner.disabled = false;
     btnCancelarAgregarImpresora.disabled = true;
+    inputGrupoToners.disabled = false;
     campoFechaCambio.disabled = false;
     campoActualContador.disabled = false;
-    inputGrupoToners.disabled = false;
 
     armarInputGrupoImpresoras(impresoras);
 
     actualizarLocalStorage();
-    // location.reload();
     mostrarInfoImpresora();
-
-
     // console.log(impresoras);
 }
 
@@ -239,6 +285,9 @@ function prepararFormNuevaImpresora(){      // Preparar Formulario para completa
     btnAgregarImpresora.disabled = true;
     btnCancelarAgregarImpresora.disabled = false;
     btnActualizarImpresora.disabled = true;
+
+    btnAceptarNuevaImpresora.style.display = "";
+    btnCancelarAgregarImpresora.style.display = "";
     
     campoNombre.disabled = false;
     campoMarca.disabled = false;
@@ -303,6 +352,10 @@ function mostrarInfoImpresora(){            // Mostrar informacion de la impreso
     campoTonerActualColocado.disabled = true;
     campoFechaTonerActualColocado.disabled = true;
     campoUltimoContador.disabled = true;
+
+    btnAceptarNuevaImpresora.style.display = "none";
+    btnAceptarActualizarImpresora.style.display = "none";
+    btnCancelarAgregarImpresora.style.display = "none";
 
     armarInputGrupoToners(impresora);
     actualizarTablaCambioToner()
