@@ -47,7 +47,7 @@ btnCancelarAgregarImpresora.addEventListener("click", cancelarAgregarImpresora);
 formNuevaImpresora.addEventListener("submit", agregarNuevaImpresora);
 formCambioToner.addEventListener("submit", agregarCambioToner);
 campoActualContador.addEventListener("change", verificarContador);
-
+campoFechaCambio.addEventListener("change",verificarFechaCambio)
 //inputFiltrar.addEventListener("keyup", opcionFiltrar);
 
 
@@ -132,6 +132,19 @@ function actualizarTablaCambioToner() {     // Actualizar Tabla de Cambios de To
         const linea = document.createElement("tr");
         linea.innerHTML = completarLinea(cambio);        
         listaCambiosToner.append(linea);    // agregar a tbody
+    }
+}
+
+function verificarFechaCambio(){
+    const impresora = obtenerImpresoraDesdeArray();
+    if (campoFechaCambio.value < impresora.fechaTonerActualColocado){
+        swal({
+            title: "Error",
+            text: "La fecha actual no puede ser inferior a la última registrada",
+            icon: "error",
+            button: "Aceptar",
+        });    
+        campoFechaCambio.valueAsDate = new Date(); 
     }
 }
 
