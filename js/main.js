@@ -280,6 +280,7 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     btnAceptarNuevaImpresora.disabled = true;
     btnAgregarImpresora.disabled = false;
     btnActualizarImpresora.disabled = false;
+    btnBorrarImpresora.disabled = false;
     btnCambioToner.disabled = false;
     btnCancelarAgregarImpresora.disabled = true;
     inputGrupoToners.disabled = false;
