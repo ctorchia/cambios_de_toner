@@ -265,6 +265,7 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     inputGrupoImpresoras.disabled = false;
     btnAceptarNuevaImpresora.disabled = true;
     btnAgregarImpresora.disabled = false;
+    btnActualizarImpresora.disabled = false;
     btnCambioToner.disabled = false;
     btnCancelarAgregarImpresora.disabled = true;
     inputGrupoToners.disabled = false;
@@ -304,7 +305,6 @@ function prepararFormNuevaImpresora(){      // Preparar Formulario para completa
     campoActualContador.disabled = true;
     inputGrupoToners.disabled = true;
 
-
     formNuevaImpresora.reset();
     campoFechaTonerActualColocado.valueAsDate = new Date();   
 }
@@ -325,7 +325,7 @@ function obtenerImpresoraDesdeArray(){      // Obtener impresora seleccionada de
 function mostrarInfoImpresora(){            // Mostrar informacion de la impresora seleccionada
     const impresora = obtenerImpresoraDesdeArray();
 
-    console.log(impresora);
+    // console.log(impresora);
 
     // DESESTRUCTURACION 
     const {nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, tonerActualColocado, fechaTonerActualColocado, contador} = impresora;
@@ -377,21 +377,25 @@ function actualizarLocalStorage(){      // Actualizar base de datos en Local Sto
     localStorage.setItem("impresoras",baseEnJSON);
 }
 
-function instanciarObjetosImportados (impresorasAlmacenadas){
-    for (const impresora of impresorasAlmacenadas){
-        impresoras.push(new Impresora(impresora.nombre, impresora.marca, impresora.tipo,impresora.modelo, impresora.ip,impresora.tonerCompatible1,impresora.tonerCompatible2,impresora.contador,impresora.historialCambios, impresora.tonerActualColocado, impresora.fechaTonerActualColocado ))
-     }
-     return true;
-}
+// function instanciarObjetosImportados (impresorasAlmacenadas){
+//     impresoras = impresorasAlmacenadas;
+//     // for (const impresora of impresorasAlmacenadas){
+//     //     impresoras.push(new Impresora(impresora.nombre, impresora.marca, impresora.tipo,impresora.modelo, impresora.ip,impresora.tonerCompatible1,impresora.tonerCompatible2,impresora.contador,impresora.historialCambios, impresora.tonerActualColocado, impresora.fechaTonerActualColocado ))
+//     //  }
+//     return true;
+// }
 
 function importarLocalStorage(){        // Importar info desde Local Storage
     let impresorasAlmacenadas = JSON.parse(localStorage.getItem("impresoras"));
+    // console.log(impresorasAlmacenadas);
     // ASIGNACION CONDICIONAL
-    const importacionCorrecta = impresorasAlmacenadas ? instanciarObjetosImportados(impresorasAlmacenadas) : false;
+    // const importacionCorrecta = impresorasAlmacenadas ? instanciarObjetosImportados(impresorasAlmacenadas) : false;
+    const importacionCorrecta = impresorasAlmacenadas ? impresoras = impresorasAlmacenadas : false;
+
     return importacionCorrecta
 }
 
-async function importarData(){
+async function importarDatosDesdeJson(){
     await fetch("./js/data.json")
         .then( (res) => res.json())
         .then( (data) => {
@@ -404,7 +408,7 @@ async function importarData(){
 async function inicio (){
     
     // OPERADOR OR
-    importarLocalStorage() || await importarData(); // Si no existe Info en LocalStorage genera impresoras de Ejemplo.
+    importarLocalStorage() || await importarDatosDesdeJson(); // Si no existe Info en LocalStorage importa datos desde JSON.
         
     armarInputGrupoImpresoras(impresoras);
     mostrarInfoImpresora();
