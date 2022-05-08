@@ -35,6 +35,7 @@ let campoFechaCambio = document.getElementById("fechaCambio");
 let campoActualContador = document.getElementById("actualContador");
 let campoInputGrupoToners = document.getElementById("inputGrupoToners");
 let totalImpresionesEmpresa = document.getElementById("totalImpresionesEmpresa");
+let imagenImpresora = document.getElementById("imagenImpresora");
 
 // Declaracion de EventListeners:
 
@@ -249,7 +250,7 @@ function prepararFormActualizarImpresora(){
     btnAceptarActualizarImpresora.style.display = "";
     btnCancelarAgregarImpresora.style.display = "";
 
-    campoNombre.disabled = false;
+    campoNombre.disabled = true;
     campoMarca.disabled = false;
     campoTipo.disabled = false;
     campoModelo.disabled = false;
@@ -357,6 +358,12 @@ function mostrarInfoImpresora(){            // Mostrar informacion de la impreso
 
     // DESESTRUCTURACION 
     const {nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, tonerActualColocado, fechaTonerActualColocado, contador} = impresora;
+    
+    if (nombre == "Ventas" || nombre == "Calidad" || nombre == "Despacho" ) {
+        imagenImpresora.src = "./imagenes/" + nombre +".png"}
+    else {
+        imagenImpresora.src = "./imagenes/ventas.png"
+    };
     
     campoNombre.value = nombre;
     campoMarca.value = marca;
