@@ -19,6 +19,7 @@ const btnAceptarActualizarImpresora = document.getElementById("btnAceptarActuali
 const btnActualizarImpresora = document.getElementById("btnActualizarImpresora");
 const btnBorrarImpresora = document.getElementById("btnBorrarImpresora");
 const listaCambiosToner = document.getElementById("listaCambiosToner");
+const inputFiltrarToner = document.getElementById("inputFiltrarToner");
 
 let impresoras = [];
 let campoNombre = document.getElementById("nombre");
@@ -49,7 +50,7 @@ formNuevaImpresora.addEventListener("submit", agregarNuevaImpresora);
 formCambioToner.addEventListener("submit", agregarCambioToner);
 campoActualContador.addEventListener("change", verificarContador);
 campoFechaCambio.addEventListener("change",verificarFechaCambio)
-//inputFiltrar.addEventListener("keyup", opcionFiltrar);
+inputFiltrarToner.addEventListener("keyup", filtrarToner);
 
 
 // ********************************************** CLASES *****************************************************************
@@ -83,12 +84,22 @@ class CambioToner {
 
 // ********************************************** FUNCIONES *****************************************************************
 
-// function opcionFiltrar(){
-//     limpiarTabla();
-//     actualizarTabla(filtrarImpresorasPorToner(impresoras));
-//     tituloTabla = document.getElementById("tituloTabla");
-//     tituloTabla.innerText = "Listado de Impresoras filtradas por Toner Seleccionado:";
-// }
+function filtrarToner(){
+    limpiarTablaCambiosToner();
+    toner = inputFiltrarToner.value.toUpperCase();
+
+    const impresora = obtenerImpresoraDesdeArray();
+    const cambiosToner = impresora.historialCambios;
+    const cambiosFiltrados = cambiosToner.filter((el) => el.modeloToner.includes(toner));
+
+    for(const cambio of cambiosFiltrados){
+        const linea = document.createElement("tr");
+        linea.innerHTML = completarLinea(cambio);        
+        listaCambiosToner.append(linea);    // agregar a tbody
+    }
+    
+    // actualizarTabla(filtrarImpresorasPorToner(impresoras));
+}
 
 // function filtrarImpresorasPorToner(impresoras){         // Filtrado de Impresoras por modelo de Toner
 //     toner = inputFiltrar.value.toUpperCase();
