@@ -18,6 +18,7 @@ const btnCancelarAgregarImpresora = document.getElementById("btnCancelarAgregarI
 const btnAceptarActualizarImpresora = document.getElementById("btnAceptarActualizarImpresora");
 const btnActualizarImpresora = document.getElementById("btnActualizarImpresora");
 const btnBorrarImpresora = document.getElementById("btnBorrarImpresora");
+const btnSwitchInventario = document.getElementById("btnSwitchInventario");
 const listaCambiosToner = document.getElementById("listaCambiosToner");
 const listaInventarioImpresoras = document.getElementById("listaInventarioImpresoras");
 const inputFiltrarToner = document.getElementById("inputFiltrarToner");
@@ -40,6 +41,11 @@ let totalImpresionesEmpresa = document.getElementById("totalImpresionesEmpresa")
 let imagenImpresora = document.getElementById("imagenImpresora");
 let campoPromedioHojas = document.getElementById("promedioHojas");
 let campoPromedioDias = document.getElementById("promedioDias");
+let bloqueSeleccionImpresora = document.getElementById("bloqueSeleccionImpresora");
+let bloqueInfoImpresoras = document.getElementById("bloqueInfoImpresoras");
+let bloqueCambioToner = document.getElementById("bloqueCambioToner");
+let bloqueHistorialCambiosDeToner = document.getElementById("bloqueHistorialCambiosDeToner");
+let bloqueInventarioImpresoras = document.getElementById("bloqueInventarioImpresoras");
 
 // Declaracion de EventListeners:
 
@@ -54,6 +60,7 @@ formCambioToner.addEventListener("submit", agregarCambioToner);
 campoActualContador.addEventListener("change", verificarContador);
 campoFechaCambio.addEventListener("change",verificarFechaCambio)
 inputFiltrarToner.addEventListener("keyup", filtrarToner);
+btnSwitchInventario.addEventListener("click", intercambiarVistas);
 
 
 // ********************************************** CLASES *****************************************************************
@@ -86,6 +93,10 @@ class CambioToner {
 }
 
 // ********************************************** FUNCIONES *****************************************************************
+
+function intercambiarVistas(){
+
+}
 
 function limpiarTablaInventarioImpresoras(){    // Limpiar la tabla de Cambios de Toner
     listaInventarioImpresoras.innerHTML = ``;
@@ -510,6 +521,12 @@ async function inicio (){
     mostrarInfoImpresora();
     mostrarTotalImpresionesEmpresa();
     listarInventarioImpresoras();
+
+    bloqueSeleccionImpresora.style.visibility = "hidden";
+    bloqueInfoImpresoras.style.display = "none";
+    bloqueCambioToner.style.display = "none"; 
+    bloqueHistorialCambiosDeToner.style.display = "none";
+    // bloqueInventarioImpresoras.style.display = "none";
 
     console.log(impresoras);
 }

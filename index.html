@@ -16,17 +16,31 @@
 <body>
     <div class="container">
 
-        <div class="ml-4 p-3 d-flex flex-row justify-content-start">
-            <div class="p-2 m-2 d-flex align-items-center">
-                <div class="font-italic">Seleccionar la Impresora:</div>
+        <div class="d-flex justify-content-between">
+            <div id="bloqueSeleccionImpresora">
+                <div class="ml-4 p-3 d-flex flex-row justify-content-start">
+                    <div class="p-2 m-2 d-flex align-items-center">
+                        <div class="font-italic">Seleccionar Impresora:</div>
+                    </div>
+                    <div class="p-2 m-2">
+                        <select id="inputGrupoImpresoras" class="form-control"></select>
+                    </div>
+                </div>
             </div>
-            <div class="p-2 m-2">
-                <select id="inputGrupoImpresoras" class="form-control"></select>
+
+            <div class="d-flex align-items-center">
+                <div class="p-2 m-2">
+                    <button class="btn btn-primary" id="btnSwitchInventario">
+                        Inventario de Impresoras
+                    </button>
+                </div>
             </div>
         </div>
 
+        <!--  Bloque Principal-->
+
         <div class="d-flex justify-content-center">
-            <div class="border border-1 m-1">
+            <div id="bloqueInfoImpresoras" class="border border-1 m-1">
                 <div class="text-center mt-2">
                     <div class="font-weight-bold font-italic">
                         <h4>Información de Impresora</h4>
@@ -84,17 +98,20 @@
                                 </div>
                                 <div class="d-flex mt-5">
                                     <div class="p-1">
-                                        <button class="btn btn-success" id="btnAceptarNuevaImpresora" style="display:none">
+                                        <button class="btn btn-success" id="btnAceptarNuevaImpresora"
+                                            style="display:none">
                                             Agregar
                                         </button>
                                     </div>
                                     <div class="p-1">
-                                        <button class="btn btn-success" id="btnAceptarActualizarImpresora" style="display:none">
+                                        <button class="btn btn-success" id="btnAceptarActualizarImpresora"
+                                            style="display:none">
                                             Actualizar
                                         </button>
                                     </div>
                                     <div class="p-1">
-                                        <button class="btn btn-danger" id="btnCancelarAgregarImpresora" style="display:none">
+                                        <button class="btn btn-danger" id="btnCancelarAgregarImpresora"
+                                            style="display:none">
                                             Cancelar
                                         </button>
                                     </div>
@@ -122,7 +139,7 @@
                 </div>
             </div>
 
-            <div class="border border-1 d-flex flex-column text-center col-3 m-1">
+            <div id="bloqueCambioToner" class="border border-1  text-center col-3 m-1">
                 <div class="text-center mt-2">
                     <div class="font-weight-bold font-italic">
                         <h4>Cambio de Toner</h4>
@@ -160,92 +177,94 @@
                     </form>
                 </div>
             </div>
+            <hr>
         </div>
-    </div>
 
-    <hr>
+        
+        <!--  Tabla con Cambios de Toner-->
 
-    <div>
-        <div class="d-flex justify-content-center">
-            <div class="font-weight-bold font-italic">
-                <h4>Historial de Cambios de Toner</h4>
+        <div id="bloqueHistorialCambiosDeToner">
+            <div class="d-flex justify-content-center">
+                <div class="font-weight-bold font-italic">
+                    <h4>Historial de Cambios de Toner</h4>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="container m-1 text-center">
+                    <table class="table">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Fecha de Colocación</th>
+                                <th>Contador de páginas</th>
+                                <th>Modelo de Toner</th>
+                                <th>Rend. (Hojas)</th>
+                                <th>Rend. (Dias)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaCambiosToner">
+                        </tbody>
+                        <tfoot class="table-primary">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td class="align-middle"><input type="text" id="inputFiltrarToner"
+                                        placeholder="Filtrar Toner" class="text-center"></td>
+                                <td>
+                                    <div class="font-weight-bold">Promedio</div>
+                                    <div id="promedioHojas"></div>
+                                </td>
+                                <td>
+                                    <div class="font-weight-bold">Promedio</div>
+                                    <div id="promedioDias"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+
+        <div id="bloqueInfoGlobal" class="d-flex justify-content-center">
+            <div class="m-3 col-2 text-center d-none">
+                <p>Impresiones Totales en la empresa:</p>
+                <p id="totalImpresionesEmpresa" class="form-control"></p>
             </div>
         </div>
-        <div class="d-flex justify-content-center">
-            <div class="container m-1 text-center">
-                <table class="table">
-                    <thead class="table-primary">
-                        <tr>
-                            <th>Fecha de Colocación</th>
-                            <th>Contador de páginas</th>
-                            <th>Modelo de Toner</th>
-                            <th>Rend. (Hojas)</th>
-                            <th>Rend. (Dias)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="listaCambiosToner">
-                    </tbody>
-                    <tfoot class="table-primary">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td class="align-middle"><input type="text" id="inputFiltrarToner" placeholder="Filtrar Toner"
-                                    class="text-center"></td>
-                            <td>
-                                <div class="font-weight-bold">Promedio</div>
-                                <div id="promedioHojas"></div>
-                            </td>
-                            <td>
-                                <div class="font-weight-bold">Promedio</div>
-                                <div id="promedioDias"></div>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
+
+        <!-- Inventario de Impresoras -->
+
+        <div id="bloqueInventarioImpresoras">
+            <div class="d-flex justify-content-center">
+                <div class="font-weight-bold font-italic">
+                    <h4>Inventario de Impresoras</h4>
+                </div>
             </div>
-        </div>
-    </div>
+            <div class="d-flex justify-content-center">
+                <div class="container m-1 text-center">
+                    <table class="table">
+                        <thead class="table-warning">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Marca</th>
+                                <th>Tipo</th>
+                                <th>Modelo</th>
+                                <th>IP</th>
+                                <th>Toner colocado</th>
+                                <th>Fecha Colocado</th>
+                                <th>Ultimo Contador</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaInventarioImpresoras">
+                        </tbody>
+                        <tfoot class="table-primary">
+                            <tr>
 
-    <hr>
-
-    <div class="d-flex justify-content-center">
-        <div class="m-3 col-2 text-center d-none">
-            <p>Impresiones Totales en la empresa:</p>
-            <p id="totalImpresionesEmpresa" class="form-control"></p>
-        </div>
-    </div>
-
-    <!-- Inventario de Impresoras -->
-
-    <div>
-        <div class="d-flex justify-content-center">
-            <div class="font-weight-bold font-italic">
-                <h4>Inventario de Impresoras</h4>
-            </div>
-        </div>
-        <div class="d-flex justify-content-center">
-            <div class="container m-1 text-center">
-                <table class="table">
-                    <thead class="table-warning">
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Marca</th>
-                            <th>Tipo</th>
-                            <th>Modelo</th>
-                            <th>IP</th>
-                            <th>Toner colocado</th>
-                            <th>Fecha Colocado</th>
-                            <th>Ultimo Contador</th>
-                        </tr>
-                    </thead>
-                    <tbody id="listaInventarioImpresoras">
-                    </tbody>
-                    <tfoot class="table-primary">
-                        <tr>
-                            
-                        </tr>
-                    </tfoot>
-                </table>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
