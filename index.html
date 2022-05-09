@@ -173,7 +173,6 @@
         </div>
         <div class="d-flex justify-content-center">
             <div class="container m-1 text-center">
-                <p id="tituloTabla"></p>
                 <table class="table">
                     <thead class="table-primary">
                         <tr>
@@ -216,7 +215,40 @@
         </div>
     </div>
 
-    
+    <!-- Inventario de Impresoras -->
+
+    <div>
+        <div class="d-flex justify-content-center">
+            <div class="font-weight-bold font-italic">
+                <h4>Inventario de Impresoras</h4>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="container m-1 text-center">
+                <table class="table">
+                    <thead class="table-warning">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Marca</th>
+                            <th>Tipo</th>
+                            <th>Modelo</th>
+                            <th>IP</th>
+                            <th>Toner colocado</th>
+                            <th>Fecha Colocado</th>
+                            <th>Ultimo Contador</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaInventarioImpresoras">
+                    </tbody>
+                    <tfoot class="table-primary">
+                        <tr>
+                            
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <!-- Manejo de Fechas - date-fns v1.30.1 -->
     <script src="js/date_fns.min.js"></script>
