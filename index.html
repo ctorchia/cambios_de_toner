@@ -22,16 +22,16 @@
                 <div class="font-italic">Seleccionar la Impresora:</div>
             </div>
             <div class="p-2 m-2">
-                <select id="inputGrupoImpresoras" class="form-control">
-
-                </select>
+                <select id="inputGrupoImpresoras" class="form-control"></select>
             </div>
         </div>
 
         <div class="d-flex justify-content-center">
             <div class="border border-1 m-1">
                 <div class="text-center mt-2">
-                    <div class="font-weight-bold font-italic"><h4>Información de Impresora</h4></div>
+                    <div class="font-weight-bold font-italic">
+                        <h4>Información de Impresora</h4>
+                    </div>
                 </div>
                 <div class="p-2">
                     <form action="" id="formNuevaImpresora">
@@ -42,16 +42,18 @@
                             <div class="m-2 text-center">
                                 <div class="mt-2">
                                     <label for="nombre">Nombre:</label>
-                                    <input type="text" class="form-control" id="nombre" placeholder="Nombre de la Impresora"
-                                        required="required">
+                                    <input type="text" class="form-control" id="nombre"
+                                        placeholder="Nombre de la Impresora" required="required">
                                 </div>
                                 <div class="mt-2">
                                     <label for="marca">Marca:</label>
-                                    <input type="text" class="form-control" id="marca" placeholder="Marca" required="required">
+                                    <input type="text" class="form-control" id="marca" placeholder="Marca"
+                                        required="required">
                                 </div>
                                 <div class="mt-2">
                                     <label for="tipo">Tipo:</label>
-                                    <input type="text" class="form-control" id="tipo" placeholder="Tipo" required="required">
+                                    <input type="text" class="form-control" id="tipo" placeholder="Tipo"
+                                        required="required">
                                 </div>
                                 <div class="mt-2">
                                     <label for="modelo">Modelo:</label>
@@ -60,7 +62,8 @@
                                 </div>
                                 <div class="mt-2">
                                     <label for="ip">IP:</label>
-                                    <input type="text" class="form-control" id="ip" placeholder="IP" required="required">
+                                    <input type="text" class="form-control" id="ip" placeholder="IP"
+                                        required="required">
                                 </div>
                             </div>
                             <div class="m-2 text-center">
@@ -77,8 +80,8 @@
                                 </div>
                                 <div class="mt-2">
                                     <label for="fechaTonerActualColocado">Fecha Toner Actual Colocado:</label>
-                                    <input type="date" class="form-control mb-2" id="fechaTonerActualColocado" placeholder=""
-                                        required="required">
+                                    <input type="date" class="form-control mb-2" id="fechaTonerActualColocado"
+                                        placeholder="" required="required">
                                 </div>
                                 <div class="d-flex mt-5">
                                     <div class="p-1">
@@ -119,10 +122,12 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class="border border-1 d-flex flex-column text-center col-3 m-1">
                 <div class="text-center mt-2">
-                    <div class="font-weight-bold font-italic"><h4>Cambio de Toner</h4></div>
+                    <div class="font-weight-bold font-italic">
+                        <h4>Cambio de Toner</h4>
+                    </div>
                 </div>
                 <div class="mt-4">
                     <form action="" id="formCambioToner">
@@ -162,7 +167,9 @@
     <hr>
 
     <div class="d-flex justify-content-center">
-        <div class="font-weight-bold font-italic"><h4>Historial de Cambios de Toner</h4></div>
+        <div class="font-weight-bold font-italic">
+            <h4>Historial de Cambios de Toner</h4>
+        </div>
     </div>
     <div class="d-flex justify-content-center">
         <div class="container m-1 text-center">
@@ -183,9 +190,16 @@
                     <tr>
                         <td></td>
                         <td></td>
-                        <td><input type="text" id="inputFiltrarToner" placeholder="Filtrar Toner" class="text-center"></td>
-                        <td><p id="promedioHojas">Promedio hojas</p></td>
-                        <td><p id="promedioDias">Promedio dias</p></td>
+                        <td class="align-middle"><input type="text" id="inputFiltrarToner" placeholder="Filtrar Toner"
+                                class="text-center"></td>
+                        <td>
+                            <div class="font-weight-bold">Promedio</div>
+                            <div id="promedioHojas"></div>
+                        </td>
+                        <td>
+                            <div class="font-weight-bold">Promedio</div>
+                            <div id="promedioDias"></div>
+                        </td>
                     </tr>
                 </tfoot>
             </table>
@@ -202,7 +216,6 @@
     </div>
 
     </div>
-
 
     <!-- Manejo de Fechas - date-fns v1.30.1 -->
     <script src="js/date_fns.min.js"></script>

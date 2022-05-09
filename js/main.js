@@ -37,6 +37,8 @@ let campoActualContador = document.getElementById("actualContador");
 let campoInputGrupoToners = document.getElementById("inputGrupoToners");
 let totalImpresionesEmpresa = document.getElementById("totalImpresionesEmpresa");
 let imagenImpresora = document.getElementById("imagenImpresora");
+let campoPromedioHojas = document.getElementById("promedioHojas");
+let campoPromedioDias = document.getElementById("promedioDias");
 
 // Declaracion de EventListeners:
 
@@ -84,6 +86,24 @@ class CambioToner {
 
 // ********************************************** FUNCIONES *****************************************************************
 
+function actualizarPromedios(cambiosFiltrados){
+    if (cambiosFiltrados.length != 0) {
+        let sumatoriaImpresiones = 0;
+        let sumatoriaDias = 0;
+        for(const cambio of cambiosFiltrados){
+            sumatoriaImpresiones += cambio.rendimientoPaginas;
+            sumatoriaDias += cambio.rendimientoDias;
+        }
+        let promedioHojas = sumatoriaImpresiones / cambiosFiltrados.length;
+        let promedioDias = sumatoriaDias / cambiosFiltrados.length;
+        campoPromedioHojas.innerHTML = promedioHojas;
+        campoPromedioDias.innerHTML = promedioDias;
+    } else {
+        campoPromedioHojas.innerHTML = 0;
+        campoPromedioDias.innerHTML = 0;
+    }
+}
+
 function filtrarToner(){
     limpiarTablaCambiosToner();
     toner = inputFiltrarToner.value.toUpperCase();
@@ -97,6 +117,8 @@ function filtrarToner(){
         linea.innerHTML = completarLinea(cambio);        
         listaCambiosToner.append(linea);    // agregar a tbody
     }
+
+    actualizarPromedios(cambiosFiltrados);
 }
 
 // SPREAD DE ARRAY
@@ -137,6 +159,7 @@ function actualizarTablaCambioToner() {     // Actualizar Tabla de Cambios de To
         linea.innerHTML = completarLinea(cambio);        
         listaCambiosToner.append(linea);    // agregar a tbody
     }
+    actualizarPromedios(cambiosToner)
 }
 
 function verificarFechaCambio(){
