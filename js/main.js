@@ -282,8 +282,6 @@ function prepararFormActualizarImpresora(){
     btnAgregarImpresora.disabled = true;
     btnActualizarImpresora.disabled = true;
     btnCambioToner.disabled = true;
-    btnCancelarAgregarImpresora.disabled = false;
-    btnAceptarActualizarImpresora.disabled = false;
     btnBorrarImpresora.disabled = true;
 
     
@@ -352,7 +350,6 @@ function prepararFormNuevaImpresora(){      // Preparar Formulario para completa
     btnAceptarNuevaImpresora.disabled = false;
     btnCambioToner.disabled = true;
     btnAgregarImpresora.disabled = true;
-    btnCancelarAgregarImpresora.disabled = false;
     btnActualizarImpresora.disabled = true;
     btnBorrarImpresora.disabled = true;
 
