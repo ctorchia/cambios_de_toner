@@ -238,10 +238,24 @@ function eliminarImpresora(e){
     e.preventDefault();
     console.log(impresoras);
     const impresora = obtenerImpresoraDesdeArray();
-    impresoras = impresoras.filter((item) => item.nombre !== impresora.nombre);
 
-    actualizarLocalStorage();
-    location.reload();
+    swal({
+        title: "Está seguro de eliminar la impresora?",
+        text: "Esta acción no podrá revertirse",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("La impresora ha sido eliminada.", {
+            icon: "success",
+          });
+          impresoras = impresoras.filter((item) => item.nombre !== impresora.nombre);
+          actualizarLocalStorage();
+          inicio();
+        } 
+      });
 }
 
 function actualizarInfoImpresora(e){
