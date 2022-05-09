@@ -97,15 +97,7 @@ function filtrarToner(){
         linea.innerHTML = completarLinea(cambio);        
         listaCambiosToner.append(linea);    // agregar a tbody
     }
-    
-    // actualizarTabla(filtrarImpresorasPorToner(impresoras));
 }
-
-// function filtrarImpresorasPorToner(impresoras){         // Filtrado de Impresoras por modelo de Toner
-//     toner = inputFiltrar.value.toUpperCase();
-//     const impresorasPorToner = impresoras.filter((el) => el.modeloToner.includes(toner));
-//     return impresorasPorToner;
-// }
 
 // SPREAD DE ARRAY
 function sumarContadoresImpresoras(contadores){
