@@ -184,7 +184,7 @@
         <!--  Tabla con Cambios de Toner-->
 
         <div id="bloqueHistorialCambiosDeToner">
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center mt-4">
                 <div class="font-weight-bold font-italic">
                     <h4>Historial de Cambios de Toner</h4>
                 </div>
@@ -235,7 +235,11 @@
 
         <!-- Inventario de Impresoras -->
 
-        <div id="bloqueInventarioImpresoras">
+        <div id="bloqueInventarioImpresoras" style="display: none">
+            <div>
+                <input type="text" id="inputFiltrarInventarioImpresoras" placeholder="Filtrar Impresoras" class="text-center">
+            </div>
+            
             <div class="d-flex justify-content-center">
                 <div class="font-weight-bold font-italic">
                     <h4>Inventario de Impresoras</h4>
@@ -244,7 +248,7 @@
             <div class="d-flex justify-content-center">
                 <div class="container m-1 text-center">
                     <table class="table">
-                        <thead class="table-warning">
+                        <thead class="table-primary">
                             <tr>
                                 <th>Nombre</th>
                                 <th>Marca</th>

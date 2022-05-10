@@ -22,6 +22,7 @@ const btnSwitchInventario = document.getElementById("btnSwitchInventario");
 const listaCambiosToner = document.getElementById("listaCambiosToner");
 const listaInventarioImpresoras = document.getElementById("listaInventarioImpresoras");
 const inputFiltrarToner = document.getElementById("inputFiltrarToner");
+const inputFiltrarInventarioImpresoras = document.getElementById("inputFiltrarInventarioImpresoras");
 
 let impresoras = [];
 let valorBtnSwitchInventario = 0;
@@ -61,6 +62,7 @@ formCambioToner.addEventListener("submit", agregarCambioToner);
 campoActualContador.addEventListener("change", verificarContador);
 campoFechaCambio.addEventListener("change",verificarFechaCambio)
 inputFiltrarToner.addEventListener("keyup", filtrarToner);
+inputFiltrarInventarioImpresoras.addEventListener("keyup",filtrarInventarioImpresoras);
 btnSwitchInventario.addEventListener("click", intercambiarVistas);
 
 
@@ -94,6 +96,26 @@ class CambioToner {
 }
 
 // ********************************************** FUNCIONES *****************************************************************
+
+function filtrarInventarioImpresoras(){
+    limpiarTablaInventarioImpresoras();
+    filtroImpresora = inputFiltrarInventarioImpresoras.value;
+
+    const impresorasFiltradas = impresoras.filter((el) => 
+    el.nombre.includes(filtroImpresora) || 
+    el.marca.includes(filtroImpresora) || 
+    el.tipo.includes(filtroImpresora) || 
+    el.modelo.includes(filtroImpresora) || 
+    el.ip.includes(filtroImpresora) || 
+    el.tonerActualColocado.includes(filtroImpresora)
+    );
+
+    for(const impresora of impresorasFiltradas){
+        const linea = document.createElement("tr");
+        linea.innerHTML = completarLineaImpresoras(impresora);        
+        listaInventarioImpresoras.append(linea);    // agregar a tbody
+    }
+}
 
 function intercambiarVistas(){
     if (valorBtnSwitchInventario == 0) {
