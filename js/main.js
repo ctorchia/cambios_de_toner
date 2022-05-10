@@ -175,8 +175,8 @@ function actualizarPromedios(cambiosFiltrados){
         }
         let promedioHojas = sumatoriaImpresiones / cambiosFiltrados.length;
         let promedioDias = sumatoriaDias / cambiosFiltrados.length;
-        campoPromedioHojas.innerHTML = promedioHojas;
-        campoPromedioDias.innerHTML = promedioDias;
+        campoPromedioHojas.innerHTML = promedioHojas.toFixed(0);
+        campoPromedioDias.innerHTML = promedioDias.toFixed(0);
     } else {
         campoPromedioHojas.innerHTML = 0;
         campoPromedioDias.innerHTML = 0;
