@@ -24,6 +24,7 @@ const listaInventarioImpresoras = document.getElementById("listaInventarioImpres
 const inputFiltrarToner = document.getElementById("inputFiltrarToner");
 
 let impresoras = [];
+let valorBtnSwitchInventario = 0;
 let campoNombre = document.getElementById("nombre");
 let campoMarca = document.getElementById("marca");
 let campoTipo = document.getElementById("tipo");
@@ -95,7 +96,25 @@ class CambioToner {
 // ********************************************** FUNCIONES *****************************************************************
 
 function intercambiarVistas(){
+    if (valorBtnSwitchInventario == 0) {
+        bloqueSeleccionImpresora.style.visibility = "hidden";
+        bloqueInfoImpresoras.style.display = "none";
+        bloqueCambioToner.style.display = "none"; 
+        bloqueHistorialCambiosDeToner.style.display = "none";
+        bloqueInventarioImpresoras.style.display = "";
+        btnSwitchInventario.innerHTML = "Vista Principal";
 
+        valorBtnSwitchInventario = 1;
+    }else {
+        bloqueSeleccionImpresora.style.visibility = "";
+        bloqueInfoImpresoras.style.display = "";
+        bloqueCambioToner.style.display = ""; 
+        bloqueHistorialCambiosDeToner.style.display = "";
+        bloqueInventarioImpresoras.style.display = "none";
+        btnSwitchInventario.innerHTML = "Inventario de Impresoras";
+
+        valorBtnSwitchInventario = 0;
+    }
 }
 
 function limpiarTablaInventarioImpresoras(){    // Limpiar la tabla de Cambios de Toner
@@ -429,6 +448,7 @@ function obtenerImpresoraDesdeArray(){      // Obtener impresora seleccionada de
 
 function mostrarInfoImpresora(){            // Mostrar informacion de la impresora seleccionada
     const impresora = obtenerImpresoraDesdeArray();
+    bloqueInventarioImpresoras.style.display = "none";
 
     // DESESTRUCTURACION 
     const {nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, tonerActualColocado, fechaTonerActualColocado, contador} = impresora;
@@ -486,14 +506,6 @@ function actualizarLocalStorage(){      // Actualizar base de datos en Local Sto
     localStorage.setItem("impresoras",baseEnJSON);
 }
 
-// function instanciarObjetosImportados (impresorasAlmacenadas){
-//     impresoras = impresorasAlmacenadas;
-//     // for (const impresora of impresorasAlmacenadas){
-//     //     impresoras.push(new Impresora(impresora.nombre, impresora.marca, impresora.tipo,impresora.modelo, impresora.ip,impresora.tonerCompatible1,impresora.tonerCompatible2,impresora.contador,impresora.historialCambios, impresora.tonerActualColocado, impresora.fechaTonerActualColocado ))
-//     //  }
-//     return true;
-// }
-
 function importarLocalStorage(){        // Importar info desde Local Storage
     let impresorasAlmacenadas = JSON.parse(localStorage.getItem("impresoras"));
     
@@ -521,12 +533,6 @@ async function inicio (){
     mostrarInfoImpresora();
     mostrarTotalImpresionesEmpresa();
     listarInventarioImpresoras();
-
-    bloqueSeleccionImpresora.style.visibility = "hidden";
-    bloqueInfoImpresoras.style.display = "none";
-    bloqueCambioToner.style.display = "none"; 
-    bloqueHistorialCambiosDeToner.style.display = "none";
-    // bloqueInventarioImpresoras.style.display = "none";
 
     console.log(impresoras);
 }
