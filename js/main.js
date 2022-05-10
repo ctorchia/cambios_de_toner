@@ -99,15 +99,15 @@ class CambioToner {
 
 function filtrarInventarioImpresoras(){
     limpiarTablaInventarioImpresoras();
-    filtroImpresora = inputFiltrarInventarioImpresoras.value;
+    filtroImpresora = inputFiltrarInventarioImpresoras.value.toLowerCase();
 
     const impresorasFiltradas = impresoras.filter((el) => 
-    el.nombre.includes(filtroImpresora) || 
-    el.marca.includes(filtroImpresora) || 
-    el.tipo.includes(filtroImpresora) || 
-    el.modelo.includes(filtroImpresora) || 
-    el.ip.includes(filtroImpresora) || 
-    el.tonerActualColocado.includes(filtroImpresora)
+    el.nombre.toLowerCase().includes(filtroImpresora) || 
+    el.marca.toLowerCase().includes(filtroImpresora) || 
+    el.tipo.toLowerCase().includes(filtroImpresora) || 
+    el.modelo.toLowerCase().includes(filtroImpresora) || 
+    el.ip.toLowerCase().includes(filtroImpresora) || 
+    el.tonerActualColocado.toLowerCase().includes(filtroImpresora)
     );
 
     for(const impresora of impresorasFiltradas){
