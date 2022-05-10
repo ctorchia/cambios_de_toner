@@ -39,6 +39,7 @@ let campoUltimoContador = document.getElementById("ultimoContador");
 let campoFechaCambio = document.getElementById("fechaCambio");
 let campoActualContador = document.getElementById("actualContador");
 let campoInputGrupoToners = document.getElementById("inputGrupoToners");
+let inputFiltradoGrupoToners = document.getElementById("inputFiltradoGrupoToners");
 let totalImpresionesEmpresa = document.getElementById("totalImpresionesEmpresa");
 let imagenImpresora = document.getElementById("imagenImpresora");
 let campoPromedioHojas = document.getElementById("promedioHojas");
@@ -61,7 +62,7 @@ formNuevaImpresora.addEventListener("submit", agregarNuevaImpresora);
 formCambioToner.addEventListener("submit", agregarCambioToner);
 campoActualContador.addEventListener("change", verificarContador);
 campoFechaCambio.addEventListener("change",verificarFechaCambio)
-inputFiltrarToner.addEventListener("keyup", filtrarToner);
+inputFiltradoGrupoToners.addEventListener("change",filtrarToner)
 inputFiltrarInventarioImpresoras.addEventListener("keyup",filtrarInventarioImpresoras);
 btnSwitchInventario.addEventListener("click", intercambiarVistas);
 
@@ -96,6 +97,14 @@ class CambioToner {
 }
 
 // ********************************************** FUNCIONES *****************************************************************
+
+function armarInputFiltradoGrupoToners(impresora){  // Armar Select con los Toners compatibles
+
+    let opciones = `<option></option>
+                    <option>${impresora.tonerCompatible1}</option>
+                    <option>${impresora.tonerCompatible2}</option>`;
+                    inputFiltradoGrupoToners.innerHTML = opciones;
+}
 
 function filtrarInventarioImpresoras(){
     limpiarTablaInventarioImpresoras();
@@ -185,7 +194,7 @@ function actualizarPromedios(cambiosFiltrados){
 
 function filtrarToner(){
     limpiarTablaCambiosToner();
-    toner = inputFiltrarToner.value.toUpperCase();
+    toner = inputFiltradoGrupoToners.value.toUpperCase();
 
     const impresora = obtenerImpresoraDesdeArray();
     const cambiosToner = impresora.historialCambios;
@@ -509,6 +518,7 @@ function mostrarInfoImpresora(){            // Mostrar informacion de la impreso
     btnCancelarAgregarImpresora.style.display = "none";
 
     armarInputGrupoToners(impresora);
+    armarInputFiltradoGrupoToners(impresora);
     actualizarTablaCambioToner()
 }
 

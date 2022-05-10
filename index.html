@@ -7,8 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
     <title>Document</title>
 </head>
@@ -18,7 +21,7 @@
 
         <div class="d-flex justify-content-between">
             <div id="bloqueSeleccionImpresora">
-                <div class="ml-4 p-3 d-flex flex-row justify-content-start">
+                <div class="m-4 d-flex flex-row justify-content-start bg-light">
                     <div class="p-2 m-2 d-flex align-items-center">
                         <div class="font-italic">Seleccionar Impresora:</div>
                     </div>
@@ -49,7 +52,7 @@
                 <div class="p-2">
                     <form action="" id="formNuevaImpresora">
                         <div class="d-flex flex-row">
-                            <div class="w-50">
+                            <div class="w-50 p-4">
                                 <img id="imagenImpresora" src="./imagenes/ventas.png" class="img-fluid" alt="">
                             </div>
                             <div class="m-2 text-center">
@@ -180,10 +183,10 @@
             <hr>
         </div>
 
-        
+
         <!--  Tabla con Cambios de Toner-->
 
-        <div id="bloqueHistorialCambiosDeToner">
+        <div id="bloqueHistorialCambiosDeToner" class="border border-1 m-1">
             <div class="d-flex justify-content-center mt-4">
                 <div class="font-weight-bold font-italic">
                     <h4>Historial de Cambios de Toner</h4>
@@ -207,8 +210,9 @@
                             <tr>
                                 <td></td>
                                 <td></td>
-                                <td class="align-middle"><input type="text" id="inputFiltrarToner"
-                                        placeholder="Filtrar Toner" class="text-center"></td>
+                                <td class="align-middle">
+                                    <select class="form-control" id="inputFiltradoGrupoToners"></select>
+                                </td>
                                 <td>
                                     <div class="font-weight-bold">Promedio</div>
                                     <div id="promedioHojas"></div>
@@ -222,7 +226,6 @@
                     </table>
                 </div>
             </div>
-            <hr>
         </div>
 
 
@@ -235,11 +238,12 @@
 
         <!-- Inventario de Impresoras -->
 
-        <div id="bloqueInventarioImpresoras" style="display: none">
-            <div>
-                <input type="text" id="inputFiltrarInventarioImpresoras" placeholder="Filtrar Impresoras" class="text-center">
+        <div id="bloqueInventarioImpresoras" class="border border-1 m-1" style="display: none">
+            <div class="m-4">
+                <input type="text" id="inputFiltrarInventarioImpresoras" placeholder="Filtrar Impresoras"
+                    class="text-center">
             </div>
-            
+
             <div class="d-flex justify-content-center">
                 <div class="font-weight-bold font-italic">
                     <h4>Inventario de Impresoras</h4>
