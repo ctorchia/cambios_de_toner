@@ -61,9 +61,9 @@ btnCancelarAgregarImpresora.addEventListener("click", cancelarAgregarImpresora);
 formNuevaImpresora.addEventListener("submit", agregarNuevaImpresora);
 formCambioToner.addEventListener("submit", agregarCambioToner);
 campoActualContador.addEventListener("change", verificarContador);
-campoFechaCambio.addEventListener("change",verificarFechaCambio)
-inputFiltradoGrupoToners.addEventListener("change",filtrarToner)
-inputFiltrarInventarioImpresoras.addEventListener("keyup",filtrarInventarioImpresoras);
+campoFechaCambio.addEventListener("change", verificarFechaCambio)
+inputFiltradoGrupoToners.addEventListener("change", filtrarToner)
+inputFiltrarInventarioImpresoras.addEventListener("keyup", filtrarInventarioImpresoras);
 btnSwitchInventario.addEventListener("click", intercambiarVistas);
 
 
@@ -71,7 +71,6 @@ btnSwitchInventario.addEventListener("click", intercambiarVistas);
 class Impresora {
 
     constructor(nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, contador, historialCambios, tonerActualColocado, fechaTonerActualColocado) {
-        // this.id = id;  // {Number} id - ID de la impresora.
         this.nombre = nombre;  // {String} Nombre de la impresora.
         this.marca = marca; // {String} Marca de la impresora.
         this.tipo = tipo; // {String} Tipo de Impresora.
@@ -87,7 +86,7 @@ class Impresora {
 }
 
 class CambioToner {
-    constructor(fechaCambio, contadorPaginas, modeloToner, rendimientoPaginas, rendimientoDias){
+    constructor(fechaCambio, contadorPaginas, modeloToner, rendimientoPaginas, rendimientoDias) {
         this.fechaCambio = fechaCambio;
         this.contadorPaginas = contadorPaginas;
         this.modeloToner = modeloToner;
@@ -98,48 +97,40 @@ class CambioToner {
 
 // ********************************************** FUNCIONES *****************************************************************
 
-function armarInputFiltradoGrupoToners(impresora){  // Armar Select con los Toners compatibles
-
-    let opciones = `<option></option>
-                    <option>${impresora.tonerCompatible1}</option>
-                    <option>${impresora.tonerCompatible2}</option>`;
-                    inputFiltradoGrupoToners.innerHTML = opciones;
-}
-
-function filtrarInventarioImpresoras(){
+function filtrarInventarioImpresoras() {         // Filtrar impresoras en tabla segun texto ingresado en input
     limpiarTablaInventarioImpresoras();
     filtroImpresora = inputFiltrarInventarioImpresoras.value.toLowerCase();
 
-    const impresorasFiltradas = impresoras.filter((el) => 
-    el.nombre.toLowerCase().includes(filtroImpresora) || 
-    el.marca.toLowerCase().includes(filtroImpresora) || 
-    el.tipo.toLowerCase().includes(filtroImpresora) || 
-    el.modelo.toLowerCase().includes(filtroImpresora) || 
-    el.ip.toLowerCase().includes(filtroImpresora) || 
-    el.tonerActualColocado.toLowerCase().includes(filtroImpresora)
+    const impresorasFiltradas = impresoras.filter((el) =>
+        el.nombre.toLowerCase().includes(filtroImpresora) ||
+        el.marca.toLowerCase().includes(filtroImpresora) ||
+        el.tipo.toLowerCase().includes(filtroImpresora) ||
+        el.modelo.toLowerCase().includes(filtroImpresora) ||
+        el.ip.toLowerCase().includes(filtroImpresora) ||
+        el.tonerActualColocado.toLowerCase().includes(filtroImpresora)
     );
 
-    for(const impresora of impresorasFiltradas){
+    for (const impresora of impresorasFiltradas) {
         const linea = document.createElement("tr");
-        linea.innerHTML = completarLineaImpresoras(impresora);        
+        linea.innerHTML = completarLineaImpresoras(impresora);
         listaInventarioImpresoras.append(linea);    // agregar a tbody
     }
 }
 
-function intercambiarVistas(){
+function intercambiarVistas() {                             // Ocultar y mostrar bloques segun la pantalla que se quiera mostrar
     if (valorBtnSwitchInventario == 0) {
         bloqueSeleccionImpresora.style.visibility = "hidden";
         bloqueInfoImpresoras.style.display = "none";
-        bloqueCambioToner.style.display = "none"; 
+        bloqueCambioToner.style.display = "none";
         bloqueHistorialCambiosDeToner.style.display = "none";
         bloqueInventarioImpresoras.style.display = "";
         btnSwitchInventario.innerHTML = "Vista Principal";
 
         valorBtnSwitchInventario = 1;
-    }else {
+    } else {
         bloqueSeleccionImpresora.style.visibility = "";
         bloqueInfoImpresoras.style.display = "";
-        bloqueCambioToner.style.display = ""; 
+        bloqueCambioToner.style.display = "";
         bloqueHistorialCambiosDeToner.style.display = "";
         bloqueInventarioImpresoras.style.display = "none";
         btnSwitchInventario.innerHTML = "Inventario de Impresoras";
@@ -148,12 +139,12 @@ function intercambiarVistas(){
     }
 }
 
-function limpiarTablaInventarioImpresoras(){    // Limpiar la tabla de Cambios de Toner
+function limpiarTablaInventarioImpresoras() {    // Limpiar la tabla de Inventario de Impresoras
     listaInventarioImpresoras.innerHTML = ``;
 }
 
-function completarLineaImpresoras(impresora){        // Armar linea con cada impresora en la base de datos para mostrar en Tabla
-    
+function completarLineaImpresoras(impresora) {        // Armar linea con cada impresora en la base de datos para mostrar en Tabla
+
     return `<th>${impresora.nombre}</th>      
             <th>${impresora.marca}</th>
             <th>${impresora.tipo}</th>
@@ -161,30 +152,30 @@ function completarLineaImpresoras(impresora){        // Armar linea con cada imp
             <th>${impresora.ip}</th>
             <th>${impresora.tonerActualColocado}</th>
             <th>${impresora.fechaTonerActualColocado}</th>
-            <th>${impresora.contador}</th>`;     
+            <th>${impresora.contador}</th>`;
 }
 
-function listarInventarioImpresoras(){
+function listarInventarioImpresoras() {     // Listar en tabla las impresoras 
     limpiarTablaInventarioImpresoras();
 
-    for(const impresora of impresoras){
+    for (const impresora of impresoras) {
         const linea = document.createElement("tr");
-        linea.innerHTML = completarLineaImpresoras(impresora);        
+        linea.innerHTML = completarLineaImpresoras(impresora);
         listaInventarioImpresoras.append(linea);    // agregar a tbody
     }
 }
 
-function actualizarPromedios(cambiosFiltrados){
+function actualizarPromedios(cambiosFiltrados) {        // Mostrar promedios de impresiones por toner y hojas y dias 
     if (cambiosFiltrados.length != 0) {
-        let sumatoriaImpresiones = 0;
+        let sumatoriaImpresiones = 0;               // Si no hay ningún cambio de toner, mostrar 0 en ambos promedios
         let sumatoriaDias = 0;
-        for(const cambio of cambiosFiltrados){
+        for (const cambio of cambiosFiltrados) {
             sumatoriaImpresiones += cambio.rendimientoPaginas;
             sumatoriaDias += cambio.rendimientoDias;
         }
         let promedioHojas = sumatoriaImpresiones / cambiosFiltrados.length;
         let promedioDias = sumatoriaDias / cambiosFiltrados.length;
-        campoPromedioHojas.innerHTML = promedioHojas.toFixed(0);
+        campoPromedioHojas.innerHTML = promedioHojas.toFixed(0);    // Quitar decimales
         campoPromedioDias.innerHTML = promedioDias.toFixed(0);
     } else {
         campoPromedioHojas.innerHTML = 0;
@@ -192,7 +183,21 @@ function actualizarPromedios(cambiosFiltrados){
     }
 }
 
-function filtrarToner(){
+function armarInputFiltradoGrupoToners(impresora) {  // Armar Select con los Toners compatibles
+
+    if (impresora.tonerCompatible2 != ""){                              // Tener en cuenta si no existe un 2do toner compatible
+        let opciones = `<option></option>
+                        <option>${impresora.tonerCompatible1}</option>      
+                        <option>${impresora.tonerCompatible2}</option>`;
+        inputFiltradoGrupoToners.innerHTML = opciones;
+    } else {
+        let opciones = `<option></option>
+                        <option>${impresora.tonerCompatible1}</option>`;
+        inputFiltradoGrupoToners.innerHTML = opciones;
+    }
+}
+
+function filtrarToner() {               // Listar los toner segun filtro
     limpiarTablaCambiosToner();
     toner = inputFiltradoGrupoToners.value.toUpperCase();
 
@@ -200,9 +205,9 @@ function filtrarToner(){
     const cambiosToner = impresora.historialCambios;
     const cambiosFiltrados = cambiosToner.filter((el) => el.modeloToner.includes(toner));
 
-    for(const cambio of cambiosFiltrados){
+    for (const cambio of cambiosFiltrados) {
         const linea = document.createElement("tr");
-        linea.innerHTML = completarLinea(cambio);        
+        linea.innerHTML = completarLinea(cambio);
         listaCambiosToner.append(linea);    // agregar a tbody
     }
 
@@ -210,27 +215,26 @@ function filtrarToner(){
 }
 
 // SPREAD DE ARRAY
-function sumarContadoresImpresoras(contadores){
+function sumarContadoresImpresoras(contadores) {
     let suma = (math.add(...contadores));
     return suma;
 }
 
-function mostrarTotalImpresionesEmpresa() {
+function mostrarTotalImpresionesEmpresa() {   // Funcion para mostrar Información global
     let contadores = [];
-    for (const impresora of impresoras){
+    for (const impresora of impresoras) {
         contadores.push(impresora.contador);
     }
     totalImpresionesEmpresa.innerText = sumarContadoresImpresoras(contadores);
 }
 
-function limpiarTablaCambiosToner(){    // Limpiar la tabla de Cambios de Toner
+function limpiarTablaCambiosToner() {    // Limpiar la tabla de Cambios de Toner
     listaCambiosToner.innerHTML = ``;
 }
 
-function completarLinea(cambio){        // Armar linea con cambio de Toner para mostrar en Tabla
-    
+function completarLinea(cambio) {        // Armar linea con cambio de Toner para mostrar en Tabla
+
     return `<th>${dateFns.format(cambio.fechaCambio, 'DD/MM/YYYY')}</th>      
-            <th>${cambio.contadorPaginas}</th>
             <th>${cambio.modeloToner}</th>
             <th>${cambio.rendimientoPaginas}</th>
             <th>${cambio.rendimientoDias}</th>`;     // Muestro la fecha en formato DD/MM/AAAA pero esta almacenada en formato Original
@@ -242,47 +246,47 @@ function actualizarTablaCambioToner() {     // Actualizar Tabla de Cambios de To
     const impresora = obtenerImpresoraDesdeArray();
     const cambiosToner = impresora.historialCambios;
 
-    for(const cambio of cambiosToner){
+    for (const cambio of cambiosToner) {
         const linea = document.createElement("tr");
-        linea.innerHTML = completarLinea(cambio);        
+        linea.innerHTML = completarLinea(cambio);
         listaCambiosToner.append(linea);    // agregar a tbody
     }
     actualizarPromedios(cambiosToner)
 }
 
-function verificarFechaCambio(){
+function verificarFechaCambio() {                       // Verifica que la fecha de cambio de toner no sea inferior a la última registrada
     const impresora = obtenerImpresoraDesdeArray();
-    if (campoFechaCambio.value < impresora.fechaTonerActualColocado){
+    if (campoFechaCambio.value < impresora.fechaTonerActualColocado) {
         swal({
             title: "Error",
             text: "La fecha actual no puede ser inferior a la última registrada",
             icon: "error",
             button: "Aceptar",
-        });    
-        campoFechaCambio.valueAsDate = new Date(); 
+        });
+        campoFechaCambio.valueAsDate = new Date();
     }
 }
 
-function verificarContador(){   // Verificar si el contador ingresado es menor al último registrado
+function verificarContador() {   // Verificar si el contador ingresado es menor al último registrado
     const impresora = obtenerImpresoraDesdeArray();
-    if (parseInt(campoActualContador.value) < impresora.contador){
+    if (parseInt(campoActualContador.value) < impresora.contador) {
         swal({
             title: "Error",
             text: "El contador actual no puede ser inferior al último registrado",
             icon: "error",
             button: "Aceptar",
-        });    
+        });
         campoActualContador.value = "";
     }
 }
 
-function actualizarInfoCambioToner(impresora,actualContador, tonerActualColocado, fechaTonerActualColocado){
+function actualizarInfoCambioToner(impresora, actualContador, tonerActualColocado, fechaTonerActualColocado) {
     impresora.contador = actualContador
     impresora.tonerActualColocado = tonerActualColocado
     impresora.fechaTonerActualColocado = fechaTonerActualColocado
 }
 
-function agregarCambioToner(e){     // Agregar Cambio de Toner
+function agregarCambioToner(e) {     // Agregar Cambio de Toner
     e.preventDefault();
     let fechaCambio = campoFechaCambio.value;
     let inputGrupoToners = campoInputGrupoToners.value;
@@ -291,12 +295,12 @@ function agregarCambioToner(e){     // Agregar Cambio de Toner
     let nuevaFechaActualTonerColocado = impresora.fechaTonerActualColocado;
     let actualContador = parseInt(campoActualContador.value);
     let rendimientoPaginas = actualContador - impresora.contador;
-    
-    actualizarInfoCambioToner(impresora,actualContador, inputGrupoToners, fechaCambio);
+
+    actualizarInfoCambioToner(impresora, actualContador, inputGrupoToners, fechaCambio);
 
     let rendimientoDias = dateFns.differenceInDays(fechaCambio, nuevaFechaActualTonerColocado);
 
-    const cambioToner = new CambioToner (nuevaFechaActualTonerColocado, actualContador, nuevoTonerActualColocado, rendimientoPaginas, rendimientoDias)
+    const cambioToner = new CambioToner(nuevaFechaActualTonerColocado, actualContador, nuevoTonerActualColocado, rendimientoPaginas, rendimientoDias)
     impresora.historialCambios.push(cambioToner);
     formCambioToner.reset();
 
@@ -313,16 +317,16 @@ function crearImpresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp
     impresoras.push(impresoraNueva);
 }
 
-function nombreImpresoraRepetido(nombreParaVerificar){
+function nombreImpresoraRepetido(nombreParaVerificar) {                         // Verificar nombre de Impresora repetido
     return impresoras.find((el) => el.nombre.includes(nombreParaVerificar));
 }
 
-function cancelarAgregarImpresora(e){
+function cancelarAgregarImpresora(e) {      // Funcion para cancelar el agregado de una impresora y recargar la página
     e.preventDefault();
     location.reload();
 }
 
-function eliminarImpresora(e){
+function eliminarImpresora(e) {     // Función para eliminar una impresora de la base de datos
     e.preventDefault();
     console.log(impresoras);
     const impresora = obtenerImpresoraDesdeArray();
@@ -333,20 +337,20 @@ function eliminarImpresora(e){
         icon: "warning",
         buttons: true,
         dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          swal("La impresora ha sido eliminada.", {
-            icon: "success",
-          });
-          impresoras = impresoras.filter((item) => item.nombre !== impresora.nombre);
-          actualizarLocalStorage();
-          inicio();
-        } 
-      });
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                swal("La impresora ha sido eliminada.", {
+                    icon: "success",
+                });
+                impresoras = impresoras.filter((item) => item.nombre !== impresora.nombre);
+                actualizarLocalStorage();
+                inicio();
+            }
+        });
 }
 
-function actualizarInfoImpresora(e){
+function actualizarInfoImpresora(e) {           // Actualizar informacion de la impresora
     e.preventDefault();
     const impresora = obtenerImpresoraDesdeArray();
 
@@ -365,14 +369,14 @@ function actualizarInfoImpresora(e){
     location.reload();
 }
 
-function prepararFormActualizarImpresora(){
+function prepararFormActualizarImpresora() {            // Preparar Formulario para actualizar datos de impresora
     inputGrupoImpresoras.disabled = true;
     btnAgregarImpresora.disabled = true;
     btnActualizarImpresora.disabled = true;
     btnCambioToner.disabled = true;
     btnBorrarImpresora.disabled = true;
 
-    
+
     btnAceptarActualizarImpresora.style.display = "";
     btnCancelarAgregarImpresora.style.display = "";
 
@@ -391,7 +395,7 @@ function prepararFormActualizarImpresora(){
     inputGrupoToners.disabled = true;
 }
 
-function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
+function agregarNuevaImpresora(e) {      // Agregar Nueva Impresora
     e.preventDefault();
 
     let nuevoNombre = campoNombre.value;
@@ -407,13 +411,13 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     let nuevoHistorialCambios = [];
 
     // OPERADOR TERNARIO
-    !nombreImpresoraRepetido(nuevoNombre) ? crearImpresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios, nuevoTonerActualColocado, nuevoFechaTonerActualColocado) : 
-    swal({
-        title: "Error",
-        text: "El nombre de impresora ingresado ya existe",
-        icon: "error",
-        button: "Aceptar",
-    });
+    !nombreImpresoraRepetido(nuevoNombre) ? crearImpresora(nuevoNombre, nuevoMarca, nuevoTipo, nuevoModelo, nuevoIp, nuevoTonerCompatible1, nuevoTonerCompatible2, nuevoContador, nuevoHistorialCambios, nuevoTonerActualColocado, nuevoFechaTonerActualColocado) :
+        swal({
+            title: "Error",
+            text: "El nombre de impresora ingresado ya existe",
+            icon: "error",
+            button: "Aceptar",
+        });
 
     formNuevaImpresora.reset();
     inputGrupoImpresoras.disabled = false;
@@ -434,7 +438,7 @@ function agregarNuevaImpresora(e){      // Agregar Nueva Impresora
     listarInventarioImpresoras();
 }
 
-function prepararFormNuevaImpresora(){      // Preparar Formulario para completar datos de nueva impresora
+function prepararFormNuevaImpresora() {      // Preparar Formulario para completar datos de nueva impresora
     inputGrupoImpresoras.disabled = true;
     btnAceptarNuevaImpresora.disabled = false;
     btnCambioToner.disabled = true;
@@ -444,7 +448,7 @@ function prepararFormNuevaImpresora(){      // Preparar Formulario para completa
 
     btnAceptarNuevaImpresora.style.display = "";
     btnCancelarAgregarImpresora.style.display = "";
-    
+
     campoNombre.disabled = false;
     campoMarca.disabled = false;
     campoTipo.disabled = false;
@@ -461,35 +465,41 @@ function prepararFormNuevaImpresora(){      // Preparar Formulario para completa
     inputGrupoToners.disabled = true;
 
     formNuevaImpresora.reset();
-    campoFechaTonerActualColocado.valueAsDate = new Date();   
+    campoFechaTonerActualColocado.valueAsDate = new Date();
 }
 
-function armarInputGrupoToners(impresora){  // Armar Select con las impresoras disponibles en la base
+function armarInputGrupoToners(impresora) {  // Armar Select con los toners compatibles de la impresora
 
-    let opciones = `<option>${impresora.tonerCompatible1}</option>
-                    <option>${impresora.tonerCompatible2}</option>`;
-    inputGrupoToners.innerHTML = opciones;
+    if (impresora.tonerCompatible2 != ""){                              // Tener en cuenta si no existe un 2do toner compatible
+        let opciones = `<option>${impresora.tonerCompatible1}</option>      
+                        <option>${impresora.tonerCompatible2}</option>`;
+        inputGrupoToners.innerHTML = opciones;
+    } else {
+        let opciones = `<option>${impresora.tonerCompatible1}</option>`;
+        inputGrupoToners.innerHTML = opciones;
+    }
 }
 
-function obtenerImpresoraDesdeArray(){      // Obtener impresora seleccionada desde el Array
+function obtenerImpresoraDesdeArray() {      // Obtener objeto de la impresora seleccionada en input desde el Array
     let nombreImpresora = inputGrupoImpresoras.value;
     const impresora = impresoras.find((el) => el.nombre.includes(nombreImpresora));
     return (impresora);
 }
 
-function mostrarInfoImpresora(){            // Mostrar informacion de la impresora seleccionada
+function mostrarInfoImpresora() {            // Mostrar informacion de la impresora seleccionada
     const impresora = obtenerImpresoraDesdeArray();
     bloqueInventarioImpresoras.style.display = "none";
 
     // DESESTRUCTURACION 
-    const {nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, tonerActualColocado, fechaTonerActualColocado, contador} = impresora;
-    
-    if (nombre == "Ventas" || nombre == "Calidad" || nombre == "Despacho" ) {
-        imagenImpresora.src = "./imagenes/" + nombre +".png"}
+    const { nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, tonerActualColocado, fechaTonerActualColocado, contador } = impresora;
+
+    if (nombre == "Ventas" || nombre == "Calidad" || nombre == "Despacho" || nombre == "Administracion" || nombre == "Compras") {
+        imagenImpresora.src = "./imagenes/" + nombre + ".png"
+    }
     else {
         imagenImpresora.src = "./imagenes/ventas.png"
     };
-    
+
     campoNombre.value = nombre;
     campoMarca.value = marca;
     campoTipo.value = tipo;
@@ -498,9 +508,9 @@ function mostrarInfoImpresora(){            // Mostrar informacion de la impreso
     campoTonerCompatible1.value = tonerCompatible1;
     campoTonerCompatible2.value = tonerCompatible2;
     campoTonerActualColocado.value = tonerActualColocado;
-    campoFechaTonerActualColocado.value = fechaTonerActualColocado; 
+    campoFechaTonerActualColocado.value = fechaTonerActualColocado;
     campoUltimoContador.value = contador;
-    campoFechaCambio.valueAsDate = new Date(); 
+    campoFechaCambio.valueAsDate = new Date();
 
     campoNombre.disabled = true;
     campoMarca.disabled = true;
@@ -522,45 +532,57 @@ function mostrarInfoImpresora(){            // Mostrar informacion de la impreso
     actualizarTablaCambioToner()
 }
 
-function armarInputGrupoImpresoras (impresoras){    // Armar Select con los toners registrados en la impresora
-    
+function armarInputGrupoImpresoras(impresoras) {    // Armar Select con las impresoras registradas en la base de datos
+
     inputGrupoImpresoras.innerHTML = ``;
 
-    for(const impresora of impresoras){
+    impresorasOrdenadas = impresoras.sort((a, b) => {  // Ordenar Lista de Impresoras para desplegable
+        const nombre1 = a.nombre.toUpperCase();
+        const nombre2 = b.nombre.toUpperCase();
+
+        if (nombre1 > nombre2) {
+            return 1;
+        }else if (nombre1 < nombre2) {
+            return -1;
+        }
+        return 0;
+    });
+
+    for (const impresora of impresorasOrdenadas) {
         const opcion = document.createElement("option");
         opcion.innerText = impresora.nombre;
         inputGrupoImpresoras.append(opcion);    // agregar a tbody
     }
 }
 
-function actualizarLocalStorage(){      // Actualizar base de datos en Local Storage
+function actualizarLocalStorage() {      // Actualizar base de datos en Local Storage
     baseEnJSON = JSON.stringify(impresoras);
-    localStorage.setItem("impresoras",baseEnJSON);
+    localStorage.setItem("impresoras", baseEnJSON);
 }
 
-function importarLocalStorage(){        // Importar info desde Local Storage
+function importarLocalStorage() {        // Importar info desde Local Storage
     let impresorasAlmacenadas = JSON.parse(localStorage.getItem("impresoras"));
-    
+
     // ASIGNACION CONDICIONAL
     const importacionCorrecta = impresorasAlmacenadas ? impresoras = impresorasAlmacenadas : false;
     return importacionCorrecta
 }
 
-async function importarDatosDesdeJson(){
+async function importarDatosDesdeJson() {   // Cargar información base desde archivo JSON
     await fetch("./js/data.json")
-        .then( (res) => res.json())
-        .then( (data) => {
+        .then((res) => res.json())
+        .then((data) => {
             impresoras = data;
             // console.log(data);
         });
     // console.log(impresoras)
 }
 
-async function inicio (){
-    
+async function inicio() {
+
     // OPERADOR OR
     importarLocalStorage() || await importarDatosDesdeJson(); // Si no existe Info en LocalStorage importa datos desde JSON.
-        
+
     armarInputGrupoImpresoras(impresoras);
     mostrarInfoImpresora();
     mostrarTotalImpresionesEmpresa();

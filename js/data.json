@@ -7,10 +7,32 @@
         "ip" : "10.18.89.16",
         "tonerCompatible1" : "237A",
         "tonerCompatible2" : "",
-        "contador" : 0,
-        "historialCambios" : [],
+        "contador" : 28740,
+        "historialCambios" : [
+            {
+                "fechaCambio": "2021-10-10",
+                "contadorPaginas": 8300,
+                "modeloToner": "237A",
+                "rendimientoPaginas": 8300,
+                "rendimientoDias": 80
+            },
+            {
+                "fechaCambio": "2021-12-29",
+                "contadorPaginas": 19100,
+                "modeloToner": "237A",
+                "rendimientoPaginas": 10800,
+                "rendimientoDias": 76
+            },
+            {
+                "fechaCambio": "2022-03-15",
+                "contadorPaginas": 28740,
+                "modeloToner": "237A",
+                "rendimientoPaginas": 9640,
+                "rendimientoDias": 56
+            }
+        ],
         "tonerActualColocado" : "237A",
-        "fechaTonerActualColocado" : "2022-02-01"
+        "fechaTonerActualColocado" : "2022-05-02"
     },
     {
         "nombre": "Calidad",
@@ -19,11 +41,33 @@
         "modelo" : "SL-M4072FD",
         "ip" : "10.18.89.26",
         "tonerCompatible1" : "D203U",
-        "tonerCompatible2" : "",
-        "contador" : 0,
-        "historialCambios" : [],
+        "tonerCompatible2" : "D203L",
+        "contador" : 11000,
+        "historialCambios" : [
+            {
+                "fechaCambio": "2022-01-03",
+                "contadorPaginas": 3100,
+                "modeloToner": "D203U",
+                "rendimientoPaginas": 3100,
+                "rendimientoDias": 43
+            },
+            {
+                "fechaCambio": "2022-02-15",
+                "contadorPaginas": 7500,
+                "modeloToner": "D203L",
+                "rendimientoPaginas": 4400,
+                "rendimientoDias": 33
+            },
+            {
+                "fechaCambio": "2022-03-20",
+                "contadorPaginas": 11000,
+                "modeloToner": "D203U",
+                "rendimientoPaginas": 3500,
+                "rendimientoDias": 51
+            }
+        ],
         "tonerActualColocado" : "D203U",
-        "fechaTonerActualColocado" : "2022-01-03"
+        "fechaTonerActualColocado" : "2022-05-02"
     },
     {
         "nombre": "Despacho",
@@ -33,10 +77,109 @@
         "ip" : "10.18.89.13",
         "tonerCompatible1" : "CC364A",
         "tonerCompatible2" : "CC364X",
-        "contador" : 0,
-        "historialCambios" : [],
+        "contador" : 42870,
+        "historialCambios" : [
+            {
+                "fechaCambio": "2021-11-02",
+                "contadorPaginas": 8520,
+                "modeloToner": "CC364A",
+                "rendimientoPaginas": 8520,
+                "rendimientoDias": 48
+            },
+            {
+                "fechaCambio": "2021-12-20",
+                "contadorPaginas": 21400,
+                "modeloToner": "CC364X",
+                "rendimientoPaginas": 12880,
+                "rendimientoDias": 52
+            },
+            {
+                "fechaCambio": "2022-02-10",
+                "contadorPaginas": 30690,
+                "modeloToner": "CC364A",
+                "rendimientoPaginas": 9290,
+                "rendimientoDias": 32
+            },
+            {
+                "fechaCambio": "2022-03-14",
+                "contadorPaginas": 42870,
+                "modeloToner": "CC364X",
+                "rendimientoPaginas": 12180,
+                "rendimientoDias": 57
+            }
+        ],
         "tonerActualColocado" : "CC364A",
-        "fechaTonerActualColocado" : "2021-11-02"
+        "fechaTonerActualColocado" : "2022-05-02"
+    },
+    {
+        "nombre": "Administracion",
+        "marca" : "HP",
+        "tipo" : "LaserJet",
+        "modelo" : "M608dn",
+        "ip" : "10.18.89.18",
+        "tonerCompatible1" : "237A",
+        "tonerCompatible2" : "",
+        "contador" : 29800,
+        "historialCambios" : [
+            {
+                "fechaCambio": "2021-12-01",
+                "contadorPaginas": 8674,
+                "modeloToner": "237A",
+                "rendimientoPaginas": 8674,
+                "rendimientoDias": 44
+            },
+            {
+                "fechaCambio": "2022-01-14",
+                "contadorPaginas": 17580,
+                "modeloToner": "237A",
+                "rendimientoPaginas": 8906,
+                "rendimientoDias": 60
+            },
+            {
+                "fechaCambio": "2022-03-15",
+                "contadorPaginas": 29800,
+                "modeloToner": "237A",
+                "rendimientoPaginas": 12220,
+                "rendimientoDias": 56
+            }
+        ],
+        "tonerActualColocado" : "237A",
+        "fechaTonerActualColocado" : "2022-05-02"
+    },
+    {
+        "nombre": "Compras",
+        "marca" : "Samsung",
+        "tipo" : "Multifuncion",
+        "modelo" : "SL-M4072FD",
+        "ip" : "10.18.89.25",
+        "tonerCompatible1" : "D203U",
+        "tonerCompatible2" : "D203L",
+        "contador" : 14500,
+        "historialCambios" : [
+            {
+                "fechaCambio": "2022-01-03",
+                "contadorPaginas": 3560,
+                "modeloToner": "D203U",
+                "rendimientoPaginas": 3560,
+                "rendimientoDias": 43
+            },
+            {
+                "fechaCambio": "2022-02-15",
+                "contadorPaginas": 9500,
+                "modeloToner": "D203L",
+                "rendimientoPaginas": 5940,
+                "rendimientoDias": 57
+            },
+            {
+                "fechaCambio": "2022-04-13",
+                "contadorPaginas": 14500,
+                "modeloToner": "D203U",
+                "rendimientoPaginas": 5000,
+                "rendimientoDias": 27
+            }
+        ],
+        "tonerActualColocado" : "D203U",
+        "fechaTonerActualColocado" : "2022-05-02"
     }
 ]
 

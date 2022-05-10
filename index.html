@@ -6,10 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
@@ -43,6 +39,9 @@
         <!--  Bloque Principal-->
 
         <div class="d-flex justify-content-center">
+
+            <!-- Bloque - Información de la Impresora -->
+
             <div id="bloqueInfoImpresoras" class="border border-1 m-1">
                 <div class="text-center mt-2">
                     <div class="font-weight-bold font-italic">
@@ -142,6 +141,8 @@
                 </div>
             </div>
 
+            <!-- Bloque - Cambio de Toner -->
+
             <div id="bloqueCambioToner" class="border border-1  text-center col-3 m-1">
                 <div class="text-center mt-2">
                     <div class="font-weight-bold font-italic">
@@ -152,23 +153,23 @@
                     <form action="" id="formCambioToner">
                         <div>
                             <label for="fechaCambio">Fecha de Cambio:</label>
-                            <input type="date" class="form-control" id="fechaCambio" placeholder="Fecha de Cambio"
+                            <input type="date" class="form-control text-center" id="fechaCambio" placeholder="Fecha de Cambio"
                                 required="required">
                         </div>
                         <div class="d-flex mt-4">
                             <div class="m-2">
                                 <label for="ultimoContador">Ultimo Contador:</label>
-                                <input type="number" class="form-control" id="ultimoContador" required="required">
+                                <input type="number" class="form-control text-center" id="ultimoContador" required="required">
                             </div>
                             <div class="m-2">
                                 <label for="actualContador">Actual Contador:</label>
-                                <input type="number" class="form-control" id="actualContador" required="required">
+                                <input type="number" class="form-control text-center" id="actualContador" required="required">
                             </div>
                         </div>
                         <div class="mt-4">
                             <label>Modelo de Toner:</label>
                             <div>
-                                <select class="form-control" id="inputGrupoToners">
+                                <select class="form-control text-center" id="inputGrupoToners">
                                 </select>
                             </div>
                         </div>
@@ -198,7 +199,6 @@
                         <thead class="table-primary">
                             <tr>
                                 <th>Fecha de Colocación</th>
-                                <th>Contador de páginas</th>
                                 <th>Modelo de Toner</th>
                                 <th>Rend. (Hojas)</th>
                                 <th>Rend. (Dias)</th>
@@ -209,9 +209,9 @@
                         <tfoot class="table-primary">
                             <tr>
                                 <td></td>
-                                <td></td>
-                                <td class="align-middle">
-                                    <select class="form-control" id="inputFiltradoGrupoToners"></select>
+                                <!-- <td></td> -->
+                                <td class="align-middle d-flex justify-content-center">
+                                    <select class="form-control text-center w-50" id="inputFiltradoGrupoToners"></select>
                                 </td>
                                 <td>
                                     <div class="font-weight-bold">Promedio</div>
