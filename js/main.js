@@ -494,7 +494,7 @@ function mostrarInfoImpresora() {            // Mostrar informacion de la impres
     const { nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, tonerActualColocado, fechaTonerActualColocado, contador } = impresora;
 
     if (nombre == "Ventas" || nombre == "Calidad" || nombre == "Despacho" || nombre == "Administracion" || nombre == "Compras") {
-        imagenImpresora.src = "./imagenes/" + nombre + ".png"
+        imagenImpresora.src = "./imagenes/" + nombre.toLowerCase() + ".png"
     }
     else {
         imagenImpresora.src = "./imagenes/ventas.png"
