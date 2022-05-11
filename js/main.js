@@ -133,7 +133,7 @@ function intercambiarVistas() {                             // Ocultar y mostrar
         bloqueCambioToner.style.display = "";
         bloqueHistorialCambiosDeToner.style.display = "";
         bloqueInventarioImpresoras.style.display = "none";
-        btnSwitchInventario.innerHTML = "Inventario de Impresoras";
+        btnSwitchInventario.innerHTML = "Lista de Impresoras";
 
         valorBtnSwitchInventario = 0;
     }
@@ -494,10 +494,10 @@ function mostrarInfoImpresora() {            // Mostrar informacion de la impres
     const { nombre, marca, tipo, modelo, ip, tonerCompatible1, tonerCompatible2, tonerActualColocado, fechaTonerActualColocado, contador } = impresora;
 
     if (nombre == "Ventas" || nombre == "Calidad" || nombre == "Despacho" || nombre == "Administracion" || nombre == "Compras") {
-        imagenImpresora.src = "./imagenes/" + nombre.toLowerCase() + ".png"
+        imagenImpresora.src = "./imagenes/" + nombre.toLowerCase() + ".webp"
     }
     else {
-        imagenImpresora.src = "./imagenes/ventas.png"
+        imagenImpresora.src = "./imagenes/ventas.webp"
     };
 
     campoNombre.value = nombre;
